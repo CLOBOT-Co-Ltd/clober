@@ -1,0 +1,85 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="sensor_tim571">
+
+  <xacro:macro name="sensor_tim571" params="*origin parent name:=laser topic:=/scan length:=0.06 width:=0.06 height:=0.079 mass:=0.15 min_angle:=-2.35619449019 max_angle:=2.35619449019 min_range:=0.05 max_range:=25.0 samples:=811">
+
+    <joint name="${name}_base_joint" type="fixed">
+      <xacro:insert_block name="origin"/>
+      <parent link="${parent}"/>
+      <child link="${name}_base_link"/>
+    </joint>
+
+    <link name="${name}_base_link">
+      <inertial>
+        <mass value="0.001"/>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <inertia ixx="0.000001" ixy="0.0" ixz="0.0" iyy="0.000001" iyz="0.0" izz="0.000001"/>
+      </inertial>
+    </link>
+
+    <joint name="${name}_joint" type="fixed">
+      <origin xyz="0 0 0.06246" rpy="0 0 0"/>
+      <parent link="${name}_base_link"/>
+      <child link="${name}_link"/>
+    </joint>
+
+    <link name="${name}_link">
+      <!--visual>
+        <geometry>
+          <mesh filename="package://former_description/meshes/include/tim571.stl"/>
+        </geometry>
+        <material name="blue">
+          <color rgba="0 0 1 1"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <mesh filename="package://former_description/meshes/include/tim571.stl"/>
+        </geometry>
+      </collision-->
+      <inertial>
+        <mass value="${mass}"/>
+        <origin xyz="0 0 -0.026" rpy="0 0 0"/>
+        <inertia ixx="${0.0833333 * mass * (width * width + height * height)}" ixy="0.0" ixz="0.0" iyy="${0.0833333 * mass * (length * length + height * height)}" iyz="0.0" izz="${0.0833333 * mass * (length * length + width * width)}" />
+      </inertial>
+    </link>
+
+    <tim571_gazebo/>
+
+  </xacro:macro>
+
+  <!-- <xacro:macro name="tim571_gazebo">
+    <gazebo reference="${name}_link">
+      <material value="Gazebo/Blue"/>
+      <sensor type="ray" name="${name}">
+        <always_on>true</always_on>
+        <update_rate>15.0</update_rate>
+        <pose>0 0 0 0 0 0</pose>
+        <visualize>false</visualize>
+        <ray>
+          <scan>
+            <horizontal>
+              <samples>${samples}</samples>
+              <resolution>1</resolution>
+              <min_angle>${min_angle}</min_angle>
+              <max_angle>${max_angle}</max_angle>
+            </horizontal>
+          </scan>
+          <range>
+            <min>${min_range}</min>
+            <max>${max_range}</max>
+            <resolution>0.01</resolution>
+          </range>
+        </ray>
+        <plugin name="gazebo_ros_laser_controller" filename="libgazebo_ros_laser.so">
+          <gaussianNoise>0.005</gaussianNoise>
+          <alwaysOn>true</alwaysOn>
+          <updateRate>15.0</updateRate>
+          <topicName>${topic}</topicName>
+          <frameName>${name}_link</frameName>
+        </plugin>
+      </sensor>
+    </gazebo>
+  </xacro:macro> -->
+
+</robot>
