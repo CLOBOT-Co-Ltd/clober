@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>clober_bringup</name>
+  <version>1.0.0</version>
+  <description> 
+    The meta package for Clober bringup update
+  </description>
+  <maintainer email="ros@clobot.co.kr">clobot-git</maintainer>
+  <license>Apache License 2.0</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <export>
+    <metapackage/>
+  </export>
+</package>

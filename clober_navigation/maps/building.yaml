@@ -1,0 +1,7 @@
+image: building.png
+resolution: 0.050000
+origin: [-40.1144065857, -37.4618988037, 0.0]
+negate: 0
+occupied_thresh: 0.9
+free_thresh: 0.2
+mode: scale

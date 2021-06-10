@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>clober_description</name>
+  <version>1.0.0</version>
+  <description>
+    This package includes urdf files of Clober
+  </description>
+  <maintainer email="ros@clobot.co.kr">clobot-git</maintainer>
+  <license>Apache License 2.0</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  
+  <depend>urdf</depend>
+  <depend>xacro</depend>
+</package>
