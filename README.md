@@ -29,7 +29,7 @@ This project currently contains basic launch and urdf files for the simulation o
 - [ Scheduler ](http://wiki.ros.org/RMF/Scheduler)
 - [ Multi Map Traffic Editor ](http://wiki.ros.org/RMF/traffic_editor)
 
-## Pages related to Clober
+## Pages Relevant to Clober
 - [ Clobot Homepage ](https://www.clobot.co.kr/)
 - [ Clobot YouTube ](https://www.youtube.com/channel/UCau5FLJpMxhvW-IHZ8c8qKQ/featured/)
 
