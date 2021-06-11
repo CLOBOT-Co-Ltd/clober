@@ -1,6 +1,6 @@
 # Clober!
 <img src="https://github.com/clobot-git/testrobot/blob/noetic-devel/images/logo.png" width="400">
-This project currently contains basic launch and urdf files for the simulation of Clober Robot research platform. We will be providing higher level packages soon, probably relatively prior to the 2021 ROSCon schedule. Have fun using our packages and hope to see you at ROSCon!
+This project currently contains basic launch and urdf files for the simulation of Clober Robot research platform. We will be providing higher level packages soon, probably relatively prior to the 2021 ROScon schedule. Have fun using our packages and hope to see you at ROScon!
 
 ## ROS 1 Packages for Clober
 |develop|main|Noetic + Ubuntu Focal|
