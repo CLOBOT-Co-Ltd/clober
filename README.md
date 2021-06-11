@@ -1,5 +1,5 @@
 # Clober!
-<img src="https://github.com/ROBOTIS-GIT/emanual/blob/master/assets/images/platform/turtlebot3/logo_turtlebot3.png" width="300">
+<img src="https://github.com/clobot-git/testrobot/tree/noetic-devel/images/logo.png" width="300">
 This project currently contains basic launch and urdf files for the simulation of Clober Robot research platform. We will be providing higher level packages soon, probably relatively prior to the 2021 ROScon schedule. Have fun using our packages and hope to see you at ROScon!
 
 ## ROS 1 Packages for Clober
