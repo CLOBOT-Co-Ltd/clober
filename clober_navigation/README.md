@@ -16,13 +16,13 @@ This project currently contains basic launch and urdf files for the simulation o
 - [Manual for Clober](https://app.gitbook.com/@clobot-git/s/clober-manual/)
 
 ## Wiki for Clober Packages
-- http://wiki.ros.org/clober (metapackage)
-- http://wiki.ros.org/clober_bringup (under_development)
-- http://wiki.ros.org/clober_description
-- http://wiki.ros.org/clober_teleop (under_development)
-- http://wiki.ros.org/clober_slam
-- http://wiki.ros.org/clober_navigation
-- http://wiki.ros.org/clober_simulation
+- http://wiki.ros.org/clobot/clober (metapackage)
+- http://wiki.ros.org/clobot/clober_bringup
+- http://wiki.ros.org/clobot/clober_description
+- http://wiki.ros.org/clobot/clober_teleop
+- http://wiki.ros.org/clobot/clober_slam
+- http://wiki.ros.org/clobot/clober_navigation
+- http://wiki.ros.org/clobot/clober_simulation
 
 ## Clobot developed Opensource packages
 - [ FreeFleet ](http://wiki.ros.org/RMF/FreeFleet)
