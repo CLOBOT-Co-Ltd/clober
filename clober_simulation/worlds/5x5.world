@@ -27,7 +27,7 @@
 
     <!-- A turtlebot symbol -->
     <include>
-      <uri>model://map_5x5</uri>
+      <uri>model://5x5</uri>
     </include>
 
     <scene>

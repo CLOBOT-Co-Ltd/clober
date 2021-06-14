@@ -33,7 +33,7 @@
 
     <!-- A turtlebot symbol -->
     <include>
-      <uri>model://map_3x3</uri>
+      <uri>model://3x3</uri>
     </include>
 
     <scene>
