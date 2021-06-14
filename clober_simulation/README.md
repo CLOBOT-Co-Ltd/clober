@@ -62,7 +62,6 @@ roslaunch clober_simulation 10x10_world.launch
 
 
 ## Operate Clober
----
 To teleoperate the simulated Clober with the keyboard, launch the teleoperation node in a new terminal window.
 ```bash
 roslaunch clober_teleop clober_teleop_keyboard.launch
@@ -70,7 +69,6 @@ roslaunch clober_teleop clober_teleop_keyboard.launch
 
 
 ## SLAM Simulation
----
 For SLAM in Gazebo simulator, you can select or create various virtual environemnts and robot models. SLAM simulation works pretty similar to that of the real world under ordinary circumstances.
 For fine tuning of the SLAM package please review the SLAM package README.md
 
@@ -100,28 +98,14 @@ rosrun map_server map_saver -f ~/map
 
 
 ## Navigation Simulation
-------
-
 ### Launch Simulation World
 Out of the worlds prepared, we recommend using the Clobot Logo World.
 ```bash
 roslaunch clober_simulation logo_world.launch
 ``` 
 
-### Run SLAM Node
+### Run SLAM Navigation
 On a new terminal run a SLAM node. Gmapping SLAM is used by default.
 ```bash
-roslaunch clober_slam clober_slam.launch slam_methods:=gmapping
-```
-
-### Run Teleoperation Node
-On a new terminal run a teleoperation node.
-```bash
-roslaunch clober_teleop clober_teleop_keyboard.launch
-```
-
-### Save Map
-After successful SLAM and map creation, open a new terminal to save the map
-```bash
-rosrun map_server map_saver -f ~/map
+roslaunch clober_navigation navigation.launch
 ```
