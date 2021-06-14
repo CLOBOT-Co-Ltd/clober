@@ -12,39 +12,40 @@ This Gazebo Simulation utilizes the ROS Gazebo package, Gazebo version for ROS1 
 |[![Build Status](https://travis-ci.com/clobot-git/clober.svg?branch=main)](https://travis-ci.com/clobot-git/clober)|[![Build Status](https://travis-ci.com/clobot-git/clober.svg?branch=main)](https://travis-ci.com/clobot-git/clober)|[![Build Status](https://travis-ci.com/clobot-git/clober.svg?branch=foxy-devel)](https://travis-ci.com/clobot-git/clober)| TBD |
 
 ## Install Clober Packages
-- The Clober Simulation Package requires `clober_msgs` package as a prerequisite. Without the package the simulation cannot be launched
+The Clober Simulation Package requires `clober_msgs` package as a prerequisite. Without the package the simulation cannot be launched
 ```bash
 cd ~/catkin_ws/src/
 git clone -b noetic-devel https://github.com/clobot-git/clober_msgs.git
+git clone -b noetic-devel https://github.com/clobot-git/clober.git
 cd ~/catkin_ws && catkin_make
 ```
 
 ## Launch Simulation World
-- Several Simulation environments are prepared, made accessible by each launch file.
+Several Simulation environments are prepared, made accessible by each launch file.
 
 ### Empty World
-<img src="https://github.com/clobot-git/testrobot/blob/noetic-devel/images/empty.png" width="400">
+<img src="https://github.com/clobot-git/testrobot/blob/noetic-devel/images/empty_world.png" width="400">
 
 ```bash
 roslaunch clober_simulation empty_world.launch
 ```
 
 ### Clobot Logo World
-<img src="https://github.com/clobot-git/testrobot/blob/noetic-devel/images/logo.png" width="400">
+<img src="https://github.com/clobot-git/testrobot/blob/noetic-devel/images/logo_world.png" width="400">
 
 ```bash
 roslaunch clober_simulation logo_world.launch
 ```
 
 ### Warehouse World
-<img src="https://github.com/clobot-git/testrobot/blob/noetic-devel/images/warehouse.png" width="400">
+<img src="https://github.com/clobot-git/testrobot/blob/noetic-devel/images/warehouse_world.png" width="400">
 
 ```bash
 roslaunch clober_simulation warehouse_env_world.launch
 ```
 
 ### Grid World
-<img src="https://github.com/clobot-git/testrobot/blob/noetic-devel/images/grid.png" width="400">
+<img src="https://github.com/clobot-git/testrobot/blob/noetic-devel/images/grid_world.png" width="400">
 
 ```bash
 roslaunch clober_simulation 3x3_world.launch
@@ -59,11 +60,13 @@ roslaunch clober_simulation 5x5_world.launch
 roslaunch clober_simulation 10x10_world.launch
 ```
 
+
 ## Operate Clober
 To teleoperate the simulated Clober with the keyboard, launch the teleoperation node in a new terminal window.
 ```bash
 roslaunch clober_teleop clober_teleop_keyboard.launch
 ```
+
 
 ## SLAM Simulation
 For SLAM in Gazebo simulator, you can select or create various virtual environemnts and robot models. SLAM simulation works pretty similar to that of the real world under ordinary circumstances.
@@ -92,6 +95,7 @@ After successful SLAM and map creation, open a new terminal to save the map
 ```bash
 rosrun map_server map_saver -f ~/map
 ```
+
 
 ## Navigation Simulation
 - [ Clobot Homepage ](https://www.clobot.co.kr/)
