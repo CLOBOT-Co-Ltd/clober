@@ -109,7 +109,9 @@ On a new terminal run a teleoperation node to explore and map the Gazebo world.
 ```bash
 rosrun teleop_twist_keyboard teleop_twist_keyboard.py
 ```
-![clober_slam](https://github.com/clobot-git/testrobot/blob/noetic-devel/gifs/clober_slam.gif)
+
+<img align="center" src="https://github.com/clobot-git/testrobot/blob/noetic-devel/gifs/clober_slam.gif">
+
 
 ### 4.5 Save Map
 After successful SLAM and map creation, open a new terminal to save the map.
@@ -150,7 +152,7 @@ rosrun teleop_twist_keyboard teleop_twist_keyboard.py
 
 5. Move the robot back and forth in order to narrow down the estimated location.
 
-![clober_amcl](https://github.com/clobot-git/testrobot/blob/noetic-devel/gifs/clober_amcl.gif)
+<img align="center" src="https://github.com/clobot-git/testrobot/blob/noetic-devel/gifs/clober_amcl.gif">
 
 6. Terminate the keyboard teleoperation(`Ctrl`+`C`) for the next navigation step. 
 
@@ -159,6 +161,4 @@ rosrun teleop_twist_keyboard teleop_twist_keyboard.py
 <img align="center" src="https://github.com/clobot-git/testrobot/blob/noetic-devel/images/2d_nav_goal.png">
 
 - Click on the destination and drag the green arrow toward the dirction of the robot on the map.
-![clober_navigation](https://github.com/clobot-git/testrobot/blob/noetic-devel/gifs/clober_navigation.gif)
-
 <img align="center" src="https://github.com/clobot-git/testrobot/blob/noetic-devel/gifs/clober_navigation.gif">
