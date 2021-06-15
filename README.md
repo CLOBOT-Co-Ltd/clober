@@ -8,14 +8,12 @@ This project currently contains basic launch and urdf files for the simulation o
 |ROS1|[Noetic + Ubuntu Focal]|
 |:---:|:---:|
 |Travis-CI|[![Build Status](https://travis-ci.com/clobot-git/clober.svg?branch=noetic-devel)](https://travis-ci.com/clobot-git/clober)|
-|:---:|:---:|
 |Linter|[![Lint](https://github.com/clobot-git/clober/workflows/Lint/badge.svg?branch=noetic-devel)](https://github.com/clobot-git/clober/actions)|
 
 ## ROS 2 Packages for Clober
 |ROS2|[Foxy + Ubuntu Focal](https://github.com/clobot-git/clober/tree/foxy-devel)|Galactic|
 |:---:|:---:|:---:|
 |Travis-CI|[![Build Status](https://travis-ci.com/clobot-git/clober.svg?branch=foxy-devel)](https://travis-ci.com/clobot-git/clober)| TBD |
-|:---:|:---:|:---:|
 |Linter|[![Lint](https://github.com/clobot-git/clober/workflows/Lint/badge.svg?branch=foxy-devel)](https://github.com/clobot-git/clober/actions)| TBD |
 
 ## Clobot gitbook for Clober Manual
