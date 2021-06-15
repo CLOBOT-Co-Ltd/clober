@@ -10,8 +10,8 @@ This Gazebo Simulation utilizes the ROS Gazebo package, Gazebo version for ROS1 
 |ros2-devel|ros2|Foxy + Ubuntu Focal|Galactic|
 |:---:|:---:|:---:|:---:|
 |[![Build Status](https://travis-ci.com/clobot-git/clober.svg?branch=main)](https://travis-ci.com/clobot-git/clober)|[![Build Status](https://travis-ci.com/clobot-git/clober.svg?branch=main)](https://travis-ci.com/clobot-git/clober)|[![Build Status](https://travis-ci.com/clobot-git/clober.svg?branch=foxy-devel)](https://travis-ci.com/clobot-git/clober)| TBD | -->
-
-## 1. Install Clober Packages
+## 1. Installation
+### 1.1 Install Clober Packages
 The Clober Simulation Package requires `clober_msgs` package as a prerequisite. Without the package the simulation cannot be launched
 ```bash
 cd ~/catkin_ws/src/
@@ -19,7 +19,7 @@ git clone -b noetic-devel https://github.com/clobot-git/clober_msgs.git
 git clone -b noetic-devel https://github.com/clobot-git/clober.git
 cd ~/catkin_ws && catkin_make
 ```
-### 1.1 Install Dependent ROS 1 Packages
+### 1.2 Install Dependent ROS 1 Packages
 ```bash
 $ sudo apt-get install ros-noetic-joy ros-noetic-teleop-twist-joy \
   ros-noetic-teleop-twist-keyboard ros-noetic-laser-proc \
@@ -36,28 +36,28 @@ $ sudo apt-get install ros-noetic-joy ros-noetic-teleop-twist-joy \
 Several Simulation environments are prepared, made accessible by each launch file.
 
 ### 2.1 Empty World
-<img align="center" src="https://github.com/clobot-git/testrobot/blob/noetic-devel/images/empty_world.png" width="400">
+<img align="center" src="https://github.com/clobot-git/testrobot/blob/noetic-devel/images/empty_world.png" width="600">
 
 ```bash
 roslaunch clober_simulation empty_world.launch
 ```
 
 ### 2.2 Clobot Logo World
-<img align="center" src="https://github.com/clobot-git/testrobot/blob/noetic-devel/images/logo_world.png" width="400">
+<img align="center" src="https://github.com/clobot-git/testrobot/blob/noetic-devel/images/logo_world.png" width="600">
 
 ```bash
 roslaunch clober_simulation logo_world.launch
 ```
 
 ### 2.3 Warehouse World
-<img align="center" src="https://github.com/clobot-git/testrobot/blob/noetic-devel/images/warehouse_world.png" width="400">
+<img align="center" src="https://github.com/clobot-git/testrobot/blob/noetic-devel/images/warehouse_world.png" width="600">
 
 ```bash
 roslaunch clober_simulation warehouse_env_world.launch
 ```
 
 ### 2.4 Grid World
-<img align="center" src="https://github.com/clobot-git/testrobot/blob/noetic-devel/images/grid_world.png" width="400">
+<img align="center" src="https://github.com/clobot-git/testrobot/blob/noetic-devel/images/grid_world.png" width="600">
 
 ```bash
 roslaunch clober_simulation 3x3_world.launch
@@ -96,16 +96,19 @@ roslaunch clober_slam clober_slam.launch slam_methods:=gmapping
 ```
 
 ### 4.4 Run Teleoperation Node
-On a new terminal run a teleoperation node.
+On a new terminal run a teleoperation node to explore and map the Gazebo world.
 ```bash
 rosrun teleop_twist_keyboard teleop_twist_keyboard.py
 ```
+<gif align="center" src="https://github.com/clobot-git/testrobot/blob/noetic-devel/gifs/clober_slam.gif" width="600">
 
 ### 4.5 Save Map
 After successful SLAM and map creation, open a new terminal to save the map
 ```bash
 rosrun map_server map_saver -f ~/map
 ```
+If you've saved your map successfully it should look like the following
+<img align="center" src="https://github.com/clobot-git/testrobot/blob/noetic-devel/images/map.png" width="600">
 
 ## 5. Navigation Simulation
 ### 5.1 Launch Simulation World
@@ -119,3 +122,22 @@ On a new terminal run a SLAM node. Gmapping SLAM is used by default.
 ```bash
 roslaunch clober_navigation navigation.launch
 ```
+
+### 5.3 Estimate Initial Pose
+Initial Pose Estimation can be performed before Navigation to intialize AMCL parameters which are critical to Navigation quality. 
+1. Click `2D Pose Estimate` Button on the RVIZ menu
+<img align="center" src="https://github.com/clobot-git/testrobot/blob/noetic-devel/images/2d_pose_estimate.png" width="600">
+2. Click on the map where clober is located and drag the green arrow toward the dirction the robot is facing.
+3. Repeat step 1 and 2 to increase data precision
+4. Launch keyboard teleoperation to further increase precision
+
+```bash
+rosrun teleop_twist_keyboard teleop_twist_keyboard.py
+```
+5. Move the robot back and forth in order to narrow down the estimated location.
+6. Terminate the keyboard teleoperation(`Ctrl`+`C`) for the next navigation step. 
+
+### 5.4 Run SLAM Navigation
+- On the RVIZ menu click `2D Nav Goal`
+- Click on the destination and drag the green arrow toward the dirction of the robot on the map.
+<gif align="center" src="https://github.com/clobot-git/testrobot/blob/noetic-devel/gifs/clober_navigation.gif" width="600">
