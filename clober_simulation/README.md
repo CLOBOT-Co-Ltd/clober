@@ -110,6 +110,7 @@ After successful SLAM and map creation, open a new terminal to save the map
 rosrun map_server map_saver -f ~/map
 ```
 If you've saved your map successfully it should look like the following
+
 <img align="center" src="https://github.com/clobot-git/testrobot/blob/noetic-devel/images/map.png">
 
 ## 5. Navigation Simulation
