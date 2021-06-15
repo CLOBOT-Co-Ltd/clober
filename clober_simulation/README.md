@@ -24,7 +24,7 @@ cd ~/catkin_ws && catkin_make
 Install the needed packages used in the simulation environment. 
 
 ```bash
-$ sudo apt-get install ros-noetic-teleop-twist-keyboard \
+sudo apt-get install ros-noetic-teleop-twist-keyboard \
   ros-noetic-amcl ros-noetic-map-server \
   ros-noetic-move-base ros-noetic-urdf ros-noetic-xacro \
   ros-noetic-gmapping ros-noetic-navigation \
@@ -101,7 +101,7 @@ On a new terminal run a SLAM node. Gmapping SLAM is used by default.
 roslaunch clober_slam clober_slam.launch slam_methods:=gmapping
 ```
 
-### 4.4 Run Teleoperation Node
+### 4.3 Run Teleoperation Node
 On a new terminal run a teleoperation node to explore and map the Gazebo world.
 ```bash
 rosrun teleop_twist_keyboard teleop_twist_keyboard.py
@@ -110,7 +110,7 @@ rosrun teleop_twist_keyboard teleop_twist_keyboard.py
 [<img align="center" src="https://github.com/clobot-git/testrobot/blob/noetic-devel/gifs/clober_slam.gif">](https://youtube.com/)
 
 
-### 4.5 Save Map
+### 4.4 Save Map
 After successful SLAM and map creation, open a new terminal to save the map.
 ```bash
 rosrun map_server map_saver -f ~/map
