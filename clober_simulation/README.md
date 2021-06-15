@@ -160,3 +160,5 @@ rosrun teleop_twist_keyboard teleop_twist_keyboard.py
 
 - Click on the destination and drag the green arrow toward the dirction of the robot on the map.
 ![clober_navigation](https://github.com/clobot-git/testrobot/blob/noetic-devel/gifs/clober_navigation.gif)
+
+<img align="center" src="https://github.com/clobot-git/testrobot/blob/noetic-devel/gifs/clober_navigation.gif">
