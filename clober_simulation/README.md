@@ -78,7 +78,7 @@ To teleoperate the simulated Clober with the keyboard, launch the teleoperation 
 ## 4. SLAM Simulation
 For SLAM in Gazebo simulator, you can select or create various virtual environemnts and robot models. SLAM simulation works pretty similar to that of the real world under ordinary circumstances.
 
-  [**For fine tuning of the SLAM package please review the SLAM package README.md**](https://github.com/clobot-git/clober/tree/noetic-devel/clober_slam)
+  [*For fine tuning of the SLAM package please review the SLAM package README.md*](https://github.com/clobot-git/clober/tree/noetic-devel/clober_slam)
 
 ### 4.1 Launch Simulation World
 Out of the worlds prepared, we recommend using the Clobot Logo World.
@@ -108,7 +108,7 @@ After successful SLAM and map creation, open a new terminal to save the map.
   ```
   If you've saved your map successfully it should look like the following.
 
-  <img align="center" src="https://github.com/clobot-git/testrobot/blob/noetic-devel/images/map.png">
+  <img align="center" src="https://github.com/clobot-git/clober/blob/noetic-devel/clober_simulation/map/logo/clobot_logo.pgm">
 
 ## 5. Navigation Simulation
 For Navigation in Gazebo simulator navigation works pretty similar under low velocity circumstances.
