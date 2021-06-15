@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>clober_simulation</name>
+  <version>1.0.0</version>
+  <description>The clober_simulation package</description>
+  <maintainer email="ros@clobot.co.kr">clobot-git</maintainer>
+
+  <license>Apache License 2.0</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <depend>roscpp</depend>
+  <depend>std_msgs</depend>
+  <depend>sensor_msgs</depend>
+  <depend>geometry_msgs</depend>
+  <depend>nav_msgs</depend>
+  <depend>tf</depend>
+  <depend>gazebo_ros</depend>
+  
+  <exec_depend>gazebo</exec_depend>
+  <exec_depend>clober_description</exec_depend>
+  
+  <export>
+    <gazebo_ros gazebo_media_path="${prefix}"/>
+    <gazebo_ros gazebo_model_path="${prefix}/models"/>
+  </export>
+</package>

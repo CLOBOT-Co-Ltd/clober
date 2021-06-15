@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- Arguments -->
+  <arg name="map_file" default="$(find clober_navigation)/maps/map.yaml"/>
+  <arg name="open_rviz" default="true"/>
+
+  <!-- Map server -->
+  <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)"/>
+
+  <!-- AMCL -->
+  <include file="$(find clober_navigation)/launch/amcl.launch"/>
+
+  <!-- move_base -->
+  <include file="$(find clober_navigation)/launch/move_base.launch"/>
+
+  <!-- rviz -->
+  <group if="$(arg open_rviz)">
+    <include file="$(find clober_description)/launch/rviz.launch"/>
+  </group>
+</launch>

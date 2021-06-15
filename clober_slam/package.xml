@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>clober_slam</name>
+  <version>1.0.0</version>
+  <description>
+    This package includes launch files for slam
+  </description>
+  <maintainer email="ros@clobot.co.kr">clobot-git</maintainer>
+  <license>Apache License 2.0</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <depend>map_server</depend>
+  <depend>gmapping</depend>
+
+</package>

@@ -1,0 +1,240 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="clober">
+
+  <xacro:include filename="$(find clober_description)/urdf/include/tim571.urdf.xacro"/>
+  <xacro:include filename="$(find clober_description)/urdf/include/d435.urdf.xacro"/>
+  <xacro:include filename="$(find clober_description)/urdf/multi_10/clober_7.gazebo.xacro"/>
+  
+  <xacro:property name="PI" value="3.1415926535897931"/>
+
+  <link name="clober_7/base_footprint"/>
+
+  <joint name="clober_7/base_joint" type="fixed">
+    <parent link="clober_7/base_footprint"/>
+    <child link="clober_7/base_link"/>
+    <origin xyz="0.0 0.0 0.020" rpy="0 0 0"/>
+  </joint>
+  
+  <link name="clober_7/base_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 ${PI/2}"/>
+      <geometry>
+        <mesh filename="package://clober_description/meshes/clober.dae"/>
+      </geometry>
+    </visual>
+    
+    <collision>
+      <origin xyz="0 0 0.2" rpy="0 0 ${PI/2}"/>
+      <geometry>
+        <box size="0.5 0.5 0.3"/>      
+      </geometry>
+    </collision>
+    
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="30"/>
+      <inertia ixx="2.2124416e-03" ixy="-1.2294101e-05" ixz="3.4938785e-05"
+               iyy="2.1193702e-03" iyz="-5.0120904e-06"
+               izz="2.0064271e-03" />
+    </inertial>
+  </link>
+
+  <joint name="clober_7/wheel_left_joint" type="continuous">
+    <parent link="clober_7/base_link"/>
+    <child link="clober_7/wheel_left_link"/>
+    <origin xyz="0.0018 0.1558 0.02" rpy="0 0 0"/>
+    <axis xyz="0 1 0" rpy="0 0 0"/>
+  </joint>
+
+  <link name="clober_7/wheel_left_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 -${PI/2}"/>
+      <geometry>
+        <mesh filename="package://clober_description/meshes/wheel.dae"/>
+      </geometry>
+    </visual>
+    
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 -${PI/2}"/>
+      <geometry>
+        <mesh filename="package://clober_description/meshes/wheel.dae"/>
+      </geometry>
+    </collision>
+    
+    <inertial>
+      <origin xyz="0 0 0" />
+      <mass value="2.8498940e-02" />
+      <inertia ixx="1.1175580e-05" ixy="-4.2369783e-11" ixz="-5.9381719e-09"
+               iyy="1.1192413e-05" iyz="-1.4400107e-11"
+               izz="2.0712558e-05" />
+      </inertial>    
+  </link>
+
+  <joint name="clober_7/wheel_right_joint" type="continuous">
+    <parent link="clober_7/base_link"/>
+    <child link="clober_7/wheel_right_link"/>
+    <origin xyz="0.0018 -0.1558 0.02" rpy="0 0 0"/>
+    <axis xyz="0 1 0" rpy="0 0 0"/>
+  </joint>
+
+  <link name="clober_7/wheel_right_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 ${PI/2}"/>
+      <geometry>
+        <mesh filename="package://clober_description/meshes/wheel.dae"/>
+      </geometry>
+    </visual>
+    
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 ${PI/2}"/>
+      <geometry>
+        <mesh filename="package://clober_description/meshes/wheel.dae"/>
+      </geometry>
+    </collision>
+    
+    <inertial>
+      <origin xyz="0 0 0" />
+      <mass value="2.8498940e-02" />
+      <inertia ixx="1.1175580e-05" ixy="-4.2369783e-11" ixz="-5.9381719e-09"
+               iyy="1.1192413e-05" iyz="-1.4400107e-11"
+               izz="2.0712558e-05" />
+      </inertial>    
+  </link>
+
+  <joint name="clober_7/caster_joint1" type="continuous">
+    <parent link="clober_7/base_link"/>
+    <child link="clober_7/caster_link1"/>
+    <origin xyz="0.11 0.13 -0.04" rpy="${PI/2} 0 0"/>
+    <axis xyz="0 0 1" rpy="0 0 0"/>    
+  </joint>
+
+  <link name="clober_7/caster_link1">    
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder length="0.02" radius="0.025"/>
+      </geometry>
+    </collision>
+
+    <inertial>
+      <origin xyz="0 0 0" />
+      <mass value="0.005" />
+      <inertia ixx="0.001" ixy="0.0" ixz="0.0"
+               iyy="0.001" iyz="0.0"
+               izz="0.001" />
+    </inertial>
+  </link>
+
+  <joint name="clober_7/caster_joint2" type="continuous">
+    <parent link="clober_7/base_link"/>
+    <child link="clober_7/caster_link2"/>
+    <origin xyz="-0.11 0.13 -0.04" rpy="${PI/2} 0 0"/>
+    <axis xyz="0 0 1" rpy="0 0 0"/>    
+  </joint>
+
+  <link name="clober_7/caster_link2">
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder length="0.02" radius="0.025"/>
+      </geometry>
+    </collision>
+
+    <inertial>
+      <origin xyz="0 0 0" />
+      <mass value="0.005" />
+      <inertia ixx="0.001" ixy="0.0" ixz="0.0"
+               iyy="0.001" iyz="0.0"
+               izz="0.001" />
+    </inertial>
+  </link>
+  
+  <joint name="clober_7/caster_joint3" type="continuous">
+    <parent link="clober_7/base_link"/>
+    <child link="clober_7/caster_link3"/>
+    <origin xyz="0.11 -0.13 -0.04" rpy="${PI/2} 0 0"/>
+    <axis xyz="0 0 1" rpy="0 0 0"/>    
+  </joint>
+
+  <link name="clober_7/caster_link3">
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder length="0.02" radius="0.025"/>
+      </geometry>
+    </collision>
+
+    <inertial>
+      <origin xyz="0 0 0" />
+      <mass value="0.005" />
+      <inertia ixx="0.001" ixy="0.0" ixz="0.0"
+               iyy="0.001" iyz="0.0"
+               izz="0.001" />
+    </inertial>
+  </link>
+  
+  <joint name="clober_7/caster_joint4" type="continuous">
+    <parent link="clober_7/base_link"/>
+    <child link="clober_7/caster_link4"/>
+    <origin xyz="-0.11 -0.13 -0.04" rpy="${PI/2} 0 0"/>
+    <axis xyz="0 0 1" rpy="0 0 0"/>    
+  </joint>
+
+  <link name="clober_7/caster_link4">
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder length="0.02" radius="0.025"/>
+      </geometry>
+    </collision>
+
+    <inertial>
+      <origin xyz="0 0 0" />
+      <mass value="0.005" />
+      <inertia ixx="0.001" ixy="0.0" ixz="0.0"
+               iyy="0.001" iyz="0.0"
+               izz="0.001" />
+    </inertial>
+  </link>
+  
+  <joint name="clober_7/imu_joint" type="fixed">
+    <parent link="clober_7/base_link"/>
+    <child link="clober_7/imu_link"/>
+    <origin xyz="0.0605 0 0.0923" rpy="0 0 0"/>
+  </joint>
+
+  <link name="clober_7/imu_link"/>
+
+  <joint name="clober_7/left_ultrasonic_joint" type="fixed">
+    <parent link="clober_7/base_link"/>
+    <child link="clober_7/left_ultrasonic"/>
+    <origin xyz="0.18164 0.09679 0.08396" rpy="0 0 0"/>
+  </joint>
+
+  <link name="clober_7/left_ultrasonic"/>
+
+  <joint name="clober_7/right_ultrasonic_joint" type="fixed">
+    <parent link="clober_7/base_link"/>
+    <child link="clober_7/right_ultrasonic"/>
+    <origin xyz="0.18164 -0.09679 0.08396" rpy="0 0 0"/>
+  </joint>
+
+  <link name="clober_7/right_ultrasonic"/>
+
+  <joint name="clober_7/base_scan_joint" type="fixed">
+    <parent link="clober_7/base_link"/>
+    <child link="clober_7/base_scan"/>
+    <origin xyz="0.159 0 0.4" rpy="${PI} 0 0"/>
+  </joint>
+
+  <link name="clober_7/base_scan"/>
+  
+  <!--<xacro:sensor_tim571 parent="base_link">
+    <origin xyz="0.159 0 0.2265" rpy="${PI} 0 0"/>
+  </xacro:sensor_tim571>-->
+
+  <!-- <xacro:sensor_d435 parent="clober_7/base_link" name="camera">
+    <origin xyz="0.17573 0 0.06791" rpy="0 -${PI/12} 0"/>
+  </xacro:sensor_d435> -->
+
+</robot>

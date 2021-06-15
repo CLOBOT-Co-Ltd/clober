@@ -1,0 +1,8 @@
+footprint: [[-0.202, -0.202], [-0.202, 0.202], [0.202, 0.202], [0.202, -0.202]] 
+
+update_frequency: 10.0
+publish_frequency: 10.0
+
+obstacle_layer:
+  observation_sources: scan
+  scan: {topic: scan, sensor_frame: laser_link, data_type: LaserScan, clearing: true, marking: true, obstacle_range: 8.0, raytrace_range: 10.0}

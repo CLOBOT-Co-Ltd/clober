@@ -1,0 +1,101 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="clober">
+
+  <xacro:include filename="$(find clober_description)/urdf/include/tim571.urdf.xacro"/>
+  <xacro:include filename="$(find clober_description)/urdf/include/d435.urdf.xacro"/>
+
+  <xacro:property name="PI" value="3.1415926535897931"/>
+
+  <link name="base_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 -${PI/2}"/>
+      <geometry>
+        <mesh filename="package://clober_description/meshes/clober_serving.dae"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 -${PI/2}"/>
+      <geometry>
+        <mesh filename="package://clober_description/meshes/clober_serving_collision.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="left_wheel_joint" type="continuous">
+    <parent link="base_link"/>
+    <child link="left_wheel_link"/>
+    <origin xyz="0.0018 0.1558 0.019" rpy="0 0 0"/>
+    <axis xyz="0 1 0" rpy="0 0 0"/>
+  </joint>
+
+  <link name="left_wheel_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 -${PI/2}"/>
+      <geometry>
+        <mesh filename="package://clober_description/meshes/wheel.dae"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 -${PI/2}"/>
+      <geometry>
+        <mesh filename="package://clober_description/meshes/wheel.dae"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="right_wheel_joint" type="continuous">
+    <parent link="base_link"/>
+    <child link="right_wheel_link"/>
+    <origin xyz="0.0018 -0.1558 0.019" rpy="0 0 0"/>
+    <axis xyz="0 1 0" rpy="0 0 0"/>
+  </joint>
+
+  <link name="right_wheel_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 ${PI/2}"/>
+      <geometry>
+        <mesh filename="package://clober_description/meshes/wheel.dae"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 ${PI/2}"/>
+      <geometry>
+        <mesh filename="package://clober_description/meshes/wheel.dae"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="imu_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="imu_link"/>
+    <origin xyz="0.0605 0 0.0923" rpy="0 0 0"/>
+  </joint>
+
+  <link name="imu_link"/>
+
+  <joint name="left_ultrasonic_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="left_ultrasonic"/>
+    <origin xyz="0.18164 0.09679 0.08396" rpy="0 0 0"/>
+  </joint>
+
+  <link name="left_ultrasonic"/>
+
+  <joint name="right_ultrasonic_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="right_ultrasonic"/>
+    <origin xyz="0.18164 -0.09679 0.08396" rpy="0 0 0"/>
+  </joint>
+
+  <link name="right_ultrasonic"/>
+
+  <xacro:sensor_tim571 parent="base_link">
+    <origin xyz="0.159 0 0.2265" rpy="${PI} 0 0"/>
+  </xacro:sensor_tim571>
+
+  <xacro:sensor_d435 parent="base_link" name="camera">
+    <origin xyz="0.17364 0 0.31685" rpy="0 -${PI/12} 0"/>
+    <!--origin xyz="0.17573 0 0.06791" rpy="0 -${PI/12} 0"/-->
+  </xacro:sensor_d435>
+
+</robot>

@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>clober_navigation</name>
+  <version>1.0.0</version>
+  <description>
+    This package includes launch files for navigation
+  </description>
+  <maintainer email="ros@clobot.co.kr">clobot-git</maintainer>
+  <license>Apache License 2.0</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <depend>amcl</depend>
+  <depend>move_base</depend>
+  <depend>costmap_2d</depend>
+  <depend>costmap_converter</depend>
+  <depend>base_local_planner</depend>
+  <depend>teb_local_planner</depend>
+  <depend>map_server</depend>
+
+</package>

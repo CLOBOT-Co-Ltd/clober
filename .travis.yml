@@ -1,0 +1,22 @@
+language:
+  - generic
+
+os: linux
+dist: focal
+arch: amd64
+services: docker
+
+notifications:
+  email:
+    on_success: change
+    on_failure: always
+    recipients:
+      - ros@clobot.co.kr
+
+branches:
+  only:
+    - noetic-devel
+
+env:
+  matrix:
+    - ROS_DISTRO=noetic ROS_REPO=ros-shadow-fixed UPSTREAM_WORKSPACE=debian OS_NAME=ubuntu OS_CODE_NAME=focal
