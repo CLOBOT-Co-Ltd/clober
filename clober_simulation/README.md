@@ -108,7 +108,7 @@ After successful SLAM and map creation, open a new terminal to save the map.
   ```
   If you've saved your map successfully it should look like the following.
 
-  <img align="center" src="https://github.com/clobot-git/clober/blob/noetic-devel/clober_simulation/map/logo/clobot_logo.pgm">
+  <img align="center" src="https://github.com/clobot-git/testrobot/blob/noetic-devel/images/map.png" width=400>
 
 ## 5. Navigation Simulation
 For Navigation in Gazebo simulator navigation works pretty similar under low velocity circumstances.
