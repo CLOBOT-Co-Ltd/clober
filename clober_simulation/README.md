@@ -100,7 +100,7 @@ On a new terminal run a teleoperation node to explore and map the Gazebo world.
 ```bash
 rosrun teleop_twist_keyboard teleop_twist_keyboard.py
 ```
-<gif align="center" src="https://github.com/clobot-git/testrobot/blob/noetic-devel/gifs/clober_slam.gif" width="600">
+![clober_slam](https://github.com/clobot-git/testrobot/blob/noetic-devel/gifs/clober_slam.gif)
 
 ### 4.5 Save Map
 After successful SLAM and map creation, open a new terminal to save the map
@@ -139,5 +139,7 @@ rosrun teleop_twist_keyboard teleop_twist_keyboard.py
 
 ### 5.4 Run SLAM Navigation
 - On the RVIZ menu click `2D Nav Goal`
+<img align="center" src="https://github.com/clobot-git/testrobot/blob/noetic-devel/images/2d_pose_estimate.png" width="600">
+
 - Click on the destination and drag the green arrow toward the dirction of the robot on the map.
-<gif align="center" src="https://github.com/clobot-git/testrobot/blob/noetic-devel/gifs/clober_navigation.gif" width="600">
+![clober_slam](https://github.com/clobot-git/testrobot/blob/noetic-devel/gifs/clober_slam.gif)
