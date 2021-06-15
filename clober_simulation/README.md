@@ -110,7 +110,7 @@ On a new terminal run a teleoperation node to explore and map the Gazebo world.
 rosrun teleop_twist_keyboard teleop_twist_keyboard.py
 ```
 
-<img align="center" src="https://github.com/clobot-git/testrobot/blob/noetic-devel/gifs/clober_slam.gif">
+[<img align="center" src="https://github.com/clobot-git/testrobot/blob/noetic-devel/gifs/clober_slam.gif">](https://youtu.be/oasjrcOs8AA)
 
 
 ### 4.5 Save Map
@@ -120,7 +120,7 @@ rosrun map_server map_saver -f ~/map
 ```
 If you've saved your map successfully it should look like the following.
 
-<img align="center" src="https://github.com/clobot-git/testrobot/blob/noetic-devel/images/map.png">
+[<img align="center" src="https://github.com/clobot-git/testrobot/blob/noetic-devel/images/map.png">](https://youtu.be/oasjrcOs8AA)
 
 ## 5. Navigation Simulation
 ### 5.1 Launch Simulation World
@@ -161,4 +161,5 @@ rosrun teleop_twist_keyboard teleop_twist_keyboard.py
 <img align="center" src="https://github.com/clobot-git/testrobot/blob/noetic-devel/images/2d_nav_goal.png">
 
 - Click on the destination and drag the green arrow toward the dirction of the robot on the map.
-<img align="center" src="https://github.com/clobot-git/testrobot/blob/noetic-devel/gifs/clober_navigation.gif">
+[<img align="center" src="https://github.com/clobot-git/testrobot/blob/noetic-devel/gifs/clober_navigation.gif">](https://youtu.be/oasjrcOs8AA)
+<!-- 여기에는 유튜브 링크를 걸어주세요~ -->
