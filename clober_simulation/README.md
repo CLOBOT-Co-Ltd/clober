@@ -1,15 +1,6 @@
 # Clober Simulations
 This Gazebo Simulation utilizes the ROS Gazebo package, Gazebo version for ROS1 noetic has to be properly installed before running this instruction.
 
-<!-- ## Clober ROS 1 Package Status
-|develop|main|Noetic + Ubuntu Focal|
-|:---:|:---:|:---:|
-|[![Build Status](https://travis-ci.com/clobot-git/clober.svg?branch=main)](https://travis-ci.com/clobot-git/clober)|[![Build Status](https://travis-ci.com/clobot-git/clober.svg?branch=main)](https://travis-ci.com/clobot-git/clober)|[![Build Status](https://travis-ci.com/clobot-git/clober.svg?branch=noetic-devel)](https://travis-ci.com/clobot-git/clober)|
-
-## Clober ROS 2 Package Status
-|ros2-devel|ros2|Foxy + Ubuntu Focal|Galactic|
-|:---:|:---:|:---:|:---:|
-|[![Build Status](https://travis-ci.com/clobot-git/clober.svg?branch=main)](https://travis-ci.com/clobot-git/clober)|[![Build Status](https://travis-ci.com/clobot-git/clober.svg?branch=main)](https://travis-ci.com/clobot-git/clober)|[![Build Status](https://travis-ci.com/clobot-git/clober.svg?branch=foxy-devel)](https://travis-ci.com/clobot-git/clober)| TBD | -->
 ## 1. Installation
 ### 1.1 Install Clober Packages
 The Clober Simulation Package requires `clober` & `clober_msgs` packages. Without the package the simulation cannot be launched.
@@ -117,7 +108,7 @@ rosrun map_server map_saver -f ~/map
 ```
 If you've saved your map successfully it should look like the following.
 
-[<img align="center" src="https://github.com/clobot-git/testrobot/blob/noetic-devel/images/map.png">](https://youtube.com/)
+<img align="center" src="https://github.com/clobot-git/testrobot/blob/noetic-devel/images/map.png">
 
 ## 5. Navigation Simulation
 ### 5.1 Launch Simulation World
@@ -149,7 +140,7 @@ rosrun teleop_twist_keyboard teleop_twist_keyboard.py
 
 5. Move the robot back and forth in order to narrow down the estimated location.
 
-<img align="center" src="https://github.com/clobot-git/testrobot/blob/noetic-devel/gifs/clober_amcl.gif">
+[<img align="center" src="https://github.com/clobot-git/testrobot/blob/noetic-devel/gifs/clober_amcl.gif">](https://youtube.com)
 
 6. Terminate the keyboard teleoperation(`Ctrl`+`C`) for the next navigation step. 
 
