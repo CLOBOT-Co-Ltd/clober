@@ -12,25 +12,22 @@ This Gazebo Simulation utilizes the ROS Gazebo package, Gazebo version for ROS1 
 |[![Build Status](https://travis-ci.com/clobot-git/clober.svg?branch=main)](https://travis-ci.com/clobot-git/clober)|[![Build Status](https://travis-ci.com/clobot-git/clober.svg?branch=main)](https://travis-ci.com/clobot-git/clober)|[![Build Status](https://travis-ci.com/clobot-git/clober.svg?branch=foxy-devel)](https://travis-ci.com/clobot-git/clober)| TBD | -->
 ## 1. Installation
 ### 1.1 Install Clober Packages
-The Clober Simulation Package requires `clober_msgs` package as a prerequisite. Without the package the simulation cannot be launched.
+The Clober Simulation Package requires `clober` & `clober_msgs` packages. Without the package the simulation cannot be launched.
 ```bash
 cd ~/catkin_ws/src/
-git clone -b noetic-devel https://github.com/clobot-git/clober_msgs.git
 git clone -b noetic-devel https://github.com/clobot-git/clober.git
+git clone -b noetic-devel https://github.com/clobot-git/clober_msgs.git
 cd ~/catkin_ws && catkin_make
 ```
 
-### 1.2 Install Dependent ROS 1 Packages
+### 1.2 Install Required ROS 1 Packages
+Install the needed packages used in the simulation environment. 
+
 ```bash
-$ sudo apt-get install ros-noetic-joy ros-noetic-teleop-twist-joy \
-  ros-noetic-teleop-twist-keyboard ros-noetic-laser-proc \
-  ros-noetic-rgbd-launch ros-noetic-depthimage-to-laserscan \
-  ros-noetic-rosserial-arduino ros-noetic-rosserial-python \
-  ros-noetic-rosserial-server ros-noetic-rosserial-client \
-  ros-noetic-rosserial-msgs ros-noetic-amcl ros-noetic-map-server \
+$ sudo apt-get install ros-noetic-teleop-twist-keyboard \
+  ros-noetic-amcl ros-noetic-map-server \
   ros-noetic-move-base ros-noetic-urdf ros-noetic-xacro \
-  ros-noetic-compressed-image-transport ros-noetic-rqt* \
-  ros-noetic-gmapping ros-noetic-navigation ros-noetic-interactive-markers
+  ros-noetic-gmapping ros-noetic-navigation \
   ros-noetic-teb-local-planner
 ```
 
@@ -110,7 +107,7 @@ On a new terminal run a teleoperation node to explore and map the Gazebo world.
 rosrun teleop_twist_keyboard teleop_twist_keyboard.py
 ```
 
-[<img align="center" src="https://github.com/clobot-git/testrobot/blob/noetic-devel/gifs/clober_slam.gif">](https://youtu.be/oasjrcOs8AA)
+[<img align="center" src="https://github.com/clobot-git/testrobot/blob/noetic-devel/gifs/clober_slam.gif">](https://youtube.com/)
 
 
 ### 4.5 Save Map
@@ -120,7 +117,7 @@ rosrun map_server map_saver -f ~/map
 ```
 If you've saved your map successfully it should look like the following.
 
-[<img align="center" src="https://github.com/clobot-git/testrobot/blob/noetic-devel/images/map.png">](https://youtu.be/oasjrcOs8AA)
+[<img align="center" src="https://github.com/clobot-git/testrobot/blob/noetic-devel/images/map.png">](https://youtube.com/)
 
 ## 5. Navigation Simulation
 ### 5.1 Launch Simulation World
@@ -161,5 +158,4 @@ rosrun teleop_twist_keyboard teleop_twist_keyboard.py
 <img align="center" src="https://github.com/clobot-git/testrobot/blob/noetic-devel/images/2d_nav_goal.png">
 
 - Click on the destination and drag the green arrow toward the dirction of the robot on the map.
-[<img align="center" src="https://github.com/clobot-git/testrobot/blob/noetic-devel/gifs/clober_navigation.gif">](https://youtu.be/oasjrcOs8AA)
-<!-- 여기에는 유튜브 링크를 걸어주세요~ -->
+[<img align="center" src="https://github.com/clobot-git/testrobot/blob/noetic-devel/gifs/clober_navigation.gif">](https://youtube.com/)

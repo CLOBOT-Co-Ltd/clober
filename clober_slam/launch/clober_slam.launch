@@ -1,18 +1,12 @@
 <?xml version="1.0"?>
 <launch>
-  <!-- Clober rviz -->
-  <include file="$(find clober_description)/launch/rviz.launch">
-  </include>
-
-  <!-- Arguments -->
   <arg name="model" default="clober"/>
   <arg name="slam_methods" default="gmapping" doc="slam type [gmapping, cartographer, hector, karto, frontier_exploration]"/>
-  <arg name="configuration_basename" default="clober_lds_2d.lua"/>
-  <arg name="open_rviz" default="true"/>
 
-  <!-- SLAM: Gmapping, Cartographer, Hector, Karto, Frontier_exploration, RTAB-Map -->
   <include file="$(find clober_slam)/launch/clober_$(arg slam_methods).launch">
     <arg name="model" value="$(arg model)"/>
-    <arg name="configuration_basename" value="$(arg configuration_basename)"/>
   </include>
+
+  <!-- Clober rviz -->
+  <include file="$(find clober_description)/launch/rviz.launch"/>
 </launch>
