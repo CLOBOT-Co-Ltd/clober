@@ -86,7 +86,7 @@ Out of the worlds prepared, we recommend using the Clobot Logo World.
   roslaunch clober_simulation logo_world.launch
   ``` 
 
-### 4.2 Run SLAM Node
+### 4.2 Launch SLAM Node
 On a new terminal run a SLAM node. Gmapping SLAM is used by default.
   ```bash
   roslaunch clober_slam clober_slam.launch slam_methods:=gmapping
