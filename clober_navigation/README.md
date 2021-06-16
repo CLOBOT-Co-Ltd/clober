@@ -59,6 +59,7 @@ You can get more information about Navigation tuning from [Basic Navigation Tuni
   This parameter describes the footprint of the robot used for navigation. Composed of four [x,y] coordinates representing the four corners of the base of the robot
 
   default: 
+  
     ```bash
     footprint: [[-0.202, -0.202], [-0.202, 0.202], [0.202, 0.202], [0.202, -0.202]]
     ```
@@ -71,10 +72,13 @@ You can get more information about Navigation tuning from [Basic Navigation Tuni
   default:
 
     global_costmap.yaml: 
+
       ```bash
       inflation_radius: 0.3
       ```
+
     local_costmap.yaml:
+
       ```bash
       inflation_radius: 0.15
       ```
@@ -89,10 +93,13 @@ You can get more information about Navigation tuning from [Basic Navigation Tuni
   default:
 
     global_costmap.yaml: 
+
       ```bash
       inflation_radius: 3.0
       ```
+
     local_costmap.yaml:
+
       ```bash
       inflation_radius: 1.5
       ```
@@ -145,6 +152,7 @@ You can get more information about Navigation tuning from [Basic Navigation Tuni
   Maximum translational acceleration of the robot in meters/sec^2
 
   default: 
+
     ```bash
     acc_lim_x: 0.7
     ```
@@ -155,6 +163,7 @@ You can get more information about Navigation tuning from [Basic Navigation Tuni
   Maximum angular acceleration of the robot in radians/sec^2
 
   default: 
+
     ```bash
     acc_lim_theta: 1.5
     ```
