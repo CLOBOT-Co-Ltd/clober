@@ -123,6 +123,7 @@ You can get more information about Navigation tuning from [Basic Navigation Tuni
   This factor is set the maximum value of translational velocity.
 
   default: 
+  
     ```bash
     max_vel_x: 0.7
     ```
@@ -135,6 +136,7 @@ You can get more information about Navigation tuning from [Basic Navigation Tuni
   See optimization parameter weight_kinematics_forward_drive
 
   default: 
+
     ```bash
     max_vel_x_backwards: 0.7
     ```
@@ -167,6 +169,7 @@ You can get more information about Navigation tuning from [Basic Navigation Tuni
   Allowed final euclidean distance to the goal position in meters
 
   default: 
+
     ```bash
     xy_goal_tolerance: 0.1
     ```
@@ -177,6 +180,7 @@ You can get more information about Navigation tuning from [Basic Navigation Tuni
   Allowed final orientation error in radians
 
   default:
+
     ```bash
     yaw_goal_tolerance: 0.2
     ```
