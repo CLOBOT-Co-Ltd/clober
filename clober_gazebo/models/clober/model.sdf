@@ -1,0 +1,232 @@
+<?xml version="1.0"?>
+<sdf version='1.6'>
+    <model name='clober'>
+
+        <link name="base_footprint"/>
+
+        <joint name="base_joint" type="fixed">
+            <parent>base_footprint</parent>
+            <child>base_link</child>
+            <pose>0.0 0.0 0.020 0 0 0</pose>
+        </joint>
+
+        <link name="base_link">
+            <visual name='visual'>
+                <pose>0 0 0 0 0 1.5707963267948966</pose>
+                <geometry>
+                    <mesh>
+                        <uri>model://clober/meshes/clober.dae</uri>
+                    </mesh>
+                </geometry>
+            </visual>
+
+            <collision name="base_collision">
+                <pose>0 0 0 0 0 1.5707963267948966</pose>
+                <geometry>
+                    <box>
+                        <size>0.5 0.5 0.3</size>
+                    </box>
+                </geometry>
+            </collision>
+
+            <inertial>
+                <pose>0 0 0 0 0 1.5707963267948966</pose>
+                <mass>30</mass>
+                <inertia>
+                    <ixx>2.2124416e-03</ixx>
+                    <ixy>-1.2294101e-05</ixy>
+                    <ixz>3.4938785e-05</ixz>
+                    <iyy>2.1193702e-03</iyy>
+                    <iyz>-5.0120904e-06</iyz>
+                    <izz>2.0064271e-03</izz>
+                </inertia>
+            </inertial>
+        </link>
+
+        <joint name="left_wheel_joint" type="revolute">
+            <parent>base_link</parent>
+            <child>left_wheel_link</child>
+            <pose>0.0018 0.1558 0.02 0 0 0</pose>
+        </joint>
+
+        <joint name="right_wheel_joint" type="revolute">
+            <parent>base_link</parent>
+            <child>right_wheel_link</child>
+            <pose>0.0018 -0.1558 0.02 0 0 0</pose>
+        </joint>
+
+        <link name="left_wheel_link">
+            <visual name='visual'>
+                <pose>0.0018 0.1558 0.02 0 0 -1.5707963267948966</pose>
+                <geometry>
+                    <mesh>
+                        <uri>model://clober/meshes/wheel.dae</uri>
+                    </mesh>
+                </geometry>
+            </visual>
+            <collision name='left_wheel_link_collision'>
+                <pose>0.0018 0.1558 0.02 0 0 -1.5707963267948966</pose>
+                <geometry>
+                    <mesh>
+                        <uri>model://clober/meshes/wheel.dae</uri>
+                    </mesh>
+                </geometry>
+            </collision>
+
+            <inertial>
+                <pose>0.0018 0.1558 0.02 0 0 -1.5707963267948966</pose>
+                <mass>2.8498940e-02</mass>
+                <inertia>
+                    <ixx>1.1175580e-05</ixx>
+                    <ixy>-4.2369783e-11</ixy>
+                    <ixz>-5.9381719e-09</ixz>
+                    <iyy>1.1192413e-05</iyy>
+                    <iyz>-1.4400107e-11</iyz>
+                    <izz>2.0712558e-05</izz>
+                </inertia>
+            </inertial>
+        </link>
+
+        <link name="right_wheel_link">
+            <visual name='visual'>
+                <pose>0.0018 -0.1558 0.02 0 0 1.5707963267948966</pose>
+                <geometry>
+                    <mesh>
+                        <uri>model://clober/meshes/wheel.dae</uri>
+                    </mesh>
+                </geometry>
+            </visual>
+            <collision name='right_wheel_link_collision'>
+                <pose>0.0018 -0.1558 0.02 0 0 1.5707963267948966</pose>
+                <geometry>
+                    <mesh>
+                        <uri>model://clober/meshes/wheel.dae</uri>
+                    </mesh>
+                </geometry>
+            </collision>
+            <inertial>
+                <pose>0.0018 -0.1558 0.02 0 0 1.5707963267948966</pose>
+                <mass>2.8498940e-02</mass>
+                <inertia>
+                    <ixx>1.1175580e-05</ixx>
+                    <ixy>-4.2369783e-11</ixy>
+                    <ixz>-5.9381719e-09</ixz>
+                    <iyy>1.1192413e-05</iyy>
+                    <iyz>-1.4400107e-11</iyz>
+                    <izz>2.0712558e-05</izz>
+                </inertia>
+            </inertial>
+        </link>
+
+        <joint name="lidar_joint" type="fixed">
+            <parent>base_link</parent>
+            <child>lidar_link</child>
+            <pose>0.159 0 0.2265 0 0 0</pose>
+        </joint>
+        <link name="lidar_link">
+            <inertial>
+            <pose>0.159 0 0.2265 0 0 0</pose>
+                <inertia>
+                    <ixx>0.001</ixx>
+                    <ixy>0.000</ixy>
+                    <ixz>0.000</ixz>
+                    <iyy>0.001</iyy>
+                    <iyz>0.000</iyz>
+                    <izz>0.001</izz>
+                </inertia>
+                <mass>0.114</mass>
+            </inertial>
+            <collision name="lidar_sensor_collision">
+            <pose>0.159 0 0.2265 0 0 0</pose>
+                <geometry>
+                    <cylinder>
+                        <radius>0.0508</radius>
+                        <length>0.055</length>
+                    </cylinder>
+                </geometry>
+            </collision>
+            <visual name="lidar_sensor_visual">
+            <pose>0.159 0 0.2265 0 0 0</pose>
+                <geometry>
+                    <mesh>
+                        <uri>model://clober/meshes/include/tim571.stl</uri>
+                    </mesh>
+                </geometry>
+            </visual>
+            <sensor name="tim_571" type="ray">
+                <always_on>true</always_on>
+                <visualize>true</visualize>
+            <pose>0.159 0 0.1565 0 0 0</pose>
+                <update_rate>20</update_rate>
+                <ray>
+                    <scan>
+                        <horizontal>
+                            <samples>720</samples>
+                            <resolution>0.25</resolution>
+                            <min_angle>-1.5707963267948966</min_angle>
+                            <max_angle>1.5707963267948966</max_angle>
+                        </horizontal>
+                    </scan>
+                    <range>
+                        <min>0.120000</min>
+                        <max>3.5</max>
+                        <resolution>0.015000</resolution>
+                    </range>
+                    <noise>
+                        <type>gaussian</type>
+                        <mean>0.0</mean>
+                        <stddev>0.01</stddev>
+                    </noise>
+                </ray>
+                <plugin name="clober_lidar" filename="libgazebo_ros_ray_sensor.so">
+                    <ros>
+                        <remapping>~/out:=scan</remapping>
+                    </ros>
+                    <output_type>sensor_msgs/LaserScan</output_type>
+                    <frame_name>lidar_link</frame_name>
+                </plugin>
+            </sensor>
+        </link>
+
+        <plugin name="clober_diff_drive" filename="libgazebo_ros_diff_drive.so">
+
+            <update_rate>30</update_rate>
+
+            <!-- wheels -->
+            <left_joint>left_wheel_joint</left_joint>
+            <right_joint>right_wheel_joint</right_joint>
+
+            <!-- kinematics -->
+            <wheel_separation>0.310</wheel_separation>
+            <wheel_diameter>0.17</wheel_diameter>
+
+            <!-- limits -->
+            <max_wheel_torque>20</max_wheel_torque>
+            <max_wheel_acceleration>1.0</max_wheel_acceleration>
+
+            <command_topic>cmd_vel</command_topic>
+
+            <!-- output -->
+            <publish_odom>true</publish_odom>
+            <publish_odom_tf>true</publish_odom_tf>
+            <publish_wheel_tf>false</publish_wheel_tf>
+
+            <odometry_topic>odom</odometry_topic>
+            <odometry_frame>odom</odometry_frame>
+            <robot_base_frame>base_footprint</robot_base_frame>
+
+        </plugin>
+
+        <plugin
+            name="clober_joint_state"
+            filename="libgazebo_ros_joint_state_publisher.so">
+            <ros>
+                <remapping>~/out:=joint_states</remapping>
+            </ros>
+            <update_rate>30</update_rate>
+            <joint_name>left_wheel_joint</joint_name>
+            <joint_name>right_wheel_joint</joint_name>
+        </plugin>
+
+    </model>
+</sdf>

@@ -51,17 +51,25 @@ Visualization Manager:
       Frame Timeout: 15
       Frames:
         All Enabled: true
+        base_footprint:
+          Value: true
         base_link:
           Value: true
         imu_link:
           Value: true
         left_ultrasonic:
           Value: true
+        left_wheel_link:
+          Value: true
         lidar_link:
+          Value: true
+        odom:
           Value: true
         right_ultrasonic:
           Value: true
-      Marker Scale: 1
+        right_wheel_link:
+          Value: true
+      Marker Scale: 0.30000001192092896
       Name: TF
       Show Arrows: true
       Show Axes: true
@@ -72,9 +80,13 @@ Visualization Manager:
             {}
           left_ultrasonic:
             {}
+          left_wheel_link:
+            {}
           lidar_link:
             {}
           right_ultrasonic:
+            {}
+          right_wheel_link:
             {}
       Update Interval: 0
       Value: true
@@ -177,7 +189,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz_default_plugins/Orbit
-      Distance: 9.260143280029297
+      Distance: 2.9306349754333496
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
