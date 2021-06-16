@@ -58,25 +58,26 @@ You can get more information about Navigation tuning from [Basic Navigation Tuni
 
   This parameter describes the footprint of the robot used for navigation. Composed of four [x,y] coordinates representing the four corners of the base of the robot
 
-  default : 
-  
-    footprint : [[-0.202, -0.202], [-0.202, 0.202], [0.202, 0.202], [0.202, -0.202]]
+  default: 
+    ```bash
+    footprint: [[-0.202, -0.202], [-0.202, 0.202], [0.202, 0.202], [0.202, -0.202]]
+    ```
 
 ### 4.2 inflation_radius
 - Defined in clober_navigation/config/global_costmap.yaml & clober_navigation/config/local_costmap.yaml
 
   This parameter makes inflation area from the obstacle. Path would be planned in order that it don’t across this area. It is safe that to set this to be bigger than robot radius. For more information, please refer to the [costmap_2d wiki](http://wiki.ros.org/costmap_2d).
 
-  default :
+  default:
 
-    global_costmap.yaml : 
-
+    global_costmap.yaml: 
+      ```bash
       inflation_radius: 0.3
-    
-    local_ costmap.yaml :
-    
-      inflation_radius : 0.15
-
+      ```
+    local_costmap.yaml:
+      ```bash
+      inflation_radius: 0.15
+      ```
 
 ### 4.3 cost_scaling_factor
 - Defined in clober_navigation/config/global_costmap.yaml & clober_navigation/config/local_costmap.yaml
@@ -85,42 +86,46 @@ You can get more information about Navigation tuning from [Basic Navigation Tuni
 
   The best path is for the robot to pass through a center of between obstacles. Set this factor to be smaller in order to far from obstacles. For more information, please refer to the [costmap_2d wiki](http://wiki.ros.org/costmap_2d)
 
-  default :
+  default:
 
-    global_costmap.yaml : 
-
+    global_costmap.yaml: 
+      ```bash
       inflation_radius: 3.0
-    
-    local_ costmap.yaml :
-    
-      inflation_radius : 1.5
-
+      ```
+    local_costmap.yaml:
+      ```bash
+      inflation_radius: 1.5
+      ```
 
 ### 4.4 base_global_planner
 - Defined in clober_navigation/config/move_base.yaml
   
   This parameter allows you to select which global planner to use as a plugin for path planning
 
-  default : navfn/NavfnROS
-
+  default: 
+    ```bash
+    base_global_planner: navfn/NavfnROS
+    ```
 
 ### 4.5 base_local_planner
 - Defined in clober_navigation/config/move_base.yaml
   
   This parameter allows you to select which local planner to use as a plugin for path planning
 
-  default : dwa_local_planner/DWAPlannerROS
-
+  default:
+    ```bash
+    base_local_planer: dwa_local_planner/DWAPlannerROS
+    ```
 
 ### 4.6 max_vel_x
 - Defined in clober_navigation/config/dwa_local_planner.yaml
 
   This factor is set the maximum value of translational velocity.
 
-  default : 
-    
-    max_vel_x : 0.7
-
+  default: 
+    ```bash
+    max_vel_x: 0.7
+    ```
 
 ### 4.7 max_vel_x_backwards
 - Defined in clober_navigation/config/dwa_local_planner.yaml
@@ -129,46 +134,47 @@ You can get more information about Navigation tuning from [Basic Navigation Tuni
   
   See optimization parameter weight_kinematics_forward_drive
 
-  default : 
-  
-    max_vel_x_backwards : 0.7
-
+  default: 
+    ```bash
+    max_vel_x_backwards: 0.7
+    ```
 
 ### 4.8 acc_lim_x
 - Defined in clober_navigation/config/dwa_local_planner.yaml
   
   Maximum translational acceleration of the robot in meters/sec^2
 
-  default : 
-  
-    acc_lim_x : 0.7
-
+  default: 
+    ```bash
+    acc_lim_x: 0.7
+    ```
 
 ### 4.9 acc_lim_theta
 - Defined in clober_navigation/config/dwa_local_planner.yaml
   
   Maximum angular acceleration of the robot in radians/sec^2
 
-  default : 
-  
-    acc_lim_theta : 1.5
-
+  default: 
+    ```bash
+    acc_lim_theta: 1.5
+    ```
 
 ### 4.10 xy_goal_tolerance
 - Defined in clober_navigation/config/dwa_local_planner.yaml
   
   Allowed final euclidean distance to the goal position in meters
 
-  default : 
-    
-    xy_goal_tolerance : 0.1
-
+  default: 
+    ```bash
+    xy_goal_tolerance: 0.1
+    ```
 
 ### 4.11 yaw_goal_tolerance
 - Defined in clober_navigation/config/dwa_local_planner.yaml
   
   Allowed final orientation error in radians
 
-  default 
-  
-    yaw_goal_tolerance : 0.2
+  default:
+    ```bash
+    yaw_goal_tolerance: 0.2
+    ```
