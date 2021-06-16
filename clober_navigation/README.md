@@ -56,9 +56,11 @@ You can get more information about Navigation tuning from [Basic Navigation Tuni
 ### 4.1 footprint
 - Defined in clober_navigation/config/costmap_common.yaml
 
-  This parameter describes the footprint of the robot used for navigation. Composed of four [[x,y]] coordinates representing the four corners of the base of the robot
+  This parameter describes the footprint of the robot used for navigation. Composed of four [x,y] coordinates representing the four corners of the base of the robot
 
-  default : [[-0.202, -0.202], [-0.202, 0.202], [0.202, 0.202], [0.202, -0.202]] 
+  default : 
+  
+    footprint : [[-0.202, -0.202], [-0.202, 0.202], [0.202, 0.202], [0.202, -0.202]]
 
 ### 4.2 inflation_radius
 - Defined in clober_navigation/config/global_costmap.yaml & clober_navigation/config/local_costmap.yaml
