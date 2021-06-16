@@ -59,7 +59,7 @@ You can get more information about Navigation tuning from [Basic Navigation Tuni
   This parameter describes the footprint of the robot used for navigation. Composed of four [x,y] coordinates representing the four corners of the base of the robot
 
   default: 
-  
+
     ```bash
     footprint: [[-0.202, -0.202], [-0.202, 0.202], [0.202, 0.202], [0.202, -0.202]]
     ```
@@ -73,15 +73,12 @@ You can get more information about Navigation tuning from [Basic Navigation Tuni
 
     global_costmap.yaml: 
 
-      ```bash
       inflation_radius: 0.3
-      ```
 
     local_costmap.yaml:
 
-      ```bash
       inflation_radius: 0.15
-      ```
+      
 
 ### 4.3 cost_scaling_factor
 - Defined in clober_navigation/config/global_costmap.yaml & clober_navigation/config/local_costmap.yaml
@@ -94,15 +91,11 @@ You can get more information about Navigation tuning from [Basic Navigation Tuni
 
     global_costmap.yaml: 
 
-      ```bash
       inflation_radius: 3.0
-      ```
 
     local_costmap.yaml:
 
-      ```bash
       inflation_radius: 1.5
-      ```
 
 ### 4.4 base_global_planner
 - Defined in clober_navigation/config/move_base.yaml
