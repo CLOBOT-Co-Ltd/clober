@@ -51,7 +51,7 @@ Initial Pose Estimation can be performed before Navigation to intialize AMCL par
 ---
 
 ## 4. Tuning Guide
-You can get more information about Navigation tuning from [Basic Navigation Tuning Guide](http://wiki.ros.org/navigation/Tutorials/Navigation%20Tuning%20Guide), [ROS Navigation Tuning Guide by Kaiyu Zheng](https://kaiyuzheng.me/documents/navguide.pdf), [timed-elastic-band local planner wiki](http://wiki.ros.org/teb_local_planner).
+You can get more information about Navigation tuning from [Basic Navigation Tuning Guide](http://wiki.ros.org/navigation/Tutorials/Navigation%20Tuning%20Guide), [ROS Navigation Tuning Guide by Kaiyu Zheng](https://kaiyuzheng.me/documents/navguide.pdf), [Dynamic Window Approach local planner wiki](http://wiki.ros.org/dwa_local_planner).
 
 ### 4.1 footprint
 - Defined in clober_navigation/config/costmap_common.yaml
@@ -107,54 +107,66 @@ You can get more information about Navigation tuning from [Basic Navigation Tuni
   
   This parameter allows you to select which local planner to use as a plugin for path planning
 
-  default : teb_local_planner/TebLocalPlannerROS
+  default : dwa_local_planner/DWAPlannerROS
 
 
 ### 4.6 max_vel_x
-- Defined in clober_navigation/config/teb_local_planner.yaml
+- Defined in clober_navigation/config/dwa_local_planner.yaml
 
   This factor is set the maximum value of translational velocity.
 
-  default : 0.7
+  default : 
+    
+    max_vel_x : 0.7
 
 
 ### 4.7 max_vel_x_backwards
-- Defined in clober_navigation/config/teb_local_planner.yaml
+- Defined in clober_navigation/config/dwa_local_planner.yaml
 
   Maximum absolute translational velocity of the robot while driving backwards in meters/sec. 
   
   See optimization parameter weight_kinematics_forward_drive
 
-  default : 0.7
+  default : 
+  
+    max_vel_x_backwards : 0.7
 
 
 ### 4.8 acc_lim_x
-- Defined in clober_navigation/config/teb_local_planner.yaml
+- Defined in clober_navigation/config/dwa_local_planner.yaml
   
   Maximum translational acceleration of the robot in meters/sec^2
 
-  default : 0.7
+  default : 
+  
+    acc_lim_x : 0.7
 
 
 ### 4.9 acc_lim_theta
-- Defined in clober_navigation/config/teb_local_planner.yaml
+- Defined in clober_navigation/config/dwa_local_planner.yaml
   
   Maximum angular acceleration of the robot in radians/sec^2
 
-  default : 1.5
+  default : 
+  
+    acc_lim_theta : 1.5
 
 
 ### 4.10 xy_goal_tolerance
-- Defined in clober_navigation/config/teb_local_planner.yaml
+- Defined in clober_navigation/config/dwa_local_planner.yaml
   
   Allowed final euclidean distance to the goal position in meters
 
-  default : 0.1
+  default : 
+    
+    xy_goal_tolerance : 0.1
 
 
 ### 4.11 yaw_goal_tolerance
-- Defined in clober_navigation/config/teb_local_planner.yaml
+- Defined in clober_navigation/config/dwa_local_planner.yaml
   
   Allowed final orientation error in radians
 
-  default : 0.2
+  default 
+  
+    yaw_goal_tolerance : 0.2
