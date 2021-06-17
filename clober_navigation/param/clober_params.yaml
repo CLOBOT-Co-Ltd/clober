@@ -1,6 +1,6 @@
 amcl:
   ros__parameters:
-    use_sim_time: False
+    use_sim_time: True
     alpha1: 0.2
     alpha2: 0.2
     alpha3: 0.2
@@ -40,11 +40,11 @@ amcl:
 
 amcl_map_client:
   ros__parameters:
-    use_sim_time: False
+    use_sim_time: True
 
 amcl_rclcpp_node:
   ros__parameters:
-    use_sim_time: False
+    use_sim_time: True
 
 bt_navigator:
   ros__parameters:
@@ -82,7 +82,7 @@ bt_navigator:
 
 bt_navigator_rclcpp_node:
   ros__parameters:
-    use_sim_time: False
+    use_sim_time: True
 
 
 controller_server:
@@ -152,7 +152,7 @@ controller_server:
 
 controller_server_rclcpp_node:
   ros__parameters:
-    use_sim_time: False
+    use_sim_time: True
 
 local_costmap:
   local_costmap:
@@ -193,10 +193,10 @@ local_costmap:
       always_send_full_costmap: true
   local_costmap_client:
     ros__parameters:
-      use_sim_time: False
+      use_sim_time: True
   local_costmap_rclcpp_node:
     ros__parameters:
-      use_sim_time: False
+      use_sim_time: True
 
 
 global_costmap:
@@ -252,24 +252,24 @@ global_costmap:
       always_send_full_costmap: true
   global_costmap_client:
     ros__parameters:
-      use_sim_time: False
+      use_sim_time: True
   global_costmap_rclcpp_node:
     ros__parameters:
-      use_sim_time: False
+      use_sim_time: True
 
 map_server:
   ros__parameters:
-    use_sim_time: False
+    use_sim_time: True
     yaml_filename: "map.yaml"
 
 map_server_rclcpp_node:
   ros__parameters:
-    use_sim_time: False
+    use_sim_time: True
 
 
 lifecycle_manager_localization:
   ros__parameters:
-    use_sim_time: False
+    use_sim_time: True
     autostart: true
     node_names: ['map_server', 'amcl',
                  'world_model', 'controller_server',
@@ -277,7 +277,7 @@ lifecycle_manager_localization:
 
 lifecycle_manager_navigation:
   ros__parameters:
-    use_sim_time: False
+    use_sim_time: True
     autostart: true
     node_names: ['map_server', 'amcl',
                  'world_model', 'controller_server',
@@ -286,18 +286,18 @@ lifecycle_manager_navigation:
 
 lifecycle_manager_localization_service_client:
   ros__parameters:
-    use_sim_time: False
+    use_sim_time: True
 
 
 lifecycle_manager_navigation_service_client:
   ros__parameters:
-    use_sim_time: False
+    use_sim_time: True
 
 
 planner_server:
   ros__parameters:
     expected_planner_frequency: 20.0
-    use_sim_time: False
+    use_sim_time: True
     planner_plugins: ["GridBased"]
     GridBased:
       plugin: "nav2_navfn_planner/NavfnPlanner"
@@ -307,7 +307,7 @@ planner_server:
 
 planner_server_GetCostmap_client:
   ros__parameters:
-    use_sim_time: False
+    use_sim_time: True
 
 
 planner_server_rclcpp_node:
@@ -317,5 +317,5 @@ planner_server_rclcpp_node:
 
 robot_state_publisher:
   ros__parameters:
-    use_sim_time: False
+    use_sim_time: True
 

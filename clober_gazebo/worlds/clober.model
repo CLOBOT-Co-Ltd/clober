@@ -39,12 +39,9 @@
             </ode>
         </physics>
 
-        <!-- <model name="clober">
-          <static>1</static>
-            <include>
-                <uri>model://clober</uri>
-                </include>
-            </model> -->
+        <include>
+            <uri>model://3x3</uri>
+        </include>
 
-        </world>
-    </sdf>
+    </world>
+</sdf>

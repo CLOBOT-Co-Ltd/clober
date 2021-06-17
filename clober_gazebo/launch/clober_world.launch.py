@@ -55,10 +55,10 @@ def generate_launch_description():
         # ),
 
 
-        # IncludeLaunchDescription(
-        #     PythonLaunchDescriptionSource([
-        #         launch_file_dir, '/description_launch.py'
-        #     ]), launch_arguments={'use_sim_time': use_sim_time}.items(),
-        # )
+        IncludeLaunchDescription(
+            PythonLaunchDescriptionSource([
+                launch_file_dir, '/description_launch.py'
+            ]), launch_arguments={'use_sim_time': use_sim_time}.items(),
+        )
     
     ])

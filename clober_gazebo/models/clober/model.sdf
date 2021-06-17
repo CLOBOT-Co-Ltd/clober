@@ -75,7 +75,7 @@
 
             <inertial>
                 <pose>0.0018 0.1558 0.02 0 0 -1.5707963267948966</pose>
-                <mass>2.8498940e-02</mass>
+                <mass>3</mass>
                 <inertia>
                     <ixx>1.1175580e-05</ixx>
                     <ixy>-4.2369783e-11</ixy>
@@ -106,7 +106,7 @@
             </collision>
             <inertial>
                 <pose>0.0018 -0.1558 0.02 0 0 1.5707963267948966</pose>
-                <mass>2.8498940e-02</mass>
+                <mass>3</mass>
                 <inertia>
                     <ixx>1.1175580e-05</ixx>
                     <ixy>-4.2369783e-11</ixy>
@@ -120,10 +120,10 @@
 
         <joint name="lidar_joint" type="fixed">
             <parent>base_link</parent>
-            <child>lidar_link</child>
+            <child>laser_link</child>
             <pose>0.159 0 0.2265 0 0 0</pose>
         </joint>
-        <link name="lidar_link">
+        <link name="laser_link">
             <inertial>
             <pose>0.159 0 0.2265 0 0 0</pose>
                 <inertia>
@@ -163,8 +163,8 @@
                         <horizontal>
                             <samples>720</samples>
                             <resolution>0.25</resolution>
-                            <min_angle>-1.5707963267948966</min_angle>
-                            <max_angle>1.5707963267948966</max_angle>
+                            <min_angle>1.5707963267948966</min_angle>
+                            <max_angle>-1.5707963267948966</max_angle>
                         </horizontal>
                     </scan>
                     <range>
@@ -183,7 +183,7 @@
                         <remapping>~/out:=scan</remapping>
                     </ros>
                     <output_type>sensor_msgs/LaserScan</output_type>
-                    <frame_name>lidar_link</frame_name>
+                    <frame_name>laser_link</frame_name>
                 </plugin>
             </sensor>
         </link>
@@ -213,7 +213,7 @@
 
             <odometry_topic>odom</odometry_topic>
             <odometry_frame>odom</odometry_frame>
-            <robot_base_frame>base_footprint</robot_base_frame>
+            <robot_base_frame>base_link</robot_base_frame>
 
         </plugin>
 

@@ -45,7 +45,7 @@ def generate_launch_description():
             'publish_period_sec',
             default_value=publish_period_sec,
             description='occupancy grid publishing period'
-        )
+        ),
         
         Node(
             package='cartographer_ros',

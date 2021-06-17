@@ -12,7 +12,7 @@ def generate_launch_description():
     remappings = [('/tf','tf'),
                   ('/tf_static','tf_static')]
 
-    use_sim_time = LaunchConfiguration('use_sim_time',default='false')
+    use_sim_time = LaunchConfiguration('use_sim_time',default='true')
 
     params = {
         'use_sim_time': use_sim_time,
@@ -64,7 +64,7 @@ def generate_launch_description():
             package='rviz2',
             executable='rviz2',
             arguments=['-d', rviz_config_dir],
-            parameters=[{'use_sim_time':use_sim_time}]
+            parameters=[{'use_sim_time':use_sim_time}],
             remappings=remappings
         )
 
