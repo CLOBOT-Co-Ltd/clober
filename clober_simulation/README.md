@@ -18,7 +18,7 @@ Install the needed packages used in the simulation environment.
     ros-noetic-amcl ros-noetic-map-server \
     ros-noetic-move-base ros-noetic-urdf ros-noetic-xacro \
     ros-noetic-gmapping ros-noetic-navigation \
-    ros-noetic-teb-local-planner
+    ros-noetic-dwa-local-planner
   ```
 
 ## 2. Launch Simulation World
