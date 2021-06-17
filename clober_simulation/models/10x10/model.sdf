@@ -1,6 +1,6 @@
 <?xml version='1.0'?>
 <sdf version='1.5'>
-  <model name='clobot_test_map'>
+  <model name='10x10'>
     <static>1</static>
   
     <link name='Wall_EAST'>
