@@ -50,10 +50,11 @@ source ~/clober_ws/install/setup.bash
 ```
 
 ## 2. Launch Simulation World
-'''bash
+```
 export GAZEBO_MODEL_PATH=${GAZEBO_MODEL_PATH}:~/clober_ws/src/clober/clober_simulation/models
+
 ros2 launch clober_simulation clober_world.launch.py
-'''
+```
 
 <img align="center" src="https://github.com/clobot-git/clober/blob/foxy-devel/images/clober_gazebo.png">
 
