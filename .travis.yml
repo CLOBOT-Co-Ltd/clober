@@ -1,0 +1,19 @@
+language:
+  - generic
+
+os: linux
+dist: focal
+arch: amd64
+services: docker
+
+notifications:
+  email:
+    on_success: change
+    on_failure: always
+    recipients:
+      - ros@clobot.co.kr
+
+branches:
+  only:
+    - foxy-devel
+

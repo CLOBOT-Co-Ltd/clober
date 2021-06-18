@@ -1,2 +1,0 @@
-# clober
-clober ros packages
