@@ -32,3 +32,4 @@ ros2 launch clober_slam cartographer.launch.py
 source /opt/ros/foxy/setup.bash
 ros2 run nav2_map_server map_saver_cli -f (filename) --ros-args -p save_map_timeout:=10000
 ```
+
