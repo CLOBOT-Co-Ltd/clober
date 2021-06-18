@@ -121,11 +121,11 @@
         <joint name="lidar_joint" type="fixed">
             <parent>base_link</parent>
             <child>laser_link</child>
-            <pose>0.159 0 0.2265 0 0 0</pose>
+            <pose>0.159 0 0.2265 3.1415926535897931 0 0</pose>
         </joint>
         <link name="laser_link">
             <inertial>
-            <pose>0.159 0 0.2265 0 0 0</pose>
+            <pose>0.159 0 0.2265 3.1415926535897931 0 0</pose>
                 <inertia>
                     <ixx>0.001</ixx>
                     <ixy>0.000</ixy>
@@ -137,7 +137,7 @@
                 <mass>0.114</mass>
             </inertial>
             <collision name="lidar_sensor_collision">
-            <pose>0.159 0 0.2265 0 0 0</pose>
+            <pose>0.159 0 0.2265 3.1415926535897931 0 0</pose>
                 <geometry>
                     <cylinder>
                         <radius>0.0508</radius>
@@ -146,7 +146,7 @@
                 </geometry>
             </collision>
             <visual name="lidar_sensor_visual">
-            <pose>0.159 0 0.2265 0 0 0</pose>
+            <pose>0.159 0 0.2265 3.1415926535897931 0 0</pose>
                 <geometry>
                     <mesh>
                         <uri>model://clober/meshes/include/tim571.stl</uri>
@@ -163,8 +163,8 @@
                         <horizontal>
                             <samples>720</samples>
                             <resolution>0.25</resolution>
-                            <min_angle>1.5707963267948966</min_angle>
-                            <max_angle>-1.5707963267948966</max_angle>
+                            <min_angle>-1.5707963267948966</min_angle>
+                            <max_angle>1.5707963267948966</max_angle>
                         </horizontal>
                     </scan>
                     <range>
@@ -192,21 +192,17 @@
 
             <update_rate>30</update_rate>
 
-            <!-- wheels -->
             <left_joint>left_wheel_joint</left_joint>
             <right_joint>right_wheel_joint</right_joint>
 
-            <!-- kinematics -->
             <wheel_separation>0.310</wheel_separation>
             <wheel_diameter>0.17</wheel_diameter>
 
-            <!-- limits -->
             <max_wheel_torque>20</max_wheel_torque>
             <max_wheel_acceleration>1.0</max_wheel_acceleration>
 
             <command_topic>cmd_vel</command_topic>
 
-            <!-- output -->
             <publish_odom>true</publish_odom>
             <publish_odom_tf>true</publish_odom_tf>
             <publish_wheel_tf>false</publish_wheel_tf>

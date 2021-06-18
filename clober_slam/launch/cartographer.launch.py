@@ -7,7 +7,7 @@ from launch.actions import DeclareLaunchArgument
 
 def generate_launch_description():
 
-    use_sim_time = LaunchConfiguration('use_sim_time',default='false')
+    use_sim_time = LaunchConfiguration('use_sim_time',default='true')
     cartographer_config_dir = LaunchConfiguration('cartographer_config_dir',
         default=os.path.join(get_package_share_directory('clober_slam'),'config'))
     configuration_basename = LaunchConfiguration('configuration_basename',default='cartographer.lua')
@@ -67,6 +67,7 @@ def generate_launch_description():
         Node(
             package='rviz2',
             executable='rviz2',
+            arguments=['-d', rviz_config_dir],
             parameters=[{'use_sim_time':use_sim_time}],
             output='screen'
         )

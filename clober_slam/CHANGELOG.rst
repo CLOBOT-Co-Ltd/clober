@@ -4,6 +4,6 @@ Changelog for clober_slam pacakage
 
 
 
-0.1.0 (2021-05-10)
+0.1.0 (2021-06-18)
 ------------------
-* add initial clober_add pacakage
+* add initial clober_slam pacakage
