@@ -125,7 +125,7 @@ You can get more information about Navigation tuning from [Basic Navigation Tuni
   default: 
   
     ```bash
-    max_vel_x: 0.7
+    max_vel_x: 0.26
     ```
 
 ### 4.7 max_vel_x_backwards
@@ -138,7 +138,7 @@ You can get more information about Navigation tuning from [Basic Navigation Tuni
   default: 
 
     ```bash
-    max_vel_x_backwards: 0.7
+    max_vel_x_backwards: -0.26
     ```
 
 ### 4.8 acc_lim_x
@@ -149,7 +149,7 @@ You can get more information about Navigation tuning from [Basic Navigation Tuni
   default: 
 
     ```bash
-    acc_lim_x: 0.7
+    acc_lim_x: 2.5
     ```
 
 ### 4.9 acc_lim_theta
@@ -160,7 +160,7 @@ You can get more information about Navigation tuning from [Basic Navigation Tuni
   default: 
 
     ```bash
-    acc_lim_theta: 1.5
+    acc_lim_theta: 3.2
     ```
 
 ### 4.10 xy_goal_tolerance
@@ -171,7 +171,7 @@ You can get more information about Navigation tuning from [Basic Navigation Tuni
   default: 
 
     ```bash
-    xy_goal_tolerance: 0.1
+    xy_goal_tolerance: 0.05
     ```
 
 ### 4.11 yaw_goal_tolerance
@@ -182,5 +182,5 @@ You can get more information about Navigation tuning from [Basic Navigation Tuni
   default:
 
     ```bash
-    yaw_goal_tolerance: 0.2
+    yaw_goal_tolerance: 0.17
     ```
