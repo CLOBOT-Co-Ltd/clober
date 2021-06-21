@@ -50,16 +50,13 @@ def generate_launch_description():
         'lasamplestep': 0.005,
     }
 
-
-    return LaunchDescription([
-        
+    return LaunchDescription([        
         Node(
             package='slam_gmapping',
             executable='slam_gmapping',
             parameters=[params],
             output='screen'
         ),
-
         Node(
             package='rviz2',
             executable='rviz2',
@@ -67,5 +64,4 @@ def generate_launch_description():
             parameters=[{'use_sim_time':use_sim_time}],
             remappings=remappings
         )
-
     ])

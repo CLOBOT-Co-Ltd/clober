@@ -16,7 +16,8 @@ To teleoperate the simulated Clober with the keyboard, launch the teleoperation 
 ros2 run teleop_twist_keyboard teleop_twist_keyboard
 ```
 
-## 2. Launch SLAM \(cartographer\)
+## 2. Launch SLAM
+### 2.1  Cartographer SLAM
 
 ```bash
 source /opt/ros/foxy/setup.bash
@@ -26,10 +27,22 @@ ros2 launch clober_slam cartographer.launch.py
 
 <img align="center" src="https://github.com/clobot-git/clober/blob/foxy-devel/images/clober_slam.png" width=400>
 
+### 2.2  Gmapping SLAM
 
-## 2. Save the map
+```bash
+source /opt/ros/foxy/setup.bash
+source ~/clober_ws/install/setup.bash
+ros2 launch clober_slam gmapping.launch.py
+```
+<img align="center" src="https://github.com/clobot-git/clober/blob/foxy-devel/images/clober_slam.gif">
+
+
+## 3. Save the map
 ```bash
 source /opt/ros/foxy/setup.bash
 ros2 run nav2_map_server map_saver_cli -f (filename) --ros-args -p save_map_timeout:=10000
 ```
+
+<img align="center" src="https://github.com/clobot-git/clober/blob/foxy-devel/images/map_3x3.pgm" width=400>
+
 
