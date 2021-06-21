@@ -1,17 +1,20 @@
+# Install development tools
+sudo apt install curl git
+
+
 # Clober Simulations
 This Gazebo Simulation utilizes the ROS Gazebo package, Gazebo version for ROS1 noetic has to be properly installed before running this instruction.
 
-## 1. Installation
-### 1.1 Install Clober Packages
-The Clober Simulation Package requires `clober` & `clober_msgs` packages. Without the package the simulation cannot be launched.
-  ```bash
-  cd ~/catkin_ws/src/
-  git clone -b noetic-devel https://github.com/clobot-git/clober.git
-  git clone -b noetic-devel https://github.com/clobot-git/clober_msgs.git
-  cd ~/catkin_ws && catkin_make
-  ```
+sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
+curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | sudo apt-key add -
+sudo apt update
+sudo apt install ros-noetic-desktop-full
+echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc
+source ~/.bashrc
 
-### 1.2 Install Required ROS 1 Packages
+
+## 1. Installation
+### 1.1 Install Required ROS 1 Packages
 Install the needed packages used in the simulation environment. 
   ```bash
   sudo apt-get install ros-noetic-teleop-twist-keyboard \
@@ -23,6 +26,17 @@ Install the needed packages used in the simulation environment.
     ros-noetic-navigation \
     ros-noetic-move-base \
     ros-noetic-dwa-local-planner
+  ```
+
+### 1.2 Install Clober Packages
+The Clober Simulation Package requires `clober` & `clober_msgs` packages. Without the package the simulation cannot be launched.
+  ```bash
+  mkdir -p ~/catkin_ws/src
+  cd ~/catkin_ws/src/
+  git clone -b noetic-devel https://github.com/clobot-git/clober.git
+  git clone -b noetic-devel https://github.com/clobot-git/clober_msgs.git
+  cd ~/catkin_ws && catkin_make
+  source ~/catkin_ws/devel/setup.bash
   ```
 
 ## 2. Launch Simulation World
