@@ -142,7 +142,7 @@
       </visual>
     </link>
 
-    <link name='Wall_SOUTH'>
+    <!-- <link name='Wall_SOUTH'>
       <collision name='Wall_SOUTH_Collision'>
         <pose>0 -2.6 0.25 0 0 0</pose>
         <geometry>
@@ -210,7 +210,7 @@
           </script>
         </material>
       </visual>
-    </link>
+    </link> -->
     
     <link name='Wall_NORTH'>
       <collision name='Wall_NORTH_Collision'>

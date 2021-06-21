@@ -21,16 +21,16 @@
             </visual>
 
             <collision name="base_collision">
-                <pose>0 0 0 0 0 1.5707963267948966</pose>
+                <pose>0 0 0.05 0 0 1.5707963267948966</pose>
                 <geometry>
                     <box>
-                        <size>0.5 0.5 0.3</size>
+                        <size>0.41 0.41 0.1</size>
                     </box>
                 </geometry>
             </collision>
 
             <inertial>
-                <pose>0 0 0 0 0 1.5707963267948966</pose>
+                <pose>0 0 0 0 0 0</pose>
                 <mass>30</mass>
                 <inertia>
                     <ixx>2.2124416e-03</ixx>
@@ -46,13 +46,15 @@
         <joint name="left_wheel_joint" type="revolute">
             <parent>base_link</parent>
             <child>left_wheel_link</child>
-            <pose>0.0018 0.1558 0.02 0 0 0</pose>
+            <pose>0.0018 0.1558 0.02 -1.5707963267948966 0 0</pose>
+            <axis>0 1 0</axis>
         </joint>
 
         <joint name="right_wheel_joint" type="revolute">
             <parent>base_link</parent>
             <child>right_wheel_link</child>
-            <pose>0.0018 -0.1558 0.02 0 0 0</pose>
+            <pose>0.0018 -0.1558 0.02 -1.5707963267948966 0 0</pose>
+             <axis>0 1 0</axis>
         </joint>
 
         <link name="left_wheel_link">
@@ -75,7 +77,7 @@
 
             <inertial>
                 <pose>0.0018 0.1558 0.02 0 0 -1.5707963267948966</pose>
-                <mass>3</mass>
+                <mass>2.8498940e-02</mass>
                 <inertia>
                     <ixx>1.1175580e-05</ixx>
                     <ixy>-4.2369783e-11</ixy>
@@ -106,7 +108,7 @@
             </collision>
             <inertial>
                 <pose>0.0018 -0.1558 0.02 0 0 1.5707963267948966</pose>
-                <mass>3</mass>
+                <mass>2.8498940e-02</mass>
                 <inertia>
                     <ixx>1.1175580e-05</ixx>
                     <ixy>-4.2369783e-11</ixy>
@@ -121,32 +123,12 @@
         <joint name="lidar_joint" type="fixed">
             <parent>base_link</parent>
             <child>laser_link</child>
-            <pose>0.159 0 0.2265 3.1415926535897931 0 0</pose>
+            <pose>0.159 0 0.1565 3.1415926535897931 0 0</pose>
         </joint>
+
         <link name="laser_link">
-            <inertial>
-            <pose>0.159 0 0.2265 3.1415926535897931 0 0</pose>
-                <inertia>
-                    <ixx>0.001</ixx>
-                    <ixy>0.000</ixy>
-                    <ixz>0.000</ixz>
-                    <iyy>0.001</iyy>
-                    <iyz>0.000</iyz>
-                    <izz>0.001</izz>
-                </inertia>
-                <mass>0.114</mass>
-            </inertial>
-            <collision name="lidar_sensor_collision">
-            <pose>0.159 0 0.2265 3.1415926535897931 0 0</pose>
-                <geometry>
-                    <cylinder>
-                        <radius>0.0508</radius>
-                        <length>0.055</length>
-                    </cylinder>
-                </geometry>
-            </collision>
             <visual name="lidar_sensor_visual">
-            <pose>0.159 0 0.2265 3.1415926535897931 0 0</pose>
+                <pose>0.159 0 0.1565 3.1415926535897931 0 0</pose>
                 <geometry>
                     <mesh>
                         <uri>model://clober/meshes/include/tim571.stl</uri>
@@ -156,7 +138,7 @@
             <sensor name="tim_571" type="ray">
                 <always_on>true</always_on>
                 <visualize>true</visualize>
-            <pose>0.159 0 0.1565 0 0 0</pose>
+                <pose>0.159 0 0.1565 0 0 0</pose>
                 <update_rate>20</update_rate>
                 <ray>
                     <scan>
@@ -168,8 +150,8 @@
                         </horizontal>
                     </scan>
                     <range>
-                        <min>0.120000</min>
-                        <max>3.5</max>
+                        <min>0.05</min>
+                        <max>25.0</max>
                         <resolution>0.015000</resolution>
                     </range>
                     <noise>
@@ -188,8 +170,137 @@
             </sensor>
         </link>
 
-        <plugin name="clober_diff_drive" filename="libgazebo_ros_diff_drive.so">
+        <joint name="caster_joint1" type="revolute">
+            <parent>base_link</parent>
+            <child>caster_link1</child>
+            <pose>0.11 0.13 -0.04 1.5707963267948966 0 0</pose>
+            <axis>0 0 1</axis>
+        </joint>
 
+        <link name="caster_link1">
+            <collision name="caster_link1_collision">
+                <pose>0.11 0.13 -0.04 1.5707963267948966 0 0</pose>
+                <geometry>
+                    <cylinder>
+                        <radius>0.025</radius>
+                        <length>0.02</length>
+                    </cylinder>
+                </geometry>
+            </collision>
+            <inertial>
+                <pose>0.11 0.13 -0.04 1.5707963267948966 0 0</pose>
+                <mass>0.005</mass>
+                <inertia>
+                    <ixx>0.001</ixx>
+                    <ixy>0.0</ixy>
+                    <ixz>0.0</ixz>
+                    <iyy>0.001</iyy>
+                    <iyz>0.0</iyz>
+                    <izz>0.001</izz>
+                </inertia>
+            </inertial>
+        </link>
+
+        <joint name="caster_joint2" type="revolute">
+            <parent>base_link</parent>
+            <child>caster_link2</child>
+            <pose>-0.15 0.13 -0.04 1.5707963267948966 0 0</pose>
+            <axis>0 0 1</axis>
+        </joint>
+
+        <link name="caster_link2">
+            <collision name="caster_link2_collision">
+                <pose>-0.15 0.13 -0.04 1.5707963267948966 0 0</pose>
+                <geometry>
+                    <cylinder>
+                        <radius>0.025</radius>
+                        <length>0.02</length>
+                    </cylinder>
+                </geometry>
+            </collision>
+
+            <inertial>
+                <pose>-0.15 0.13 -0.04 1.5707963267948966 0 0</pose>
+                <mass>0.005</mass>
+                <inertia>
+                    <ixx>0.001</ixx>
+                    <ixy>0.0</ixy>
+                    <ixz>0.0</ixz>
+                    <iyy>0.001</iyy>
+                    <iyz>0.0</iyz>
+                    <izz>0.001</izz>
+                </inertia>
+            </inertial>
+        </link>
+
+        <joint name="caster_joint3" type="revolute">
+            <parent>base_link</parent>
+            <child>caster_link3</child>
+            <pose>0.11 -0.13 -0.04 1.5707963267948966 0 0</pose>
+            <axis>0 0 1</axis>
+        </joint>
+
+        <link name="caster_link3">
+            <collision name="caster_link3_collision">
+                <pose>0.11 -0.13 -0.04 1.5707963267948966 0 0</pose>
+                <geometry>
+                    <cylinder>
+                        <radius>0.025</radius>
+                        <length>0.02</length>
+                    </cylinder>
+                </geometry>
+            </collision>
+
+            <inertial>
+                <pose>0.11 -0.13 -0.04 1.5707963267948966 0 0</pose>
+                <mass>0.005</mass>
+                <inertia>
+                    <ixx>0.001</ixx>
+                    <ixy>0.0</ixy>
+                    <ixz>0.0</ixz>
+                    <iyy>0.001</iyy>
+                    <iyz>0.0</iyz>
+                    <izz>0.001</izz>
+                </inertia>
+
+            </inertial>
+        </link>
+
+        <joint name="caster_joint4" type="revolute">
+
+            <parent>base_link</parent>
+            <child>caster_link4</child>
+            <pose>-0.15 -0.13 -0.04 1.5707963267948966 0 0</pose>
+            <axis>0 0 1</axis>
+        </joint>
+
+        <link name="caster_link4">
+            <collision name="caster_link4_collision">
+                <pose>-0.15 -0.13 -0.04 1.5707963267948966 0 0</pose>
+                <geometry>
+                    <cylinder>
+                        <radius>0.025</radius>
+                        <length>0.02</length>
+                    </cylinder>
+                </geometry>
+            </collision>
+
+            <inertial>
+                <pose>-0.15 -0.13 -0.04 1.5707963267948966 0 0</pose>
+                <mass>0.005</mass>
+                <inertia>
+                    <ixx>0.001</ixx>
+                    <ixy>0.0</ixy>
+                    <ixz>0.0</ixz>
+                    <iyy>0.001</iyy>
+                    <iyz>0.0</iyz>
+                    <izz>0.001</izz>
+                </inertia>
+
+            </inertial>
+        </link>
+
+        <plugin name="clober_diff_drive" filename="libgazebo_ros_diff_drive.so">
             <update_rate>30</update_rate>
 
             <left_joint>left_wheel_joint</left_joint>
@@ -210,7 +321,6 @@
             <odometry_topic>odom</odometry_topic>
             <odometry_frame>odom</odometry_frame>
             <robot_base_frame>base_link</robot_base_frame>
-
         </plugin>
 
         <plugin
@@ -223,6 +333,76 @@
             <joint_name>left_wheel_joint</joint_name>
             <joint_name>right_wheel_joint</joint_name>
         </plugin>
+
+        <gazebo reference="base_link">
+            <material>Gazebo/White</material>
+        </gazebo>
+
+        <gazebo reference="left_wheel_link">
+            <mu1>0.1</mu1>
+            <mu2>0.1</mu2>
+            <kp>500000.0</kp>
+            <kd>10.0</kd>
+            <minDepth>0.001</minDepth>
+            <maxVel>0.1</maxVel>
+            <fdir1>1 0 0</fdir1>
+            <material>Gazebo/FlatBlack</material>
+        </gazebo>
+
+        <gazebo reference="right_wheel_link">
+            <mu1>0.1</mu1>
+            <mu2>0.1</mu2>
+            <kp>500000.0</kp>
+            <kd>10.0</kd>
+            <minDepth>0.001</minDepth>
+            <maxVel>0.1</maxVel>
+            <fdir1>1 0 0</fdir1>
+            <material>Gazebo/FlatBlack</material>
+        </gazebo>
+
+        <gazebo reference="caster_link1">
+            <mu1>0.05</mu1>
+            <mu2>0.05</mu2>
+            <kp>100000.0</kp>
+            <kd>100.0</kd>
+            <minDepth>0.001</minDepth>
+            <maxVel>1.0</maxVel>
+            <fdir1>1 0 0</fdir1>
+            <material>Gazebo/FlatBlack</material>
+        </gazebo>
+
+        <gazebo reference="caster_link2">
+            <mu1>0.05</mu1>
+            <mu2>0.05</mu2>
+            <kp>100000.0</kp>
+            <kd>100.0</kd>
+            <minDepth>0.001</minDepth>
+            <maxVel>1.0</maxVel>
+            <fdir1>1 0 0</fdir1>
+            <material>Gazebo/FlatBlack</material>
+        </gazebo>
+
+        <gazebo reference="caster_link3">
+            <mu1>0.05</mu1>
+            <mu2>0.05</mu2>
+            <kp>100000.0</kp>
+            <kd>100.0</kd>
+            <minDepth>0.001</minDepth>
+            <maxVel>1.0</maxVel>
+            <fdir1>1 0 0</fdir1>
+            <material>Gazebo/FlatBlack</material>
+        </gazebo>
+
+        <gazebo reference="caster_link4">
+            <mu1>0.05</mu1>
+            <mu2>0.05</mu2>
+            <kp>100000.0</kp>
+            <kd>100.0</kd>
+            <minDepth>0.001</minDepth>
+            <maxVel>1.0</maxVel>
+            <fdir1>1 0 0</fdir1>
+            <material>Gazebo/FlatBlack</material>
+        </gazebo>
 
     </model>
 </sdf>

@@ -38,7 +38,7 @@ def generate_launch_description():
 
         ExecuteProcess(
             cmd=['ros2', 'run', 'gazebo_ros', 'spawn_entity.py', '-file' , gazebo_model_path + '/clober/' + 'model.sdf',
-                '-entity', 'nb2', '-spawn_service_timeout', '300'],
+                '-entity', 'clober', '-spawn_service_timeout', '300', '-x', '0.0', '-y', '0.0', '-z', '0.0'],
             output='screen'),    
 
         # IncludeLaunchDescription(
