@@ -43,6 +43,6 @@ source /opt/ros/foxy/setup.bash
 ros2 run nav2_map_server map_saver_cli -f (filename) --ros-args -p save_map_timeout:=10000
 ```
 
-<img align="center" src="https://github.com/clobot-git/clober/blob/foxy-devel/images/map_3x3.pgm" width=400>
+<img align="center" src="https://github.com/clobot-git/clober/blob/foxy-devel/images/map_3x3.png" width=400>
 
 
