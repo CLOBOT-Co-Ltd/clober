@@ -15,9 +15,13 @@ The Clober Simulation Package requires `clober` & `clober_msgs` packages. Withou
 Install the needed packages used in the simulation environment. 
   ```bash
   sudo apt-get install ros-noetic-teleop-twist-keyboard \
-    ros-noetic-amcl ros-noetic-map-server \
-    ros-noetic-move-base ros-noetic-urdf ros-noetic-xacro \
-    ros-noetic-gmapping ros-noetic-navigation \
+    ros-noetic-gmapping \
+    ros-noetic-urdf \
+    ros-noetic-xacro \
+    ros-noetic-map-server \
+    ros-noetic-amcl \
+    ros-noetic-navigation \
+    ros-noetic-move-base \
     ros-noetic-dwa-local-planner
   ```
 

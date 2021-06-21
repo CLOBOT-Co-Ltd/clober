@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<package format="2">
+<package format="3">
   <name>clober_simulation</name>
   <version>1.0.0</version>
   <description>The clober_simulation package</description>
@@ -19,7 +19,7 @@
   
   <exec_depend>gazebo</exec_depend>
   <exec_depend>clober_description</exec_depend>
-  
+    
   <export>
     <gazebo_ros gazebo_media_path="${prefix}"/>
     <gazebo_ros gazebo_model_path="${prefix}/models"/>
