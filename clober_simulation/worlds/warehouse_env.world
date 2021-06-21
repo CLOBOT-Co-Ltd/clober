@@ -31,9 +31,8 @@
       </ode>
     </physics>
 
-    <!-- A turtlebot symbol -->
     <include>
-      <uri>model://clober_test_map</uri>
+      <uri>model://warehouse_env</uri>
     </include>
 
     <scene>

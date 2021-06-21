@@ -31,7 +31,6 @@
       </ode>
     </physics>
 
-    <!-- A turtlebot symbol -->
     <include>
       <uri>model://3x3</uri>
     </include>

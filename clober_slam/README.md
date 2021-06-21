@@ -43,18 +43,36 @@ After successful SLAM and map creation, open a new terminal to save the map.
 ## 2. Tuning Guide
 Gmapping has many parameters to change performances for different environments. You can get an information about whole parameters in [ROS WiKi](http://wiki.ros.org/gmapping). This tuning guide provides tips when configuring gmapping parameters. If you want to optimize SLAM performances for your environments, this section might be helpful.
 
-Below parameters are defined in clober_slam/config/gmapping_params.yaml file.
+**Parameters below are defined in clober_slam/config/gmapping_params.yaml file.**
 
 ### 2.1 maxUrange
-  This parameter is set the maximum usable range of the lidar sensor.
+- This parameter is set the maximum usable range of the lidar sensor.
+
+  default :
+  ```bash
+  maxUrange: 3.0
+  ```
+
 
 ### 2.2 map_update_interval
-  This parameter defines time between updating the map.
+- This parameter defines time between updating the map.
   The smaller the value, the more frequent the map is updated.
   However, setting this too small will be require more processing power for the map calculation. Set this parameter depending on the map environment.
 
+  default :
+  ```bash
+  map_update_interval: 2.0
+  ```
+
 ### 2.3 minimumScore
-  This parameter sets the minimum score value that determines the success or failure of the sensor’s scan data matching test. This can reduce errors in the expected position of the robot in a large area. If the parameter is set properly, you will see information similar to one shown below.
+- This parameter sets the minimum score value that determines the success or failure of the sensor’s scan data matching test. This can reduce errors in the expected position of the robot in a large area. 
+
+  default :
+  ```bash
+  minimumScore: 50
+  ```
+
+  If the parameter is set properly, you will see information similar to one shown below.
 
   ```bash
   Average Scan Matching Score=278.965
@@ -73,8 +91,17 @@ Below parameters are defined in clober_slam/config/gmapping_params.yaml file.
   ```
 
 ### 2.4 linearUpdate
-  When the robot translates longer distance than this value, it will run the scan process.
+- When the robot translates longer distance than this value, it will run the scan process.
 
+  default :
+  ```bash
+  linearUpdate: 1.0
+  ```
 
 ### 2.5 angularUpdate
-  When the robot rotates more than this value, it will run the scan process. It is recommended to set this value less than linearUpdate.
+- When the robot rotates more than this value, it will run the scan process. It is recommended to set this value less than linearUpdate.
+
+  default :
+  ```bash
+  angularUpdate: 0.2
+  ```

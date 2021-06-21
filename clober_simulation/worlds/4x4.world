@@ -25,7 +25,6 @@
       </ode>
     </physics>
 
-    <!-- A turtlebot symbol -->
     <include>
       <uri>model://4x4</uri>
     </include>
