@@ -1,10 +1,11 @@
 # Install development tools
+Install development tools for a smooth installation.
 ```
 sudo apt install curl git
 ```
 
 # Clober Simulations
-This Gazebo Simulation utilizes the ROS Gazebo package, Gazebo version for ROS1 noetic has to be properly installed before running this instruction.
+This Gazebo Simulation utilizes the ROS Gazebo package, Gazebo version 11 for ROS1 noetic has to be properly installed before running this instruction, such that we recommend you installing the full version of ROS noetic.
 
 ```
 sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
