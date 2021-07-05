@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="clober">
 
-  <xacro:include filename="$(find clober_description)/urdf/include/tim571.urdf.xacro"/>
+  <!-- <xacro:include filename="$(find clober_description)/urdf/include/tim571.urdf.xacro"/> -->
 
   <xacro:property name="PI" value="3.1415926535897931"/>
 

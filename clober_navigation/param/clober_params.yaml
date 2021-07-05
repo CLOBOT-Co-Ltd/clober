@@ -51,11 +51,15 @@ bt_navigator:
     use_sim_time: true
     global_frame: map
     robot_base_frame: base_link
+    transform_tolerance: 0.1
     odom_topic: /odom
     default_bt_xml_filename: "navigate_w_replanning_time.xml"
     enable_groot_monitoring: True
     groot_zmq_publisher_port: 1666
     groot_zmq_server_port: 1667
+    goal_blackboard_id: goal
+    goals_blackboard_id: goals
+    path_blackboard_id: path
     plugin_lib_names:
     - nav2_compute_path_to_pose_action_bt_node
     - nav2_follow_path_action_bt_node
@@ -89,9 +93,9 @@ controller_server:
   ros__parameters:
     use_sim_time: true
     controller_frequency: 20.0
-    min_x_velocity_threshold: 0.001
-    min_y_velocity_threshold: 0.5
-    min_theta_velocity_threshold: 0.001
+    min_x_velocity_threshold: 0.01
+    min_y_velocity_threshold: 0.01
+    min_theta_velocity_threshold: 0.1
     progress_checker_plugin: "progress_checker"
     goal_checker_plugin: "goal_checker"
     controller_plugins: ["FollowPath"]
@@ -99,8 +103,8 @@ controller_server:
     # Progress checker parameters
     progress_checker:
       plugin: "nav2_controller::SimpleProgressChecker"
-      required_movement_radius: 0.5
-      movement_time_allowance: 10.0
+      required_movement_radius: 1.0
+      movement_time_allowance: 100.0
     # Goal checker parameters
     goal_checker:
       plugin: "nav2_controller::SimpleGoalChecker"
@@ -111,27 +115,25 @@ controller_server:
     FollowPath:
       plugin: "dwb_core::DWBLocalPlanner"
       debug_trajectory_details: true
-      min_vel_x: 0.0
+      min_vel_x: -0.05
       min_vel_y: 0.0
-      max_vel_x: 0.26
+      max_vel_x: 0.2
       max_vel_y: 0.0
       max_vel_theta: 1.0
       min_speed_xy: 0.0
-      max_speed_xy: 0.26
+      max_speed_xy: 0.2
       min_speed_theta: 0.0
-      # Add high threshold velocity for turtlebot 3 issue.
-      # https://github.com/ROBOTIS-GIT/turtlebot3_simulations/issues/75
-      acc_lim_x: 2.5
-      acc_lim_y: 0.0
-      acc_lim_theta: 3.2
-      decel_lim_x: -2.5
-      decel_lim_y: 0.0
-      decel_lim_theta: -3.2
+      acc_lim_x: 1.5
+      acc_lim_y: 1.5
+      acc_lim_theta: 3.0
+      decel_lim_x: -1.5
+      decel_lim_y: -1.5
+      decel_lim_theta: -3.0
       vx_samples: 20
-      vy_samples: 5
+      vy_samples: 20
       vtheta_samples: 20
-      sim_time: 1.7
-      linear_granularity: 0.05
+      sim_time: 0.5
+      linear_granularity: 0.5
       angular_granularity: 0.025
       transform_tolerance: 0.2
       xy_goal_tolerance: 0.25
@@ -139,12 +141,13 @@ controller_server:
       short_circuit_trajectory_evaluation: true
       stateful: true
       critics: ["RotateToGoal", "Oscillation", "BaseObstacle", "GoalAlign", "PathAlign", "PathDist", "GoalDist"]
+      BaseObstacle.sum_scores: true
       BaseObstacle.scale: 0.02
-      PathAlign.scale: 32.0
+      PathAlign.scale: 80.0
       PathAlign.forward_point_distance: 0.1
       GoalAlign.scale: 24.0
       GoalAlign.forward_point_distance: 0.1
-      PathDist.scale: 32.0
+      PathDist.scale: 12.0
       GoalDist.scale: 24.0
       RotateToGoal.scale: 32.0
       RotateToGoal.slowing_factor: 5.0
@@ -166,7 +169,7 @@ local_costmap:
       width: 3
       height: 3
       resolution: 0.05
-      robot_radius: 0.3
+      robot_radius: 0.23
       plugins: ["voxel_layer", "inflation_layer"]
       inflation_layer:
         plugin: "nav2_costmap_2d::InflationLayer"
@@ -188,8 +191,6 @@ local_costmap:
           clearing: true
           marking: true
           data_type: "LaserScan"
-      static_layer:
-        map_subscribe_transient_local: true
       always_send_full_costmap: true
   local_costmap_client:
     ros__parameters:
@@ -202,6 +203,7 @@ local_costmap:
 global_costmap:
   global_costmap:
     ros__parameters:
+      footprint_padding: 0.03
       update_frequency: 1.0
       publish_frequency: 1.0
       global_frame: map
@@ -209,19 +211,20 @@ global_costmap:
       use_sim_time: true
       use_maximum: true
       static_map: true
-      robot_radius: 0.3
+      robot_radius: 0.23
       resolution: 0.05
       track_unknown_space: true
-      plugins: ["static_layer", "obstacle_layer", "inflation_layer","voxel_layer"]
+      plugins: ["static_layer", "inflation_layer", "voxel_layer", "obstacle_layer"]
       static_layer:
         plugin: "nav2_costmap_2d::StaticLayer"
         map_subscribe_transient_local: true
         enabled: true
-        subscribe_to_updates: false
+        subscribe_to_updates: true
+        transform_tolerance: 0.1
         map_topic: "/map"
       inflation_layer:
         plugin: "nav2_costmap_2d::InflationLayer"
-        cost_scaling_factor: 10.0
+        cost_scaling_factor: 1.0
         inflation_radius: 0.3
       voxel_layer:
         plugin: "nav2_costmap_2d::VoxelLayer"
@@ -231,6 +234,7 @@ global_costmap:
         z_resolution: 0.05
         z_voxels: 16
         max_obstacle_height: 2.0
+        unknown_threshold: 0
         mark_threshold: 0
         observation_sources: scan
         scan:
@@ -241,14 +245,23 @@ global_costmap:
           data_type: "LaserScan"
       obstacle_layer:
         plugin: "nav2_costmap_2d::ObstacleLayer"
-        enabled: false
+        enabled: true
         observation_sources: scan
+        footprint_clearing_enabled: true
+        max_obstacle_height: 2.0
+        combination_method: 1
         scan:
           topic: /scan
+          obstacle_max_range: 2.5
+          obstacle_min_range: 0.0
+          raytrace_max_range: 3.0
+          raytrace_min_range: 0.0
           max_obstacle_height: 2.0
+          min_obstacle_height: 0.0
           clearing: true
           marking: true
           data_type: "LaserScan"
+          inf_is_valid: false
       always_send_full_costmap: true
   global_costmap_client:
     ros__parameters:
@@ -272,7 +285,7 @@ lifecycle_manager_localization:
     autostart: true
     node_names: ['map_server', 'amcl',
                  'world_model', 'controller_server',
-                 'navfn_planner', 'bt_navigator']
+                 'planner_server', 'bt_navigator', 'waypoint_follower']
 
 lifecycle_manager_navigation:
   ros__parameters:
@@ -280,7 +293,7 @@ lifecycle_manager_navigation:
     autostart: true
     node_names: ['map_server', 'amcl',
                  'world_model', 'controller_server',
-                 'navfn_planner', 'bt_navigator']
+                 'planner_server', 'bt_navigator', 'waypoint_follower']
 
 
 lifecycle_manager_localization_service_client:
@@ -295,15 +308,13 @@ lifecycle_manager_navigation_service_client:
 
 planner_server:
   ros__parameters:
-    expected_planner_frequency: 20.0
-    use_sim_time: True
-    planner_plugins: ["GridBased"]
+    planner_plugins: ['GridBased']
     GridBased:
-      plugin: "nav2_navfn_planner/NavfnPlanner"
-      tolerance: 0.5
-      use_astar: false
-      allow_unknown: true
-
+      plugin: 'nav2_navfn_planner/NavfnPlanner'
+      use_astar: True
+      allow_unknown: True
+      tolerance: 0.01
+        
 planner_server_GetCostmap_client:
   ros__parameters:
     use_sim_time: True
@@ -318,3 +329,32 @@ robot_state_publisher:
   ros__parameters:
     use_sim_time: True
 
+waypoint_follower:
+  ros__parameters:
+    loop_rate: 20
+    stop_on_failure: false
+    waypoint_task_executor_plugin: "wait_at_waypoint"
+    wait_at_waypoint:
+      plugin: "nav2_waypoint_follower::WaitAtWaypoint"
+      enabled: True
+      waypoint_pause_duration: 1000
+
+recoveries_server:
+  ros__parameters:
+    costmap_topic: local_costmap/costmap_raw
+    footprint_topic: local_costmap/published_footprint
+    cycle_frequency: 10.0
+    recovery_plugins: ["spin", "backup", "wait"]
+    spin:
+      plugin: "nav2_recoveries/Spin"
+    backup:
+      plugin: "nav2_recoveries/BackUp"
+    wait:
+      plugin: "nav2_recoveries/Wait"
+    global_frame: odom
+    robot_base_frame: base_link
+    transform_timeout: 0.1
+    simulate_ahead_time: 2.0
+    max_rotational_vel: 1.0
+    min_rotational_vel: 0.4
+    rotational_acc_lim: 3.2

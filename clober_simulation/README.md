@@ -25,7 +25,13 @@ sudo apt update && sudo apt install -y \
 ### 1.3 Install Gazebo (gazebo 11)
 http://gazebosim.org/tutorials?tut=ros2_installing&cat=connect_ros
 
-### 1.4 Install Clober Packages
+### 1.4 Install xacro packages
+
+```
+sudo apt-get install ros-foxy-xacro
+```
+
+### 1.5 Install Clober Packages
 ```
 $ mkdir -p ~/clober_ws/src
 cd ~/clober_ws/
@@ -33,7 +39,7 @@ wget https://raw.githubusercontent.com/clobot-git/clober/foxy-devel/clober.repos
 vcs import src < clober.repos
 ```
 
-### 1.5 Install other dependencies
+### 1.6 Install other dependencies
 ```
 cd ~/clober_ws/
 source /opt/ros/foxy/setup.bash
@@ -41,7 +47,7 @@ rosdep update
 rosdep install --from-paths src --ignore-src -r -y --rosdistro foxy
 ```
 
-### 1.6 Colcon build the packages
+### 1.7 Colcon build the packages
 ```
 cd ~/clober_ws/
 source /opt/ros/foxy/setup.bash

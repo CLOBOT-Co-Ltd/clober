@@ -11,9 +11,9 @@ from nav2_common.launch import RewrittenYaml
 
 def generate_launch_description():
     # Get the launch directory
-    nav_dir = get_package_share_directory('omoros_nav')
+    nav_dir = get_package_share_directory('clober_navigation')
     param_dir = os.path.join(nav_dir,'param')
-    param_file = 'omoros_params.yaml'
+    param_file = 'clober_params.yaml'
     bt_file = 'navigate_w_replanning_time.xml'
 
     namespace = LaunchConfiguration('namespace')
