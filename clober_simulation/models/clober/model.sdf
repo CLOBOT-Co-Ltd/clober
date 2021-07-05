@@ -2,13 +2,13 @@
 <sdf version='1.6'>
     <model name='clober'>
 
-        <link name="base_footprint"/>
+        <!-- <link name="base_footprint"/>
 
         <joint name="base_joint" type="fixed">
             <parent>base_footprint</parent>
             <child>base_link</child>
             <pose>0.0 0.0 0.020 0 0 0</pose>
-        </joint>
+        </joint> -->
 
         <link name="base_link">
             <visual name='visual'>
@@ -47,14 +47,32 @@
             <parent>base_link</parent>
             <child>left_wheel_link</child>
             <pose>0.0018 0.1558 0.02 -1.5707963267948966 0 0</pose>
-            <axis>0 1 0</axis>
+            <axis>
+                <xyz> 0 1 0 </xyz>
+                <dynamics>
+                    <friction> 1 </friction>
+                    <damping> 1 </damping>
+                    <spring_reference> 0 </spring_reference>
+                    <spring_stiffness> 0 </spring_stiffness>
+                </dynamics>
+                <use_parent_model_frame> 1 </use_parent_model_frame>
+            </axis>
         </joint>
 
         <joint name="right_wheel_joint" type="revolute">
             <parent>base_link</parent>
             <child>right_wheel_link</child>
             <pose>0.0018 -0.1558 0.02 -1.5707963267948966 0 0</pose>
-             <axis>0 1 0</axis>
+            <axis>
+                <xyz> 0 1 0 </xyz>
+                <dynamics>
+                    <friction> 1 </friction>
+                    <damping> 1 </damping>
+                    <spring_reference> 0 </spring_reference>
+                    <spring_stiffness> 0 </spring_stiffness>
+                </dynamics>
+                <use_parent_model_frame> 1 </use_parent_model_frame>
+            </axis>
         </joint>
 
         <link name="left_wheel_link">
@@ -73,6 +91,22 @@
                         <uri>model://clober/meshes/wheel.dae</uri>
                     </mesh>
                 </geometry>
+                <surface>
+                    <friction>
+                        <ode>
+                            <mu> 1 </mu>
+                            <mu2> 1 </mu2>
+                        </ode>
+                    </friction>
+                    <contact>
+                        <ode>
+                            <kp> 100000 </kp>
+                            <kd> 1000 </kd>
+                            <max_vel> 0.1 </max_vel>
+                            <min_depth> 0.0001 </min_depth>
+                        </ode>
+                    </contact>
+                </surface>                
             </collision>
 
             <inertial>
@@ -105,6 +139,22 @@
                         <uri>model://clober/meshes/wheel.dae</uri>
                     </mesh>
                 </geometry>
+                <surface>
+                    <friction>
+                        <ode>
+                            <mu> 1 </mu>
+                            <mu2> 1 </mu2>
+                        </ode>
+                    </friction>
+                    <contact>
+                        <ode>
+                            <kp> 100000 </kp>
+                            <kd> 1000 </kd>
+                            <max_vel> 0.1 </max_vel>
+                            <min_depth> 0.0001 </min_depth>
+                        </ode>
+                    </contact>
+                </surface>                
             </collision>
             <inertial>
                 <pose>0.0018 -0.1558 0.02 0 0 1.5707963267948966</pose>
@@ -174,7 +224,16 @@
             <parent>base_link</parent>
             <child>caster_link1</child>
             <pose>0.11 0.13 -0.04 1.5707963267948966 0 0</pose>
-            <axis>0 0 1</axis>
+            <axis>
+                <xyz> 0 1 0 </xyz>
+                <dynamics>
+                    <friction> 0.1 </friction>
+                    <damping> 0.1 </damping>
+                    <spring_reference> 0 </spring_reference>
+                    <spring_stiffness> 0 </spring_stiffness>
+                </dynamics>
+                <use_parent_model_frame> 1 </use_parent_model_frame>
+            </axis>
         </joint>
 
         <link name="caster_link1">
@@ -186,6 +245,22 @@
                         <length>0.02</length>
                     </cylinder>
                 </geometry>
+                <surface>
+                    <friction>
+                        <ode>
+                            <mu> 1 </mu>
+                            <mu2> 1 </mu2>
+                        </ode>
+                    </friction>
+                    <contact>
+                        <ode>
+                            <kp> 100000 </kp>
+                            <kd> 1000 </kd>
+                            <max_vel> 0.1 </max_vel>
+                            <min_depth> 0.0001 </min_depth>
+                        </ode>
+                    </contact>
+                </surface>
             </collision>
             <inertial>
                 <pose>0.11 0.13 -0.04 1.5707963267948966 0 0</pose>
@@ -205,7 +280,16 @@
             <parent>base_link</parent>
             <child>caster_link2</child>
             <pose>-0.15 0.13 -0.04 1.5707963267948966 0 0</pose>
-            <axis>0 0 1</axis>
+            <axis>
+                <xyz> 0 1 0 </xyz>
+                <dynamics>
+                    <friction> 0.1 </friction>
+                    <damping> 0.1 </damping>
+                    <spring_reference> 0 </spring_reference>
+                    <spring_stiffness> 0 </spring_stiffness>
+                </dynamics>
+                <use_parent_model_frame> 1 </use_parent_model_frame>
+            </axis>
         </joint>
 
         <link name="caster_link2">
@@ -217,6 +301,22 @@
                         <length>0.02</length>
                     </cylinder>
                 </geometry>
+                <surface>
+                    <friction>
+                        <ode>
+                            <mu> 1 </mu>
+                            <mu2> 1 </mu2>
+                        </ode>
+                    </friction>
+                    <contact>
+                        <ode>
+                            <kp> 100000 </kp>
+                            <kd> 1000 </kd>
+                            <max_vel> 0.1 </max_vel>
+                            <min_depth> 0.0001 </min_depth>
+                        </ode>
+                    </contact>
+                </surface>                
             </collision>
 
             <inertial>
@@ -237,7 +337,16 @@
             <parent>base_link</parent>
             <child>caster_link3</child>
             <pose>0.11 -0.13 -0.04 1.5707963267948966 0 0</pose>
-            <axis>0 0 1</axis>
+            <axis>
+                <xyz> 0 1 0 </xyz>
+                <dynamics>
+                    <friction> 0.1 </friction>
+                    <damping> 0.1 </damping>
+                    <spring_reference> 0 </spring_reference>
+                    <spring_stiffness> 0 </spring_stiffness>
+                </dynamics>
+                <use_parent_model_frame> 1 </use_parent_model_frame>
+            </axis>
         </joint>
 
         <link name="caster_link3">
@@ -249,6 +358,22 @@
                         <length>0.02</length>
                     </cylinder>
                 </geometry>
+                <surface>
+                    <friction>
+                        <ode>
+                            <mu> 1 </mu>
+                            <mu2> 1 </mu2>
+                        </ode>
+                    </friction>
+                    <contact>
+                        <ode>
+                            <kp> 100000 </kp>
+                            <kd> 1000 </kd>
+                            <max_vel> 0.1 </max_vel>
+                            <min_depth> 0.0001 </min_depth>
+                        </ode>
+                    </contact>
+                </surface>                
             </collision>
 
             <inertial>
@@ -271,7 +396,16 @@
             <parent>base_link</parent>
             <child>caster_link4</child>
             <pose>-0.15 -0.13 -0.04 1.5707963267948966 0 0</pose>
-            <axis>0 0 1</axis>
+            <axis>
+                <xyz> 0 1 0 </xyz>
+                <dynamics>
+                    <friction> 0.1 </friction>
+                    <damping> 0.1 </damping>
+                    <spring_reference> 0 </spring_reference>
+                    <spring_stiffness> 0 </spring_stiffness>
+                </dynamics>
+                <use_parent_model_frame> 1 </use_parent_model_frame>
+            </axis>
         </joint>
 
         <link name="caster_link4">
@@ -283,6 +417,22 @@
                         <length>0.02</length>
                     </cylinder>
                 </geometry>
+                <surface>
+                    <friction>
+                        <ode>
+                            <mu> 1 </mu>
+                            <mu2> 1 </mu2>
+                        </ode>
+                    </friction>
+                    <contact>
+                        <ode>
+                            <kp> 100000 </kp>
+                            <kd> 1000 </kd>
+                            <max_vel> 0.1 </max_vel>
+                            <min_depth> 0.0001 </min_depth>
+                        </ode>
+                    </contact>
+                </surface>                
             </collision>
 
             <inertial>
