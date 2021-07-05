@@ -1,6 +1,5 @@
 # Clober!
 <img align="center" src="https://github.com/clobot-git/clober/blob/noetic-devel/images/clober_right.png" width="400">
-This project currently contains basic launch and urdf files for the simulation of Clober Robot research platform. We will be providing higher level packages soon, probably relatively prior to the 2021 ROScon schedule. Have fun using our packages and hope to see you at ROScon!
 
 ## ROS 1 Packages for Clober
 [![Licence](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
