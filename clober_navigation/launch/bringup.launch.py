@@ -18,7 +18,7 @@ def generate_launch_description():
     launch_dir = os.path.join(nav_dir,'launch')
     param_dir = os.path.join(nav_dir,'param')
     param_file = 'clober_params.yaml'
-    bt_file = 'navigate_w_replanning_time.xml'
+    bt_file = 'BehaviorTree.xml'
     map_dir = os.path.join(nav_dir,'map','3x3')
     map_file = 'map.yaml'
 

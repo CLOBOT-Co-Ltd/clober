@@ -14,7 +14,7 @@ def generate_launch_description():
     nav_dir = get_package_share_directory('clober_navigation')
     param_dir = os.path.join(nav_dir,'param')
     param_file = 'clober_params.yaml'
-    bt_file = 'navigate_w_replanning_time.xml'
+    bt_file = 'BehaviorTree.xml'
 
     namespace = LaunchConfiguration('namespace')
     use_sim_time = LaunchConfiguration('use_sim_time')

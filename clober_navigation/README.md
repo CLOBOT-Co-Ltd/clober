@@ -128,5 +128,5 @@ You can get more information about Navigation2's parameters from [Navigation2 Co
 
 ### 6.2. Set Navigation2 Behavior Tree
 
-Behavior Tree Navigator module implements the NavigateToPos task interface. This based the [Behavior Tree](https://www.behaviortree.dev/) and the Navigation2 provies the plugins for navigation. To make a BehaviorTree.xml file, you can customize the Navigator based on the BT.
+Behavior Tree Navigator module implements the NavigateToPos task interface. This based the [Behavior Tree](https://www.behaviortree.dev/) and the Navigation2 provies the plugins for navigation. To make a [BehaviorTree.xml](https://github.com/clobot-git/clober/blob/foxy-devel/clober_navigation/param/BehaviorTree.xml) file, you can customize the Navigator based on the BT.
 You can get more information about Navigation2's plugins for BT from [Navigation2 Configuration Guide - Behavior Tree XML Nodes](https://navigation.ros.org/configuration/packages/configuring-bt-xml.html#)
