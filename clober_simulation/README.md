@@ -46,28 +46,28 @@ The Clober Simulation Package requires `clober` & `clober_msgs` packages. Withou
 Several Simulation environments are prepared, made accessible by each launch file.
 
 ### 2.1 Empty World
-<img align="center" src="https://github.com/clobot-git/testrobot/blob/noetic-devel/images/empty_world.png">
+<img align="center" src="https://github.com/clobot-git/clober/blob/noetic-devel/images/empty_world.png">
 
   ```bash
   roslaunch clober_simulation empty_world.launch
   ```
 
 ### 2.2 Clobot Logo World
-<img align="center" src="https://github.com/clobot-git/testrobot/blob/noetic-devel/images/logo_world.png">
+<img align="center" src="https://github.com/clobot-git/clober/blob/noetic-devel/images/logo_world.png">
 
   ```bash
   roslaunch clober_simulation logo_world.launch
   ```
 
 ### 2.3 Warehouse World
-<img align="center" src="https://github.com/clobot-git/testrobot/blob/noetic-devel/images/warehouse_world.png">
+<img align="center" src="https://github.com/clobot-git/clober/blob/noetic-devel/images/warehouse_world.png">
 
   ```bash
   roslaunch clober_simulation warehouse_env_world.launch
   ```
 
 ### 2.4 Grid World
-<img align="center" src="https://github.com/clobot-git/testrobot/blob/noetic-devel/images/grid_world.png">
+<img align="center" src="https://github.com/clobot-git/clober/blob/noetic-devel/images/grid_world.png">
 
 3x3 grid world
   ```bash
@@ -119,7 +119,7 @@ On a new terminal run a teleoperation node to explore and map the Gazebo world.
   rosrun teleop_twist_keyboard teleop_twist_keyboard.py
   ```
 
-  [<img align="center" src="https://github.com/clobot-git/testrobot/blob/noetic-devel/gifs/clober_slam.gif">](https://youtube.com/)
+  [<img align="center" src="https://github.com/clobot-git/clober/blob/noetic-devel/gifs/clober_slam.gif">](https://youtube.com/)
 
 
 ### 4.4 Save Map
@@ -129,7 +129,7 @@ After successful SLAM and map creation, open a new terminal to save the map.
   ```
   If you've saved your map successfully it should look like the following.
 
-  <img align="center" src="https://github.com/clobot-git/testrobot/blob/noetic-devel/images/map.png" width=400>
+  <img align="center" src="https://github.com/clobot-git/clober/blob/noetic-devel/images/map.png" width=400>
 
 ## 5. Navigation Simulation
 For Navigation in Gazebo simulator navigation works pretty similar under low velocity circumstances.
@@ -151,7 +151,7 @@ On a new terminal run a Navgitaion node.
 ### 5.3 Estimate Initial Pose
 Initial Pose Estimation can be performed before Navigation to intialize AMCL parameters which are critical to Navigation quality. 
   1. Click `2D Pose Estimate` Button on the RVIZ menu
-    <img align="center" src="https://github.com/clobot-git/testrobot/blob/noetic-devel/images/2d_pose_estimate.png">
+    <img align="center" src="https://github.com/clobot-git/clober/blob/noetic-devel/images/2d_pose_estimate.png">
 
   2. Click on the map where clober is located and drag the green arrow toward the dirction the robot is facing.
 
@@ -163,13 +163,13 @@ Initial Pose Estimation can be performed before Navigation to intialize AMCL par
     ```
 
   5. Move the robot back and forth in order to narrow down the estimated location.
-    [<img align="center" src="https://github.com/clobot-git/testrobot/blob/noetic-devel/gifs/clober_amcl.gif">](https://youtube.com)
+    [<img align="center" src="https://github.com/clobot-git/clober/blob/noetic-devel/gifs/clober_amcl.gif">](https://youtube.com)
 
   6. Terminate the keyboard teleoperation(`Ctrl`+`C`) for the next navigation step. 
 
 ### 5.4 Publish 2D Navigation Goal
 - On the RVIZ menu click `2D Nav Goal`
-  <img align="center" src="https://github.com/clobot-git/testrobot/blob/noetic-devel/images/2d_nav_goal.png">
+  <img align="center" src="https://github.com/clobot-git/clober/blob/noetic-devel/images/2d_nav_goal.png">
 
 - Click on the destination and drag the green arrow toward the dirction of the robot on the map.
-  [<img align="center" src="https://github.com/clobot-git/testrobot/blob/noetic-devel/gifs/clober_navigation.gif">](https://youtube.com/)
+  [<img align="center" src="https://github.com/clobot-git/clober/blob/noetic-devel/gifs/clober_navigation.gif">](https://youtube.com/)
