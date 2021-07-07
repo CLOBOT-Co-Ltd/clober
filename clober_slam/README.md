@@ -26,7 +26,7 @@ On a new terminal run a teleoperation node to explore and map the world.
   rosrun teleop_twist_keyboard teleop_twist_keyboard.py
   ```
 
-  [<img align="center" src="https://github.com/clobot-git/testrobot/blob/noetic-devel/gifs/clober_slam.gif">](https://youtube.com/)
+  [<img align="center" src="https://github.com/clobot-git/clober/blob/noetic-devel/gifs/clober_slam.gif">](https://youtube.com/)
 
 
 ### 1.4 Save Map
@@ -36,7 +36,7 @@ After successful SLAM and map creation, open a new terminal to save the map.
   ```
   If you've saved your map successfully it should look like the following. The map uses two-dimensional Occupancy Grid Map (OGM), which is commonly used in ROS and Navigation.
 
-  <img align="center" src="https://github.com/clobot-git/testrobot/blob/noetic-devel/images/map.png" width=400>
+  <img align="center" src="https://github.com/clobot-git/clober/blob/noetic-devel/images/map.png" width=400>
   White area is collision free area while black area is occupied and inaccessible, and gray area represents the unknown area. 
 
 
