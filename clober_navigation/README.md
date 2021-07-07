@@ -36,7 +36,7 @@ Initial Pose Estimation can be performed before Navigation to intialize AMCL par
     ```
 
   5. Move the robot back and forth in order to narrow down the estimated location.
-    [<img align="center" src="https://github.com/clobot-git/clober/blob/noetic-devel/images/clober_amcl.gif">](https://youtube.com)
+    <img align="center" src="https://github.com/clobot-git/clober/blob/noetic-devel/images/clober_amcl.gif">
 
   6. Terminate the keyboard teleoperation(`Ctrl`+`C`) for the next navigation step. 
 
@@ -45,7 +45,7 @@ Initial Pose Estimation can be performed before Navigation to intialize AMCL par
   <img align="center" src="https://github.com/clobot-git/clober/blob/noetic-devel/images/2d_nav_goal.png">
 
 - Click on the destination and drag the green arrow toward the dirction of the robot on the map.
-  [<img align="center" src="https://github.com/clobot-git/clober/blob/noetic-devel/images/clober_navigation.gif">](https://youtube.com/)
+  <img align="center" src="https://github.com/clobot-git/clober/blob/noetic-devel/images/clober_navigation.gif">
 
 
 ---
