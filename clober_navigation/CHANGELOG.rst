@@ -1,9 +1,10 @@
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Changelog for package clober_navigation
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Changelog for Clober
-^^^^^^^^^^^^^^^^^^^^^^^
+Forthcoming
+-----------
 
-
-
-1.0.0 (2021-06-10)
+1.0.0 (2021-07-12)
 ------------------
 * Initial Clober package

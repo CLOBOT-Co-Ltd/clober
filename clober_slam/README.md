@@ -26,7 +26,7 @@ On a new terminal run a teleoperation node to explore and map the world.
   rosrun teleop_twist_keyboard teleop_twist_keyboard.py
   ```
 
-  [<img align="center" src="https://github.com/clobot-git/clober/blob/noetic-devel/images/clober_slam.gif">](https://youtube.com/)
+  <img align="center" src="https://github.com/clobot-git/clober/blob/noetic-devel/images/clober_slam.gif">
 
 
 ### 1.4 Save Map
