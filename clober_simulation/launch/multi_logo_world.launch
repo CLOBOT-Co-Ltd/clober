@@ -23,7 +23,7 @@
   </include>
 
   <group ns = "$(arg clober_0)">
-    <param name="robot_description" command="$(find xacro)/xacro --inorder $(find clober_description)/urdf/multi_10/clober_0.urdf.xacro" />
+    <param name="robot_description" command="$(find xacro)/xacro --inorder $(find clober_description)/urdf/multi_clober.urdf.xacro prefix:=$(arg clober_0)/" />
 
     <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher" output="screen">
       <param name="publish_frequency" type="double" value="50.0" />
@@ -34,7 +34,7 @@
   </group>
 
   <group ns = "$(arg clober_1)">
-    <param name="robot_description" command="$(find xacro)/xacro --inorder $(find clober_description)/urdf/multi_10/clober_1.urdf.xacro" />
+    <param name="robot_description" command="$(find xacro)/xacro --inorder $(find clober_description)/urdf/multi_clober.urdf.xacro prefix:=$(arg clober_1)/" />
 
     <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher" output="screen">
       <param name="publish_frequency" type="double" value="50.0" />
