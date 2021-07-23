@@ -8,8 +8,6 @@ class CloberUtils{
         float toRPM(float w);
         float toVelocity(float rpm);
         float toRad(float enc, int ppr);
-
-
 };
 
 

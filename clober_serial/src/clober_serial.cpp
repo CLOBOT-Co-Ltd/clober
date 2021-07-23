@@ -218,7 +218,7 @@ void CloberSerial::updatePose()
     posY_ += y;
     heading_ += theta;
 
-    cout << "update pose x : " << posX_ << ", y : " << posY_ << endl;
+    // cout << "update pose x : " << posX_ << ", y : " << posY_ << endl;
 }
 
 void CloberSerial::updatePose(float dL, float dR)
@@ -265,7 +265,7 @@ void CloberSerial::updatePose(float dL, float dR)
     posY_ = (sin(Wdt) * (x - ICCx)) + (cos(Wdt) * (y - ICCy)) + ICCy;
     heading_ = theta + Wdt;
 
-    cout << "update pose x : " << posX_ << ", y : " << posY_ << endl;
+    // cout << "update pose x : " << posX_ << ", y : " << posY_ << endl;
 }
 
 void CloberSerial::publish_loop(int hz)
@@ -323,7 +323,7 @@ void CloberSerial::publishOdom()
 
     odom_pub_.publish(odom);
 
-    cout << "odom x : " << posX_ << ", y : " << posY_ << ", heading : " << heading_ << endl;
+    // cout << "odom x : " << posX_ << ", y : " << posY_ << ", heading : " << heading_ << endl;
 
     // static int timeout_counter = 0;
     // if( !cmd_vel_timeout_switch_){

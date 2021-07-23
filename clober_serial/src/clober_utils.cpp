@@ -6,7 +6,6 @@ float CloberUtils::toRPM(float w){
     return rpm;
 }
 
-
 float CloberUtils::toVelocity(float rpm)
 {
     float w = (rpm * 2.0 * PI) / 60.0;
