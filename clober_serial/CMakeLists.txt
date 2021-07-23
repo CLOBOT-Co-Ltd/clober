@@ -127,15 +127,21 @@ include_directories(
 #   src/${PROJECT_NAME}/clober_serial.cpp
 # )
 
+set(serial_srcs
+  include/serial/serial.h
+  include/serial/v8stdint.h
+  src/serial/serial.cc
+  src/serial/impl/unix.cc
+  src/serial/impl/list_ports/list_ports_linux.cc
+)
+
+add_library(libserial ${serial_srcs})
+target_link_libraries(libserial rt pthread ${catkin_LIBRARIES})
+
 set(SRC 
   src/main.cpp
   src/clober_serial.cpp
-)
-
-find_library(SERIAL
-  NAMES libCppLinuxSerial.a
-  HINTS /usr/local/lib
-  REQUIRED
+  src/clober_utils.cpp
 )
 
 ## Add cmake target dependencies of the library
@@ -160,7 +166,7 @@ add_dependencies(${PROJECT_NAME}_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catk
 
 ## Specify libraries to link a library or executable target against
 target_link_libraries(${PROJECT_NAME}_node
-  ${catkin_LIBRARIES} ${Boost_LIBRARIES} ${SERIAL}
+ libserial ${catkin_LIBRARIES} ${Boost_LIBRARIES} 
 )
 
 #############

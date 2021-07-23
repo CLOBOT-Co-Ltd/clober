@@ -7,35 +7,29 @@
 #include <boost/algorithm/string.hpp>
 #include <thread>
 #include <memory>
-
-#include <CppLinuxSerial/SerialPort.hpp>
+#include <serial/serial.h>
+#include "clober_utils.hpp"
 
 #include <ros/ros.h>
 #include <geometry_msgs/Twist.h>
+#include <geometry_msgs/TransformStamped.h>
 #include <nav_msgs/Odometry.h>
 
 #include <tf2/LinearMath/Quaternion.h>
-
-// #include <tf2_ros/transform_broadcaster.h>
-
-
+#include <tf2_ros/transform_broadcaster.h>
 
 
 using namespace std::chrono_literals;
 using namespace std;
 using duration = std::chrono::nanoseconds;
 
-#define PI 3.141592
 
 const string eol("\r");
 const size_t max_line_length(128);
 
-
 struct Encoder{
-    int cpr;
-
+    int ppr;
 };
-
 
 struct MotorState{
     float speed;
@@ -44,7 +38,6 @@ struct MotorState{
     float position_meter_prev;
     float position_meter_curr;
 };
-
 
 struct VehicleConfig{
     float WIDTH;
@@ -71,7 +64,6 @@ class CloberSerial{
         void updatePose();
         void updatePose(float dL, float dR);
 
-
         void on_motor_move(MotorCommand cmd);
 
         void SetValues();
@@ -79,23 +71,25 @@ class CloberSerial{
         float toVW(float l_speed, float r_speed);
 
         float limitMaxSpeed(float speed);
-        float toRPM(float w);
-        float toVelocity(float rpm);
-        float toRad(float enc);
 
-        void writeVelocity(int channel, float rpm);
-        void stopMotor(int channel);
         void read_serial(int ms);
         void parse();
 
         void publishOdom();
-        void publish_loop(int ms);
+        void publish_loop(int hz);
 
+        void sendRPM(pair<int,int> channel, pair<float,float> rpm);
+        void sendStop(pair<int,int> channel);
 
+    private:    
+        ros::NodeHandle nh_;
+        ros::Time timestamp_;
 
-    private:
-
-        mn::CppLinuxSerial::SerialPort serial_;
+        std::shared_ptr<serial::Serial> serial_;
+        std::string port_;
+        int32_t baudrate_;
+        int timeout_;
+        float control_frequency_;
 
         // switch //
         bool cmd_vel_timeout_switch_;
@@ -103,7 +97,7 @@ class CloberSerial{
 
         // publisher //
         ros::Publisher odom_pub_;
-        // std::unique_ptr<tf2_ros::TransformBroadcaster> tf_broadcaster_;
+        tf2_ros::TransformBroadcaster tf_broadcaster_;
 
         // Subscriber //
         ros::Subscriber cmd_vel_sub_;
@@ -124,16 +118,15 @@ class CloberSerial{
         float posX_;
         float posY_;
         float heading_;
-        
-
-        ros::Time timestamp_;
 
         bool trigger_;
 
         shared_ptr<thread> readThread_;
         shared_ptr<thread> publishThread_;
-        
 
+        CloberUtils utils_;
+
+        int odom_mode_;
 };
 
 #endif //__CLOBER_SERIAL_H__
