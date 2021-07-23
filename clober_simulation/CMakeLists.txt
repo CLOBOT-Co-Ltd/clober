@@ -25,7 +25,7 @@ include_directories(
   ${GAZEBO_INCLUDE_DIRS}
 )
 
-install(DIRECTORY launch models rviz worlds 
+install(DIRECTORY launch models worlds 
   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
 )
 
