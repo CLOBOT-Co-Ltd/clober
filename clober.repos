@@ -9,3 +9,13 @@ repositories:
         url: https://github.com/clobot-git/clober_msgs.git
         version: foxy-devel
 
+
+    sick_scan2:
+        type: git
+        url: https://github.com/CLOBOT-Co-Ltd/sick_scan2.git
+        version: master
+
+    robot_localization:
+        type: git
+        url: https://github.com/CLOBOT-Co-Ltd/robot_localization.git
+        version: foxy-devel
