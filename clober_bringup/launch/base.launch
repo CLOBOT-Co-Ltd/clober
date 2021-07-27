@@ -17,8 +17,6 @@
     <!-- <include file="$(find clober_bringup)/launch/include/sick_tim_5xx.launch"/> -->
 
 
-    
-
 </launch>
 
 

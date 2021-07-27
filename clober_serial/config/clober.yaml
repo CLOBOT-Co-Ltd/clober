@@ -1,5 +1,5 @@
 clober_serial_node:
-  port: "/dev/ttyUSB0"
+  port: "/dev/ttyClober"
   baud: 115200
   # serial timeout [ms]
   timeout: 50 
