@@ -82,7 +82,6 @@ class CloberSerial{
         void sendStop(pair<int,int> channel);
 
     private:    
-        ros::NodeHandle nh_;
         ros::Time timestamp_;
 
         std::shared_ptr<serial::Serial> serial_;

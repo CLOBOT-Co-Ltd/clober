@@ -1,6 +1,6 @@
 #include <clober_serial/clober_serial.hpp>
 
-CloberSerial::CloberSerial()
+CloberSerial::CloberSerial() 
     : port_("/dev/ttyUSB0"),
       baudrate_(115200),
       timeout_(50),
@@ -10,15 +10,26 @@ CloberSerial::CloberSerial()
       cmd_vel_timeout_(1.0),
       odom_mode_(0)
 {
-    nh_.getParam("port", port_);
-    nh_.getParam("baud", baudrate_);
-    nh_.getParam("timeout", timeout_);
-    nh_.getParam("control_frequency", control_frequency_);
-    nh_.getParam("odom_frame_parent", odom_frame_parent_);
-    nh_.getParam("odom_frame_child", odom_frame_child_);
-    nh_.getParam("cmd_vel_timeout", cmd_vel_timeout_);
-    nh_.getParam("mode", odom_mode_);
+    
+    ros::NodeHandle private_nh("~");
+    ros::NodeHandle nh;
 
+    private_nh.getParam("port", port_);
+    private_nh.getParam("baud", baudrate_);
+    private_nh.getParam("timeout", timeout_);
+    private_nh.getParam("control_frequency", control_frequency_);
+    private_nh.getParam("odom_frame_parent", odom_frame_parent_);
+    private_nh.getParam("odom_frame_child", odom_frame_child_);
+    private_nh.getParam("cmd_vel_timeout", cmd_vel_timeout_);
+    private_nh.getParam("mode", odom_mode_);
+
+
+    private_nh.getParam("wheel_separation", config_.WIDTH);
+    private_nh.getParam("wheel_radius", config_.WheelRadius);
+    private_nh.getParam("wheel_max_speed_mps", config_.MAX_SPEED);
+    private_nh.getParam("wheel_max_rpm", config_.MAX_RPM);
+    private_nh.getParam("encoder_ppr", config_.encoder.ppr);
+ 
     odom_freq_ = control_frequency_;
 
     SetValues();
@@ -36,9 +47,9 @@ CloberSerial::CloberSerial()
 
     cout << "Connected to serial : " << port_ << " with baudrate " << baudrate_ << endl;
 
-    odom_pub_ = nh_.advertise<nav_msgs::Odometry>("/odom", 1);
+    odom_pub_ = nh.advertise<nav_msgs::Odometry>("/odom", 1);
 
-    cmd_vel_sub_ = nh_.subscribe<geometry_msgs::Twist>("/cmd_vel", 1, bind(&CloberSerial::cmd_vel_callback, this, _1));
+    cmd_vel_sub_ = nh.subscribe<geometry_msgs::Twist>("/cmd_vel", 1, bind(&CloberSerial::cmd_vel_callback, this, _1));
 
     readThread_ = std::make_shared<thread>(bind(&CloberSerial::read_serial, this, 20));
     publishThread_ = std::make_shared<thread>(bind(&CloberSerial::publish_loop, this, control_frequency_));
@@ -55,12 +66,6 @@ CloberSerial::~CloberSerial()
 
 void CloberSerial::SetValues()
 {
-    nh_.getParam("wheel_separation", config_.WIDTH);
-    nh_.getParam("wheel_radius", config_.WheelRadius);
-    nh_.getParam("wheel_max_speed_mps", config_.MAX_SPEED);
-    nh_.getParam("wheel_max_rpm", config_.MAX_RPM);
-    nh_.getParam("encoder_ppr", config_.encoder.ppr);
-
     config_.left_motor.position_rad = 0.0;
     config_.right_motor.position_rad = 0.0;
     trigger_ = false;
@@ -346,6 +351,7 @@ void CloberSerial::on_motor_move(MotorCommand cmd)
 {
 
     pair<float, float> wheel_speed;
+
     wheel_speed = toWheelSpeed(cmd.linearVel, cmd.angularVel);
     wheel_speed.first = limitMaxSpeed(wheel_speed.first);
     wheel_speed.second = limitMaxSpeed(wheel_speed.second);
