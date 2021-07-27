@@ -1,7 +1,6 @@
 clober_serial_node:
   port: "/dev/ttyUSB0"
   baud: 115200
-  wheel_separation: 0.45
   # serial timeout [ms]
   timeout: 50 
   control_frequency: 50
@@ -17,6 +16,7 @@ clober_serial_node:
   mode : 0 
 
   # robot configuration
+  wheel_separation: 0.45
   wheel_radius : 0.085
   wheel_max_speed_mps : 1.0
   wheel_max_rpm : 200
