@@ -19,7 +19,7 @@ sudo apt-get install libgeographic-dev
 ```
 $ mkdir -p ~/catkin_ws/src
 cd ~/catkin_ws/
-wget https://raw.githubusercontent.com/clobot-git/clober/noetic-devel/clober.repos
+wget https://raw.githubusercontent.com/CLOBOT-Co-Ltd/clober/noetic-devel/clober.repos
 vcs import src < clober.repos
 cd ~/catkin_ws && catkin_make
 source ~/catkin_ws/devel/setup.bash
