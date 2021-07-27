@@ -3,26 +3,48 @@
 
 CloberSerial::CloberSerial():Node("clober_serial", rclcpp::NodeOptions().use_intra_process_comms(true))
 {
-    std::string port = declare_parameter("port","/dev/ttyUSB0");
-    int32_t baudrate = declare_parameter("baudrate", 115200);
-    odom_freq_ = declare_parameter("odom_freq",50.0);
-    odom_frame_parent_ = declare_parameter("odom_frame_parent","odom");
-    odom_frame_child_ = declare_parameter("odom_frame_child","base_link");
-    publish_tf_ = declare_parameter("publish_tf",true);
-    cmd_vel_timeout_ = declare_parameter("cmd_vel_timeout",1.0);
+    // declare default parameter values
+    declare_parameter("port","/dev/ttyUSB0");
+    declare_parameter("baudrate", 115200);
+    declare_parameter("odom_freq",50.0);
+    declare_parameter("odom_frame_parent","odom");
+    declare_parameter("odom_frame_child","base_link");
+    declare_parameter("publish_tf",true);
+    declare_parameter("cmd_vel_timeout",1.0);
+
+    declare_parameter("wheel_separation",0.45);
+    declare_parameter("wheel_radius",0.085);
+    declare_parameter("wheel_max_speed_mps",1.0);
+    declare_parameter("wheel_max_rpm",200);
+    declare_parameter("encoder_ppr",4096);
+
+    // get parameter values
+    get_parameter("port", port_);
+    get_parameter("baudrate", baudrate_);
+    get_parameter("odom_freq", odom_freq_);
+    get_parameter("odom_frame_parent", odom_frame_parent_);
+    get_parameter("odom_frame_child", odom_frame_child_);
+    get_parameter("publish_tf", publish_tf_);
+    get_parameter("cmd_vel_timeout", cmd_vel_timeout_);
+
+    get_parameter("wheel_separation", config_.WIDTH);
+    get_parameter("wheel_radius", config_.WheelRadius);
+    get_parameter("wheel_max_speed_mps", config_.MAX_SPEED);
+    get_parameter("wheel_max_rpm", config_.MAX_RPM);
+    get_parameter("encoder_ppr", config_.encoder.ppr);
+
+    cout <<"port !!! : "<<port_<<endl;
+    cout <<"wheel_separation !!! : "<<config_.WIDTH<<endl;
 
     SetValues();
 
-    RCLCPP_INFO(get_logger(), "Connecting to serial : '%s', with baudrate '%d'", port.c_str(), baudrate);
+    RCLCPP_INFO(get_logger(), "Connecting to serial : '%s', with baudrate '%d'", port_.c_str(), baudrate_);
     try{
-        serial_ = std::make_unique<serial::Serial>(port, baudrate);
+        serial_ = std::make_unique<serial::Serial>(port_, baudrate_);
 
-        serial::Timeout to = serial::Timeout::simpleTimeout(0); 
+        serial::Timeout to = serial::Timeout::simpleTimeout(50); 
         serial_->setTimeout(to);
         // serial_->setTimeout(0,500,0,500,0);
-
-        // serial_->open();
-
     }catch(const std::exception &e){
         RCLCPP_ERROR(get_logger(),"Connection failed");
         RCLCPP_ERROR(get_logger(), e.what());
@@ -31,7 +53,7 @@ CloberSerial::CloberSerial():Node("clober_serial", rclcpp::NodeOptions().use_int
 
 
     if(serial_->isOpen()){
-        RCLCPP_INFO(get_logger(), "Connected to serial : '%s', with baudrate '%d'", port.c_str(), baudrate);
+        RCLCPP_INFO(get_logger(), "Connected to serial : '%s', with baudrate '%d'", port_.c_str(), baudrate_);
     }
 
     tf_broadcaster_ = std::make_unique<tf2_ros::TransformBroadcaster>(this);
@@ -57,11 +79,6 @@ CloberSerial::~CloberSerial(){
 }
 
 void CloberSerial::SetValues(){
-    config_.WIDTH = 0.45;
-    config_.WheelRadius = 0.085;
-    config_.encoder.cpr = 4096;
-    config_.MAX_SPEED = 1.0;
-    config_.MAX_RPM = 200;
     config_.left_motor.position_rad = 0.0;
     config_.right_motor.position_rad = 0.0;
     trigger_ = false;
@@ -84,7 +101,6 @@ void CloberSerial::parse(){
         string msg = serial_->readline(max_line_length, eol);
         if( msg.size() > 2 ){
             if( msg[0] == 'F'  && msg[2] == ':'){
-
                 try{
                     size_t index = boost::lexical_cast<size_t>(msg[1]);
 
@@ -94,15 +110,15 @@ void CloberSerial::parse(){
                     if( feedbacks.size() > 8 ){
 
                         config_.left_motor.rpm = boost::lexical_cast<float>(feedbacks[5]);
-                        config_.left_motor.speed = toVelocity(boost::lexical_cast<float>(feedbacks[5]));
+                        config_.left_motor.speed = utils_.toVelocity(boost::lexical_cast<float>(feedbacks[5]));
                         
                         config_.right_motor.rpm = boost::lexical_cast<float>(feedbacks[6]);
-                        config_.right_motor.speed = toVelocity(boost::lexical_cast<float>(feedbacks[6]));           
+                        config_.right_motor.speed = utils_.toVelocity(boost::lexical_cast<float>(feedbacks[6]));           
                         
-                        config_.left_motor.position_rad += toRad(boost::lexical_cast<float>(feedbacks[7]));
+                        config_.left_motor.position_rad += utils_.toRad(boost::lexical_cast<float>(feedbacks[7]), config_.encoder.ppr);
                         config_.left_motor.position_meter_curr = config_.left_motor.position_rad * config_.WheelRadius;
 
-                        config_.right_motor.position_rad += toRad(boost::lexical_cast<float>(feedbacks[8]));
+                        config_.right_motor.position_rad += utils_.toRad(boost::lexical_cast<float>(feedbacks[8]), config_.encoder.ppr);
                         config_.right_motor.position_meter_curr = config_.right_motor.position_rad * config_.WheelRadius;
 
                         float dl = config_.left_motor.position_meter_curr - config_.left_motor.position_meter_prev;
@@ -113,14 +129,6 @@ void CloberSerial::parse(){
                         
                         // updatePose(dl, dr);
                         // updatePose(l_speed, r_speed);
-
-                        cout <<"enc l : "<< boost::lexical_cast<float>(feedbacks[7]) << endl;
-                        cout <<"enc l position(rad) : "<< config_.left_motor.position_rad << endl;
-                        cout <<"enc l position(m) : "<< config_.left_motor.position_meter_curr << endl;
-
-                        cout <<"enc r : "<< boost::lexical_cast<float>(feedbacks[8]) << endl;
-                        cout <<"enc r position(rad) : "<< config_.right_motor.position_rad << endl;
-                        cout <<"enc r position(m) : "<< config_.right_motor.position_meter_curr << endl;
 
                         config_.left_motor.position_meter_prev = config_.left_motor.position_meter_curr;
                         config_.right_motor.position_meter_prev = config_.right_motor.position_meter_curr;
@@ -183,43 +191,6 @@ float CloberSerial::limitMaxSpeed(float speed){
     }
 }
 
-float CloberSerial::toRPM(float w){
-    float rpm = (w*60.0) / (2*PI);
-    return rpm;
-}
-
-
-float CloberSerial::toVelocity(float rpm){
-    float w = (rpm * 2.0 * PI) / 60.0;
-    return w;
-}
-
-
-float CloberSerial::toRad(float enc){
-    float rad = (enc * 2.0 * PI) / config_.encoder.cpr; 
-    return rad;
-}
-
-
-void CloberSerial::writeVelocity(int channel, float rpm){
-    stringstream msg;
-
-    msg << "!G " << channel+1 << " " <<  rpm << "\r";
-    // cout <<"writeVelocity : "<<msg.str()<<endl;
-
-    serial_->write(msg.str());
-}
-
-
-void CloberSerial::stopMotor(int channel){
-    stringstream msg;
-    msg << "!MS " << channel+1 << "\r";
-    // cout <<"stopMotor : "<<msg.str()<<endl;
-
-    serial_->write(msg.str());
-}
-
-
 void CloberSerial::updatePose(){
     auto now = get_clock()->now();
 
@@ -240,7 +211,7 @@ void CloberSerial::updatePose(){
     posY_ += y;
     heading_ += theta;
 
-    cout <<"update pose x : "<<posX_ <<", y : "<<posY_<<endl;
+    // cout <<"update pose x : "<<posX_ <<", y : "<<posY_<<endl;
 }
 
 void CloberSerial::updatePose(float dL, float dR){
@@ -280,7 +251,7 @@ void CloberSerial::updatePose(float dL, float dR){
     posY_ = (sin(Wdt)*(x - ICCx)) + (cos(Wdt)*(y - ICCy)) + ICCy;
     heading_ = theta + Wdt;
 
-    cout <<"update pose x : "<<posX_ <<", y : "<<posY_<<endl;
+    // cout <<"update pose x : "<<posX_ <<", y : "<<posY_<<endl;
 }
 
 
@@ -368,18 +339,30 @@ void CloberSerial::on_motor_move(geometry_msgs::msg::Twist::SharedPtr msg){
     wheel_speed.second = limitMaxSpeed(wheel_speed.second);
 
     pair<float, float> wheel_rpm;
-    wheel_rpm.first = toRPM(wheel_speed.first) * 1000 / config_.MAX_RPM;
-    wheel_rpm.second = toRPM(wheel_speed.second) * 1000 / config_.MAX_RPM;
+    wheel_rpm.first = utils_.toRPM(wheel_speed.first) * 1000 / config_.MAX_RPM;
+    wheel_rpm.second = utils_.toRPM(wheel_speed.second) * 1000 / config_.MAX_RPM;
 
-    writeVelocity(0,wheel_rpm.first);
-    writeVelocity(1,wheel_rpm.second);
+    sendRPM(make_pair(0, 1), make_pair(wheel_rpm.first, wheel_rpm.second));
 
-    if ( abs(wheel_rpm.first) < 0.0001 ){
-        stopMotor(0);
+    if (abs(wheel_rpm.first) < 0.0001 && abs(wheel_rpm.second) < 0.0001)
+    {
+        sendStop(make_pair(0,1));
     }
-
-    if ( abs(wheel_rpm.second) < 0.0001 ){
-        stopMotor(1);
-    }    
-
 }
+
+void CloberSerial::sendRPM(pair<int, int> channel, pair<float, float> rpm)
+{
+    stringstream msg;
+    msg << "!G " << channel.first + 1 << " " << rpm.first << "\r"
+        << "!G " << channel.second + 1 << " " << rpm.second << "\r";
+    cout << "send rpm : " << msg.str() << endl;
+
+    serial_->write(msg.str());
+}
+
+void CloberSerial::sendStop(pair<int,int> channel){
+    stringstream msg;
+    msg << "!MS " << channel.first + 1 << "\r" << "!MS " << channel.second + 1 << "\r";
+    serial_->write(msg.str());
+}
+

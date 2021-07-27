@@ -9,34 +9,43 @@ from launch.launch_description_sources import PythonLaunchDescriptionSource
 def generate_launch_description():
 
     bringup_dir = get_package_share_directory('clober_bringup')
-    ekf_config_file = os.path.join(bringup_dir,'config'.'ekf.yaml')
+    print("bringup : ", bringup_dir)
+
+    ekf_config_file = os.path.join(bringup_dir,'config','ekf.yaml')
+    print("ekf_config_file : ", ekf_config_file)
+
+    robot_dir = os.path.join(get_package_share_directory('clober_serial'),'launch')
+    print("robot_dir : ", robot_dir)
 
     description_dir = os.path.join(get_package_share_directory('clober_description'),'launch')
-    lidar_dir = os.path.join(get_package_share_directory('sick_scan2'),'launch')
+
+    lidar_config_file = os.path.join(bringup_dir,'config','sick_tim_5xx.yaml')
 
     return LaunchDescription([
 
+        # Load robot driver #
+        IncludeLaunchDescription(
+            PythonLaunchDescriptionSource([robot_dir,'/clober_serial.launch.py'])
+        ),
+
         # Node(
-        #     package=''
-
+        #     package='robot_localization',
+        #     executable='ekf_node',
+        #     output='screen',
+        #     parameters=[ekf_config_file],
+        #     # remappings=[('odometry/filtered','odom')]
         # ),
-
-        Node(
-            package='robot_localization',
-            executable='ekf_node',
-            output='screen',
-            parameters=[ekf_config_file],
-            # remappings=[('odometry/filtered','odom')]
-        )
 
         # Load robot model #
         IncludeLaunchDescription(
-            PythonLaunchDescriptionSource([description_dir,'description_launch.py')
-        )
+            PythonLaunchDescriptionSource([description_dir,'/description_launch.py'])
+        ),
         
-        # Load lidar driver #
-        IncludeLaunchDescription(
-            PythonLaunchDescriptionSource([lidar_dir,'sick_tim_5xx.launch.py'])
-        )
 
+        Node(
+                package='sick_scan2',
+                executable='sick_generic_caller',
+                output='screen',
+                parameters=[lidar_config_file],
+            ),
     ])

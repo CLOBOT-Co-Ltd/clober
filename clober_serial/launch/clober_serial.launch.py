@@ -26,9 +26,7 @@ from launch.actions import DeclareLaunchArgument
 def generate_launch_description():
 
     dir = get_package_share_directory('clober_serial')
-
-    # config_file = os.path.join(dir,'config','clober.yaml')
-
+    param_file = os.path.join(dir,'config','clober.yaml')
 
     return LaunchDescription([
 
@@ -43,14 +41,6 @@ def generate_launch_description():
             executable='clober_serial_node',
             name='clober_serial_node',
             output='screen',
-            parameters=[{
-                'publish_tf': False,
-                'calibrate_imu' : False,
-                'odom_topic': 'raw_odom',
-                'odom_freq' : 50.0,
-                'imu_topic': 'raw_imu',
-                'imu_freq' : 100.0,
-                'cmd_vel_timeout' : 1.0
-                }],
+            parameters=[param_file],
         ),
     ])

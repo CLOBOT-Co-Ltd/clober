@@ -15,7 +15,7 @@
 #include <nav_msgs/msg/odometry.hpp>
 #include <tf2_ros/transform_broadcaster.h>
 
-
+#include "clober_utils.hpp"
 
 
 using namespace std::chrono_literals;
@@ -29,7 +29,7 @@ const size_t max_line_length(128);
 
 
 struct Encoder{
-    int cpr;
+    int ppr;
 
 };
 
@@ -47,7 +47,7 @@ struct VehicleConfig{
     float WIDTH;
     float WheelRadius;
     float MAX_SPEED;
-    float MAX_RPM;
+    int MAX_RPM;
     Encoder encoder;
     MotorState left_motor;
     MotorState right_motor;
@@ -63,26 +63,22 @@ class CloberSerial : public rclcpp::Node{
         void updatePose();
         void updatePose(float dL, float dR);
 
-
         void on_motor_move(geometry_msgs::msg::Twist::SharedPtr msg);
 
         void SetValues();
         pair<float,float> toWheelSpeed(float v, float w);
         float toVW(float l_speed, float r_speed);
 
-        float limitMaxSpeed(float speed);
-        float toRPM(float w);
-        float toVelocity(float rpm);
-        float toRad(float enc);
-
-        void writeVelocity(int channel, float rpm);
-        void stopMotor(int channel);
         void read_serial(int ms);
         void parse();
 
         void publishOdom();
         void publish_loop(int ms);
 
+        float limitMaxSpeed(float speed);
+
+        void sendRPM(pair<int,int> channel, pair<float,float> rpm);
+        void sendStop(pair<int,int> channel);
 
 
     private:
@@ -104,6 +100,9 @@ class CloberSerial : public rclcpp::Node{
         rclcpp::Subscription<geometry_msgs::msg::Twist>::SharedPtr cmd_vel_sub_;
 
         std::shared_ptr<serial::Serial> serial_;
+        std::string port_;
+        int32_t baudrate_;
+
         std::shared_ptr<geometry_msgs::msg::Twist> motor_cmd_;
 
         double odom_freq_;
@@ -129,6 +128,7 @@ class CloberSerial : public rclcpp::Node{
         shared_ptr<thread> readThread_;
         shared_ptr<thread> publishThread_;
         
+        CloberUtils utils_;
 
 };
 

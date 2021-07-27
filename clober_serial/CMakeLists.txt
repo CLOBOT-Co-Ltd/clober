@@ -20,7 +20,6 @@ find_package(ament_cmake REQUIRED)
 find_package(geometry_msgs REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(std_msgs REQUIRED)
-find_package(serial REQUIRED)
 find_package(tf2_geometry_msgs REQUIRED)
 find_package(tf2 REQUIRED)
 find_package(tf2_ros REQUIRED)
@@ -38,18 +37,30 @@ include_directories(
   ${Boost_INCLUDE_DIRS}
 )
 
+set(serial_srcs
+  include/serial/serial.h
+  include/serial/v8stdint.h
+  src/serial/serial.cc
+  src/serial/impl/unix.cc
+  src/serial/impl/list_ports/list_ports_linux.cc
+)
 
-set(EXECUTABLE_NAME "clober_serial")
+add_library(libserial ${serial_srcs})
+target_link_libraries(libserial rt pthread ${catkin_LIBRARIES})
+
+
+set(EXECUTABLE_NAME "clober_serial_node")
+
 add_executable(${EXECUTABLE_NAME}
   src/main.cpp
   src/clober_serial.cpp
+  src/clober_utils.cpp
 )
 
 set(DEPENDENCIES
   "geometry_msgs"
   "rclcpp"
   "std_msgs"
-  "serial"
   "tf2_geometry_msgs"
   "tf2"
   "tf2_ros"
@@ -58,7 +69,7 @@ set(DEPENDENCIES
   "Boost"
 )
 
-target_link_libraries(${EXECUTABLE_NAME} ${ament_LIBRARIES} ${Boost_LIBRARIES})
+target_link_libraries(${EXECUTABLE_NAME} libserial ${ament_LIBRARIES} ${Boost_LIBRARIES})
 ament_target_dependencies(${EXECUTABLE_NAME} ${DEPENDENCIES})
 
 install (TARGETS ${EXECUTABLE_NAME}
@@ -66,7 +77,7 @@ install (TARGETS ${EXECUTABLE_NAME}
 )
 
 install(
-  DIRECTORY launch
+  DIRECTORY launch config
   DESTINATION share/${PROJECT_NAME}
 )
 

@@ -1,0 +1,29 @@
+clober_serial_node:
+  ros__parameters:
+    port: "/dev/ttyUSB0"
+    baud: 115200
+    # serial timeout [ms]
+    timeout: 50 
+    control_frequency: 50
+
+    # velocity commands timeout [s]
+    cmd_vel_timeout : 1.0
+
+    # odometry
+    odom_frame_parent : "odom"
+    odom_frame_child : "base_footprint"
+    
+    # mode 0 (use v,w) / mode 1 (use wheel speed) / mode 2 (use wheel encoder)
+    mode : 0 
+
+    # robot configuration
+    wheel_separation: 0.45
+    wheel_radius : 0.085
+    wheel_max_speed_mps : 1.0
+    wheel_max_rpm : 200
+
+    encoder_ppr : 4096
+
+  
+
+  
