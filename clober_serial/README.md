@@ -52,7 +52,7 @@ rosdep update
 rosdep install --from-paths src --ignore-src -r -y --rosdistro foxy
 ```
 
-## 2. Launch Motor Driver package
+## 2. Launch Bringup package
 ```bash
 ros2 launch clober_bringup clober_bringup.launch.py
 ```
