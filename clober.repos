@@ -1,7 +1,7 @@
 repositories:
     clober:
         type: git
-        url: https://github.com/clobot-git/clober.git
+        url: https://github.com/CLOBOT-Co-Ltd/clober.git
         version: noetic-devel
 
     clober_msgs:
