@@ -32,6 +32,7 @@ CloberSerial::CloberSerial()
  
     odom_freq_ = control_frequency_;
 
+    // initalize
     SetValues();
 
     try
@@ -80,7 +81,7 @@ void CloberSerial::cmd_vel_callback(const geometry_msgs::Twist::ConstPtr &msg)
     motor_cmd_.angularVel = msg->angular.z;
     cmd_vel_timeout_switch_ = false;
 
-    cout << "cmd_vel callback" << endl;
+    // cout << "cmd_vel callback" << endl;
 
     on_motor_move(motor_cmd_);
 }
@@ -97,6 +98,7 @@ void CloberSerial::read_serial(int ms)
 void CloberSerial::parse()
 {
     string msg = serial_->readline(max_line_length, eol);
+    cout << "msg: " << msg << endl << endl;
 
     if (msg.size() > 2)
     {
@@ -111,7 +113,6 @@ void CloberSerial::parse()
 
                 if (feedbacks.size() > 8)
                 {
-
                     config_.left_motor.rpm = boost::lexical_cast<float>(feedbacks[5]);
                     config_.left_motor.speed = utils_.toVelocity(boost::lexical_cast<float>(feedbacks[5]));
 
@@ -167,6 +168,8 @@ float CloberSerial::toVW(float l_speed, float r_speed)
 {
     linearVel_ = (l_speed + r_speed) / 2;
     angularVel_ = (r_speed - l_speed) / config_.WIDTH;
+
+    // cout << "Current Velocity : linear : " << linearVel_ << ", angular : " << angularVel_ << endl;
 }
 
 pair<float, float> CloberSerial::toWheelSpeed(float v, float w)
@@ -223,7 +226,7 @@ void CloberSerial::updatePose()
     posY_ += y;
     heading_ += theta;
 
-    // cout << "update pose x : " << posX_ << ", y : " << posY_ << endl;
+    // cout << "update pose x : " << posX_ << ", y : " << posY_ << ", heading : " << heading_ << endl << endl;
 }
 
 void CloberSerial::updatePose(float dL, float dR)
@@ -270,7 +273,7 @@ void CloberSerial::updatePose(float dL, float dR)
     posY_ = (sin(Wdt) * (x - ICCx)) + (cos(Wdt) * (y - ICCy)) + ICCy;
     heading_ = theta + Wdt;
 
-    // cout << "update pose x : " << posX_ << ", y : " << posY_ << endl;
+    // cout << "update pose x : " << posX_ << ", y : " << posY_ << ", heading : " << heading_ << endl << endl;
 }
 
 void CloberSerial::publish_loop(int hz)
@@ -288,10 +291,12 @@ void CloberSerial::publishOdom()
     tf2::Quaternion q;
     q.setRPY(0.0, 0.0, heading_);
 
+    ros::Time stamp_now = ros::Time::now();
+
     nav_msgs::Odometry odom;
     odom.header.frame_id = odom_frame_parent_;
     odom.child_frame_id = odom_frame_child_;
-    odom.header.stamp = timestamp_;
+    odom.header.stamp = stamp_now;
     odom.pose.pose.position.x = posX_;
     odom.pose.pose.position.y = posY_;
     odom.pose.pose.orientation.x = q.x();
@@ -316,15 +321,15 @@ void CloberSerial::publishOdom()
     odom.twist.covariance[28] = 1e6;
     odom.twist.covariance[35] = 1e3;
 
-    geometry_msgs::TransformStamped odom_tf;
-    odom_tf.header.stamp = timestamp_;
-    odom_tf.header.frame_id = odom_frame_parent_;
-    odom_tf.child_frame_id = odom_frame_child_;
-    odom_tf.transform.translation.x = posX_;
-    odom_tf.transform.translation.y = posY_;
-    odom_tf.transform.translation.z = 0;
-    odom_tf.transform.rotation = odom.pose.pose.orientation;
-    tf_broadcaster_.sendTransform(odom_tf);
+    // geometry_msgs::TransformStamped odom_tf;
+    // odom_tf.header.stamp = stamp_now;
+    // odom_tf.header.frame_id = odom_frame_parent_;
+    // odom_tf.child_frame_id = odom_frame_child_;
+    // odom_tf.transform.translation.x = posX_;
+    // odom_tf.transform.translation.y = posY_;
+    // odom_tf.transform.translation.z = 0;
+    // odom_tf.transform.rotation = odom.pose.pose.orientation;
+    // tf_broadcaster_.sendTransform(odom_tf);
 
     odom_pub_.publish(odom);
 
@@ -373,7 +378,7 @@ void CloberSerial::sendRPM(pair<int, int> channel, pair<float, float> rpm)
     stringstream msg;
     msg << "!G " << channel.first + 1 << " " << rpm.first << "\r"
         << "!G " << channel.second + 1 << " " << rpm.second << "\r";
-    cout << "send rpm : " << msg.str() << endl;
+    // cout << "send rpm : " << msg.str() << endl;
 
     serial_->write(msg.str());
 }
