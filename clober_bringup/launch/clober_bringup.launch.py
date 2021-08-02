@@ -19,6 +19,9 @@ def generate_launch_description():
 
     description_dir = os.path.join(get_package_share_directory('clober_description'),'launch')
 
+    imu_dir = get_package_share_directory('myahrs_ros2_driver')
+    imu_config_file = os.path.join(imu_dir, 'config', 'config.yaml')
+
     lidar_config_file = os.path.join(bringup_dir,'config','sick_tim_5xx.yaml')
 
     return LaunchDescription([
@@ -28,24 +31,35 @@ def generate_launch_description():
             PythonLaunchDescriptionSource([robot_dir,'/clober_serial.launch.py'])
         ),
 
-        # Node(
-        #     package='robot_localization',
-        #     executable='ekf_node',
-        #     output='screen',
-        #     parameters=[ekf_config_file],
-        #     # remappings=[('odometry/filtered','odom')]
-        # ),
-
         # Load robot model #
         IncludeLaunchDescription(
             PythonLaunchDescriptionSource([description_dir,'/description_launch.py'])
         ),
         
-
+        # Load Myahrs+ Driver #
         Node(
-                package='sick_scan2',
-                executable='sick_generic_caller',
-                output='screen',
-                parameters=[lidar_config_file],
-            ),
+            package='myahrs_ros2_driver',
+            executable='myahrs_ros2_driver',
+            name='myahrs_ros2_driver',
+            output='screen',
+            arguments=['/dev/ttyACM0', '115200'],
+            parameters=[imu_config_file],
+        ),
+
+        # Load 2D Lidar #
+        Node(
+            package='sick_scan2',
+            executable='sick_generic_caller',
+            output='screen',
+            parameters=[lidar_config_file],
+        ),
+
+        # ekf_localization_node #
+        Node(
+            package='robot_localization',
+            executable='ekf_node',
+            output='screen',
+            parameters=[ekf_config_file],
+            remappings=[('odometry/filtered','odom/ekf/enc_imu')]
+        ),
     ])

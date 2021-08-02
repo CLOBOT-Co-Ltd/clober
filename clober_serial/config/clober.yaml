@@ -4,8 +4,7 @@ clober_serial_node:
     baud: 115200
     # serial timeout [ms]
     timeout: 50 
-    control_frequency: 50
-
+    
     # velocity commands timeout [s]
     cmd_vel_timeout : 1.0
 
@@ -20,7 +19,7 @@ clober_serial_node:
     wheel_separation: 0.45
     wheel_radius : 0.085
     wheel_max_speed_mps : 1.0
-    wheel_max_rpm : 200
+    wheel_max_rpm : 200.0
 
     encoder_ppr : 4096
 

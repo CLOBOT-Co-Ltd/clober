@@ -27,6 +27,7 @@ find_package(nav_msgs REQUIRED)
 find_package(sensor_msgs REQUIRED)
 find_package(Boost REQUIRED system)
 find_package(Threads REQUIRED)
+find_package(clober_msgs REQUIRED)
 
 # uncomment the following section in order to fill in
 # further dependencies manually.
@@ -67,6 +68,7 @@ set(DEPENDENCIES
   "nav_msgs"
   "sensor_msgs"
   "Boost"
+  "clober_msgs"
 )
 
 target_link_libraries(${EXECUTABLE_NAME} libserial ${ament_LIBRARIES} ${Boost_LIBRARIES})

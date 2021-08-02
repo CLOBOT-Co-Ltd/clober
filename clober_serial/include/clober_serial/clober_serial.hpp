@@ -3,6 +3,7 @@
 
 #include <chrono>
 #include <string>
+#include <bitset>
 #include <boost/lexical_cast.hpp>
 #include <boost/algorithm/string.hpp>
 #include <thread>
@@ -14,6 +15,7 @@
 #include <tf2/LinearMath/Quaternion.h>
 #include <nav_msgs/msg/odometry.hpp>
 #include <tf2_ros/transform_broadcaster.h>
+#include <clober_msgs/msg/feedback.hpp>
 
 #include "clober_utils.hpp"
 
@@ -34,23 +36,34 @@ struct Encoder{
 };
 
 
+struct ControllerState{
+    bool emergency_stop;
+    float temperature;
+    float battery_voltage;
+    float charging_voltage;
+    float current_12v;
+    float current_24v;
+    vector<string> fault_flags;
+};
+
 struct MotorState{
     float speed;
     float rpm;
     float position_rad;
     float position_meter_prev;
     float position_meter_curr;
+    float current;
 };
-
 
 struct VehicleConfig{
     float WIDTH;
     float WheelRadius;
     float MAX_SPEED;
-    int MAX_RPM;
+    float MAX_RPM;
     Encoder encoder;
     MotorState left_motor;
     MotorState right_motor;
+    ControllerState controller_state;
 };
 
 
@@ -65,6 +78,8 @@ class CloberSerial : public rclcpp::Node{
 
         void on_motor_move(geometry_msgs::msg::Twist::SharedPtr msg);
 
+        void faultFlags(const uint16_t flags);
+
         void SetValues();
         pair<float,float> toWheelSpeed(float v, float w);
         float toVW(float l_speed, float r_speed);
@@ -73,6 +88,7 @@ class CloberSerial : public rclcpp::Node{
         void parse();
 
         void publishOdom();
+        void publishFeedback();
         void publish_loop(int ms);
 
         float limitMaxSpeed(float speed);
@@ -87,6 +103,7 @@ class CloberSerial : public rclcpp::Node{
         // switch //
         bool cmd_vel_timeout_switch_;
         bool publish_tf_;
+        float control_frequency_;
 
         // timer //
         rclcpp::TimerBase::SharedPtr odom_read_timer_;
@@ -94,6 +111,7 @@ class CloberSerial : public rclcpp::Node{
 
         // publisher //
         rclcpp::Publisher<nav_msgs::msg::Odometry>::SharedPtr odom_pub_;
+        rclcpp::Publisher<clober_msgs::msg::Feedback>::SharedPtr feedback_pub_;
         std::unique_ptr<tf2_ros::TransformBroadcaster> tf_broadcaster_;
 
         // Subscriber //
@@ -130,6 +148,7 @@ class CloberSerial : public rclcpp::Node{
         
         CloberUtils utils_;
 
+        int odom_mode_;
 };
 
 #endif //__CLOBER_SERIAL_H__

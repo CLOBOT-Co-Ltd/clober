@@ -11,11 +11,11 @@ CloberSerial::CloberSerial():Node("clober_serial", rclcpp::NodeOptions().use_int
     declare_parameter("odom_frame_child","base_link");
     declare_parameter("publish_tf",true);
     declare_parameter("cmd_vel_timeout",1.0);
-
+    
     declare_parameter("wheel_separation",0.45);
     declare_parameter("wheel_radius",0.085);
     declare_parameter("wheel_max_speed_mps",1.0);
-    declare_parameter("wheel_max_rpm",200);
+    declare_parameter("wheel_max_rpm",200.0);
     declare_parameter("encoder_ppr",4096);
 
     // get parameter values
@@ -26,7 +26,7 @@ CloberSerial::CloberSerial():Node("clober_serial", rclcpp::NodeOptions().use_int
     get_parameter("odom_frame_child", odom_frame_child_);
     get_parameter("publish_tf", publish_tf_);
     get_parameter("cmd_vel_timeout", cmd_vel_timeout_);
-
+    
     get_parameter("wheel_separation", config_.WIDTH);
     get_parameter("wheel_radius", config_.WheelRadius);
     get_parameter("wheel_max_speed_mps", config_.MAX_SPEED);
@@ -58,16 +58,17 @@ CloberSerial::CloberSerial():Node("clober_serial", rclcpp::NodeOptions().use_int
 
     tf_broadcaster_ = std::make_unique<tf2_ros::TransformBroadcaster>(this);
     odom_pub_ = create_publisher<nav_msgs::msg::Odometry>("/odom",rclcpp::QoS(1));
+    feedback_pub_ = create_publisher<clober_msgs::msg::Feedback>("/feedback",rclcpp::QoS(1));
     motor_cmd_ = std::make_unique<geometry_msgs::msg::Twist>();
-
     cmd_vel_sub_ = create_subscription<geometry_msgs::msg::Twist>("/cmd_vel",rclcpp::QoS(rclcpp::KeepLast(10)), [=](geometry_msgs::msg::Twist::SharedPtr msg){cmd_vel_callback(msg);});
+
     // cmd_vel_sub_ = create_subscription<geometry_msgs::msg::Twist>("/cmd_vel",rclcpp::QoS(1), [=](geometry_msgs::msg::Twist::SharedPtr msg){cmd_vel_callback(msg);});
 
     // ser_read_timer_ = create_wall_timer(1s/odom_freq_, [=](){parse();});
     // ser_read_timer_ = create_wall_timer(1s/10, [=](){parse();});
 
     readThread_ = std::make_shared<thread>(bind(&CloberSerial::read_serial, this, 20));
-    // publishThread_ = std::make_shared<thread>(bind(&CloberSerial::publish_loop, this, 20));
+    publishThread_ = std::make_shared<thread>(bind(&CloberSerial::publish_loop, this, 50));
 }
 
 CloberSerial::~CloberSerial(){
@@ -97,69 +98,126 @@ void CloberSerial::read_serial(int ms){
 
 
 void CloberSerial::parse(){
-    // if( serial_->available()){
-        string msg = serial_->readline(max_line_length, eol);
-        if( msg.size() > 2 ){
-            if( msg[0] == 'F'  && msg[2] == ':'){
-                try{
-                    size_t index = boost::lexical_cast<size_t>(msg[1]);
+    string msg = serial_->readline(max_line_length, eol);
 
-                    vector<string> feedbacks;
-                    boost::split(feedbacks, msg, boost::algorithm::is_any_of(":"));
+    if( msg.size() > 2 ){
+        if( msg[0] == 'F'  && msg[2] == ':'){
+            try{
+                size_t index = boost::lexical_cast<size_t>(msg[1]);
 
-                    if( feedbacks.size() > 8 ){
+                vector<string> feedbacks;
+                boost::split(feedbacks, msg, boost::algorithm::is_any_of(":"));
 
-                        config_.left_motor.rpm = boost::lexical_cast<float>(feedbacks[5]);
-                        config_.left_motor.speed = utils_.toVelocity(boost::lexical_cast<float>(feedbacks[5]));
-                        
-                        config_.right_motor.rpm = boost::lexical_cast<float>(feedbacks[6]);
-                        config_.right_motor.speed = utils_.toVelocity(boost::lexical_cast<float>(feedbacks[6]));           
-                        
-                        config_.left_motor.position_rad += utils_.toRad(boost::lexical_cast<float>(feedbacks[7]), config_.encoder.ppr);
-                        config_.left_motor.position_meter_curr = config_.left_motor.position_rad * config_.WheelRadius;
+                config_.controller_state.battery_voltage = (boost::lexical_cast<double>(feedbacks[1]) / 10.0) + 0.4;
+                config_.controller_state.temperature = boost::lexical_cast<double>(feedbacks[2]);
 
-                        config_.right_motor.position_rad += utils_.toRad(boost::lexical_cast<float>(feedbacks[8]), config_.encoder.ppr);
-                        config_.right_motor.position_meter_curr = config_.right_motor.position_rad * config_.WheelRadius;
-
-                        float dl = config_.left_motor.position_meter_curr - config_.left_motor.position_meter_prev;
-                        float dr = config_.right_motor.position_meter_curr - config_.right_motor.position_meter_prev;
-                        
-                        float l_speed = config_.left_motor.speed * config_.WheelRadius;
-                        float r_speed = config_.right_motor.speed * config_.WheelRadius;
-                        
-                        // updatePose(dl, dr);
-                        // updatePose(l_speed, r_speed);
-
-                        config_.left_motor.position_meter_prev = config_.left_motor.position_meter_curr;
-                        config_.right_motor.position_meter_prev = config_.right_motor.position_meter_curr;
-
-                        toVW(config_.left_motor.speed, config_.right_motor.speed);
-                        updatePose();
-                    }
+                if (boost::lexical_cast<int>(feedbacks[3]) == 0){
+                    config_.controller_state.emergency_stop = true;
+                } else {
+                    config_.controller_state.emergency_stop = false;
                 }
-                catch(boost::bad_lexical_cast &e){
+
+                faultFlags(boost::lexical_cast<uint16_t>(feedbacks[4]));
+
+                if( feedbacks.size() > 8 ){
+
+                    config_.left_motor.rpm = boost::lexical_cast<float>(feedbacks[5]);
+                    config_.left_motor.speed = utils_.toVelocity(boost::lexical_cast<float>(feedbacks[5]));
+                    
+                    config_.right_motor.rpm = boost::lexical_cast<float>(feedbacks[6]);
+                    config_.right_motor.speed = utils_.toVelocity(boost::lexical_cast<float>(feedbacks[6]));           
+                    
+                    config_.left_motor.position_rad += utils_.toRad(boost::lexical_cast<float>(feedbacks[7]), config_.encoder.ppr);
+                    config_.left_motor.position_meter_curr = config_.left_motor.position_rad * config_.WheelRadius;
+
+                    config_.right_motor.position_rad += utils_.toRad(boost::lexical_cast<float>(feedbacks[8]), config_.encoder.ppr);
+                    config_.right_motor.position_meter_curr = config_.right_motor.position_rad * config_.WheelRadius;
+
+                    float dl = config_.left_motor.position_meter_curr - config_.left_motor.position_meter_prev;
+                    float dr = config_.right_motor.position_meter_curr - config_.right_motor.position_meter_prev;
+                    
+                    float l_speed = config_.left_motor.speed * config_.WheelRadius;
+                    float r_speed = config_.right_motor.speed * config_.WheelRadius;
+                    
+                    toVW(l_speed, r_speed);
+
+                    switch (odom_mode_)
+                    {
+                    case 0:
+                        updatePose();
+                        break;
+                    
+                    case 1:
+                        updatePose(l_speed, r_speed);
+                        break;
+
+                    case 2:
+                        updatePose(dl, dr);
+                        break;
+
+                    default:
+                        updatePose();
+                        break;
+                    }
+
+                    config_.left_motor.position_meter_prev = config_.left_motor.position_meter_curr;
+                    config_.right_motor.position_meter_prev = config_.right_motor.position_meter_curr;
                 }
             }
+            catch(boost::bad_lexical_cast &e){
+            }
         }
-    // }
+        else if (msg[0] == 'I' && msg[1] == 'O' && msg[2] == ':')
+        {
+            // try
+            // {
+            // vector<string> io;
+            // boost::split(io, msg, boost::algorithm::is_any_of(":"));
+
+            // config_.controller_state.charging_voltage = boost::lexical_cast<double>(io[1]) / 1000.0 * 6.0;
+            // config_.controller_state.current_12v = boost::lexical_cast<double>(io[2]) / 1000.0 * 0.0048;
+            // config_.controller_state.current_24v = boost::lexical_cast<double>(io[3]) / 1000.0 * 0.0048;
+            // }
+            // catch (boost::bad_lexical_cast& e)
+            // {
+            // }
+        }
+    }
 }
 
+void CloberSerial::faultFlags(const uint16_t flags)
+{
+    config_.controller_state.fault_flags.clear();
+    if (bitset<16>(flags)[0] == 1)
+        config_.controller_state.fault_flags.push_back("Overheat");
+    if (bitset<16>(flags)[1] == 1)
+        config_.controller_state.fault_flags.push_back("Overvoltage");
+    if (bitset<16>(flags)[2] == 1)
+        config_.controller_state.fault_flags.push_back("Undervoltage");
+    if (bitset<16>(flags)[3] == 1)
+        config_.controller_state.fault_flags.push_back("Short circuit");
+    if (bitset<16>(flags)[4] == 1)
+        config_.controller_state.fault_flags.push_back("Emergency stop");
+    if (bitset<16>(flags)[5] == 1)
+        config_.controller_state.fault_flags.push_back("Motor/Sensor setup fault");
+    if (bitset<16>(flags)[6] == 1)
+        config_.controller_state.fault_flags.push_back("MOSFET failure");
+    if (bitset<16>(flags)[7] == 1)
+        config_.controller_state.fault_flags.push_back("Default configuration loaded at startup");
+}
 
 void CloberSerial::cmd_vel_callback(geometry_msgs::msg::Twist::SharedPtr msg){
     motor_cmd_->linear.x = msg->linear.x;
     motor_cmd_->angular.z = msg->angular.z;
     cmd_vel_timeout_switch_ = false;
 
-    cout <<"cmd_vel callback"<<endl;
+    // cout <<"cmd_vel callback"<<endl;
 
     on_motor_move(motor_cmd_);
 }
 
 
 float CloberSerial::toVW(float l_speed, float r_speed){
-    // rad/s -> m/s 
-    l_speed *= config_.WheelRadius;
-    r_speed *= config_.WheelRadius;
 
     linearVel_ = ( l_speed + r_speed ) / 2;
     angularVel_ = ( r_speed - l_speed ) / config_.WIDTH;
@@ -237,12 +295,14 @@ void CloberSerial::updatePose(float dL, float dR){
         R = (config_.WIDTH / 2.0) * ( (dL+dR)/(dR-dL) );
     }
 
-    // float Wdt = (dR - dL) / config_.WIDTH;
-
-    float W = (dR - dL) / config_.WIDTH;
-    float Wdt = W*dT;
-
-
+    float Wdt;
+    
+    if ( odom_mode_ == 1 ){
+        float W = (dR - dL) / config_.WIDTH;            // dR, dL 인자를 속도값으로 넘겼을 때, dT를 곱해서 계산
+        Wdt = W*dT;
+    }else if ( odom_mode_ == 2){
+        Wdt = (dR - dL) / config_.WIDTH;                // dR, dL 인자를 거리값으로 넘겼을 때,
+    }
 
     float ICCx = x - (R*sin(theta));
     float ICCy = y + (R*cos(theta));
@@ -258,8 +318,34 @@ void CloberSerial::updatePose(float dL, float dR){
 void CloberSerial::publish_loop(int ms){
     while(rclcpp::ok()){
         publishOdom();
+        publishFeedback();
         std::this_thread::sleep_for(std::chrono::milliseconds(ms));
     }
+}
+
+void CloberSerial::publishFeedback()
+{
+    clober_msgs::msg::Feedback feedback;
+
+    auto now = get_clock()->now();
+
+    feedback.header.stamp = now;
+    feedback.controller_state.emergency_stop = config_.controller_state.emergency_stop;
+    feedback.controller_state.battery_voltage = config_.controller_state.battery_voltage;
+    feedback.controller_state.charging_voltage = config_.controller_state.charging_voltage;
+    feedback.controller_state.current_12v = config_.controller_state.current_12v;
+    feedback.controller_state.current_24v = config_.controller_state.current_24v;
+    feedback.controller_state.temperature = config_.controller_state.temperature;
+    feedback.controller_state.fault_flags = config_.controller_state.fault_flags;
+    
+    feedback.left_motor.position = config_.left_motor.position_rad;
+    feedback.right_motor.position = config_.right_motor.position_rad;
+    feedback.left_motor.velocity = config_.left_motor.rpm;
+    feedback.right_motor.velocity = config_.right_motor.rpm;
+    feedback.left_motor.current = config_.left_motor.current;
+    feedback.right_motor.current = config_.right_motor.current;
+
+    feedback_pub_->publish(std::move(feedback));
 }
 
 
@@ -267,10 +353,11 @@ void CloberSerial::publishOdom(){
 
     tf2::Quaternion q;
     q.setRPY(0.0,0.0,heading_);
+    auto now = get_clock()->now();
     auto odom = std::make_unique<nav_msgs::msg::Odometry>();
     odom->header.frame_id = odom_frame_parent_;
     odom->child_frame_id = odom_frame_child_;
-    odom->header.stamp = timestamp_;
+    odom->header.stamp = now;
     odom->pose.pose.position.x = posX_;
     odom->pose.pose.position.y = posY_;
     odom->pose.pose.orientation.x = q.x();
@@ -295,21 +382,21 @@ void CloberSerial::publishOdom(){
     odom->twist.covariance[28] = 1e6;
     odom->twist.covariance[35] = 1e3;
 
-    if(publish_tf_){
-        geometry_msgs::msg::TransformStamped odom_tf;
-        odom_tf.header.stamp = timestamp_;
-        odom_tf.header.frame_id = odom_frame_parent_;
-        odom_tf.child_frame_id = odom_frame_child_;
-        odom_tf.transform.translation.x = posX_;
-        odom_tf.transform.translation.y = posY_;
-        odom_tf.transform.translation.z = 0;
-        odom_tf.transform.rotation = odom->pose.pose.orientation;
-        tf_broadcaster_->sendTransform(odom_tf);       
-    }
+    // if(publish_tf_){
+    //     geometry_msgs::msg::TransformStamped odom_tf;
+    //     odom_tf.header.stamp = timestamp_;
+    //     odom_tf.header.frame_id = odom_frame_parent_;
+    //     odom_tf.child_frame_id = odom_frame_child_;
+    //     odom_tf.transform.translation.x = posX_;
+    //     odom_tf.transform.translation.y = posY_;
+    //     odom_tf.transform.translation.z = 0;
+    //     odom_tf.transform.rotation = odom->pose.pose.orientation;
+    //     tf_broadcaster_->sendTransform(odom_tf);       
+    // }
 
     odom_pub_->publish(std::move(odom));
 
-    cout <<"odom x : "<<posX_<<", y : "<<posY_<<", heading : "<<heading_<<endl;
+    // cout <<"odom x : "<<posX_<<", y : "<<posY_<<", heading : "<<heading_<<endl;
 
 
     // static int timeout_counter = 0;
@@ -355,7 +442,7 @@ void CloberSerial::sendRPM(pair<int, int> channel, pair<float, float> rpm)
     stringstream msg;
     msg << "!G " << channel.first + 1 << " " << rpm.first << "\r"
         << "!G " << channel.second + 1 << " " << rpm.second << "\r";
-    cout << "send rpm : " << msg.str() << endl;
+    // cout << "send rpm : " << msg.str() << endl;
 
     serial_->write(msg.str());
 }
