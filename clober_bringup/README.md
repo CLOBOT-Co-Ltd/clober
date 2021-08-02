@@ -39,7 +39,7 @@ sudo apt-get install libgeographic-dev
 ```
 $ mkdir -p ~/clober_ws/src
 cd ~/clober_ws/
-wget https://raw.githubusercontent.com/clobot-git/clober/foxy-devel/clober.repos
+wget https://raw.githubusercontent.com/CLOBOT-Co-Ltd/clober/foxy-devel/clober.repos
 vcs import src < clober.repos
 colcon build --symlink-install
 ```
