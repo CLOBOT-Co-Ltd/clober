@@ -169,18 +169,18 @@ void CloberSerial::parse(){
         }
         else if (msg[0] == 'I' && msg[1] == 'O' && msg[2] == ':')
         {
-            // try
-            // {
-            // vector<string> io;
-            // boost::split(io, msg, boost::algorithm::is_any_of(":"));
+            try
+            {
+            vector<string> io;
+            boost::split(io, msg, boost::algorithm::is_any_of(":"));
 
-            // config_.controller_state.charging_voltage = boost::lexical_cast<double>(io[1]) / 1000.0 * 6.0;
-            // config_.controller_state.current_12v = boost::lexical_cast<double>(io[2]) / 1000.0 * 0.0048;
-            // config_.controller_state.current_24v = boost::lexical_cast<double>(io[3]) / 1000.0 * 0.0048;
-            // }
-            // catch (boost::bad_lexical_cast& e)
-            // {
-            // }
+            config_.controller_state.charging_voltage = boost::lexical_cast<double>(io[1]) / 1000.0 * 6.0;
+            config_.controller_state.current_12v = boost::lexical_cast<double>(io[2]) / 1000.0 * 0.0048;
+            config_.controller_state.current_24v = boost::lexical_cast<double>(io[3]) / 1000.0 * 0.0048;
+            }
+            catch (boost::bad_lexical_cast& e)
+            {
+            }
         }
     }
 }
