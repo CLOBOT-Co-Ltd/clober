@@ -32,6 +32,8 @@ sudo apt update && sudo apt install -y \
 ```
 sudo apt-get install ros-foxy-xacro
 sudo apt-get install ros-foxy-teleop-twist-keyboard
+sudo apt-get install ros-foxy-diagnostic-updater
+sudo apt-get install ros-foxy-geographic-msgs
 sudo apt-get install libgeographic-dev
 ```
 
