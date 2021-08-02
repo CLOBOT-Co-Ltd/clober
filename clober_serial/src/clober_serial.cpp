@@ -49,7 +49,7 @@ CloberSerial::CloberSerial()
     cout << "Connected to serial : " << port_ << " with baudrate " << baudrate_ << endl;
 
     odom_pub_ = nh.advertise<nav_msgs::Odometry>("/odom", 1);
-
+    feedback_pub_ = nh.advertise<clober_msgs::Feedback>("/feedback", 1);
     cmd_vel_sub_ = nh.subscribe<geometry_msgs::Twist>("/cmd_vel", 1, bind(&CloberSerial::cmd_vel_callback, this, _1));
 
     readThread_ = std::make_shared<thread>(bind(&CloberSerial::read_serial, this, 20));
@@ -98,7 +98,6 @@ void CloberSerial::read_serial(int ms)
 void CloberSerial::parse()
 {
     string msg = serial_->readline(max_line_length, eol);
-    cout << "msg: " << msg << endl << endl;
 
     if (msg.size() > 2)
     {
@@ -110,6 +109,18 @@ void CloberSerial::parse()
 
                 vector<string> feedbacks;
                 boost::split(feedbacks, msg, boost::algorithm::is_any_of(":"));
+
+                // The status of the controller
+                config_.controller_state.battery_voltage = (boost::lexical_cast<double>(feedbacks[1]) / 10.0) + 0.4;
+                config_.controller_state.temperature = boost::lexical_cast<double>(feedbacks[2]);
+
+                if (boost::lexical_cast<int>(feedbacks[3]) == 0){
+                    config_.controller_state.emergency_stop = true;
+                } else {
+                    config_.controller_state.emergency_stop = false;
+                }
+
+                faultFlags(boost::lexical_cast<uint16_t>(feedbacks[4]));
 
                 if (feedbacks.size() > 8)
                 {
@@ -124,6 +135,9 @@ void CloberSerial::parse()
 
                     config_.right_motor.position_rad += utils_.toRad(boost::lexical_cast<float>(feedbacks[8]), config_.encoder.ppr);
                     config_.right_motor.position_meter_curr = config_.right_motor.position_rad * config_.WheelRadius;
+
+                    config_.left_motor.current = boost::lexical_cast<double>(feedbacks[9]) / 10.0;
+                    config_.right_motor.current = boost::lexical_cast<double>(feedbacks[10]) / 10.0;
 
                     float dl = config_.left_motor.position_meter_curr - config_.left_motor.position_meter_prev;
                     float dr = config_.right_motor.position_meter_curr - config_.right_motor.position_meter_prev;
@@ -161,10 +175,46 @@ void CloberSerial::parse()
             {
             }
         }
+        else if (msg[0] == 'I' && msg[1] == 'O' && msg[2] == ':')
+        {
+            try
+            {
+            vector<string> io;
+            boost::split(io, msg, boost::algorithm::is_any_of(":"));
+
+            config_.controller_state.charging_voltage = boost::lexical_cast<double>(io[1]) / 1000.0 * 6.0;
+            config_.controller_state.current_12v = boost::lexical_cast<double>(io[2]) / 1000.0 * 0.0048;
+            config_.controller_state.current_24v = boost::lexical_cast<double>(io[3]) / 1000.0 * 0.0048;
+            }
+            catch (boost::bad_lexical_cast& e)
+            {
+            }
+        }
     }
 }
 
-float CloberSerial::toVW(float l_speed, float r_speed)
+void CloberSerial::faultFlags(const uint16_t flags)
+{
+    config_.controller_state.fault_flags.clear();
+    if (bitset<16>(flags)[0] == 1)
+        config_.controller_state.fault_flags.push_back("Overheat");
+    if (bitset<16>(flags)[1] == 1)
+        config_.controller_state.fault_flags.push_back("Overvoltage");
+    if (bitset<16>(flags)[2] == 1)
+        config_.controller_state.fault_flags.push_back("Undervoltage");
+    if (bitset<16>(flags)[3] == 1)
+        config_.controller_state.fault_flags.push_back("Short circuit");
+    if (bitset<16>(flags)[4] == 1)
+        config_.controller_state.fault_flags.push_back("Emergency stop");
+    if (bitset<16>(flags)[5] == 1)
+        config_.controller_state.fault_flags.push_back("Motor/Sensor setup fault");
+    if (bitset<16>(flags)[6] == 1)
+        config_.controller_state.fault_flags.push_back("MOSFET failure");
+    if (bitset<16>(flags)[7] == 1)
+        config_.controller_state.fault_flags.push_back("Default configuration loaded at startup");
+}
+
+void CloberSerial::toVW(float l_speed, float r_speed)
 {
     linearVel_ = (l_speed + r_speed) / 2;
     angularVel_ = (r_speed - l_speed) / config_.WIDTH;
@@ -201,8 +251,6 @@ float CloberSerial::limitMaxSpeed(float speed)
         return speed;
     }
 }
-
-
 
 void CloberSerial::updatePose()
 {
@@ -282,8 +330,34 @@ void CloberSerial::publish_loop(int hz)
     while (ros::ok())
     {
         publishOdom();
+        publishFeedback();
         std::this_thread::sleep_for(std::chrono::milliseconds(ms));
     }
+}
+
+void CloberSerial::publishFeedback()
+{
+    clober_msgs::Feedback feedback;
+
+    ros::Time stamp_now = ros::Time::now();
+
+    feedback.header.stamp = stamp_now;
+    feedback.controller_state.emergency_stop = config_.controller_state.emergency_stop;
+    feedback.controller_state.battery_voltage = config_.controller_state.battery_voltage;
+    feedback.controller_state.charging_voltage = config_.controller_state.charging_voltage;
+    feedback.controller_state.current_12v = config_.controller_state.current_12v;
+    feedback.controller_state.current_24v = config_.controller_state.current_24v;
+    feedback.controller_state.temperature = config_.controller_state.temperature;
+    feedback.controller_state.fault_flags = config_.controller_state.fault_flags;
+    
+    feedback.left_motor.position = config_.left_motor.position_rad;
+    feedback.right_motor.position = config_.right_motor.position_rad;
+    feedback.left_motor.velocity = config_.left_motor.rpm;
+    feedback.right_motor.velocity = config_.right_motor.rpm;
+    feedback.left_motor.current = config_.left_motor.current;
+    feedback.right_motor.current = config_.right_motor.current;
+
+    feedback_pub_.publish(feedback);
 }
 
 void CloberSerial::publishOdom()

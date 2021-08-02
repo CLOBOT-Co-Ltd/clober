@@ -13,6 +13,7 @@ find_package(catkin REQUIRED COMPONENTS
   std_msgs
   nav_msgs
   tf
+  clober_msgs
 )
 
 ## System dependencies are found with CMake's conventions

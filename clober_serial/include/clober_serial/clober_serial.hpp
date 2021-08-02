@@ -3,6 +3,7 @@
 
 #include <chrono>
 #include <string>
+#include <bitset>
 #include <boost/lexical_cast.hpp>
 #include <boost/algorithm/string.hpp>
 #include <thread>
@@ -14,6 +15,7 @@
 #include <geometry_msgs/Twist.h>
 #include <geometry_msgs/TransformStamped.h>
 #include <nav_msgs/Odometry.h>
+#include <clober_msgs/Feedback.h>
 
 #include <tf2/LinearMath/Quaternion.h>
 #include <tf2_ros/transform_broadcaster.h>
@@ -31,12 +33,23 @@ struct Encoder{
     int ppr;
 };
 
+struct ControllerState{
+    bool emergency_stop;
+    float temperature;
+    float battery_voltage;
+    float charging_voltage;
+    float current_12v;
+    float current_24v;
+    vector<string> fault_flags;
+};
+
 struct MotorState{
     float speed;
     float rpm;
     float position_rad;
     float position_meter_prev;
     float position_meter_curr;
+    float current;
 };
 
 struct VehicleConfig{
@@ -47,6 +60,7 @@ struct VehicleConfig{
     Encoder encoder;
     MotorState left_motor;
     MotorState right_motor;
+    ControllerState controller_state;
 };
 
 struct MotorCommand{
@@ -66,9 +80,11 @@ class CloberSerial{
 
         void on_motor_move(MotorCommand cmd);
 
+        void faultFlags(const uint16_t flags);
+
         void SetValues();
         pair<float,float> toWheelSpeed(float v, float w);
-        float toVW(float l_speed, float r_speed);
+        void toVW(float l_speed, float r_speed);
 
         float limitMaxSpeed(float speed);
 
@@ -76,6 +92,7 @@ class CloberSerial{
         void parse();
 
         void publishOdom();
+        void publishFeedback();
         void publish_loop(int hz);
 
         void sendRPM(pair<int,int> channel, pair<float,float> rpm);
@@ -96,6 +113,7 @@ class CloberSerial{
 
         // publisher //
         ros::Publisher odom_pub_;
+        ros::Publisher feedback_pub_;
         tf2_ros::TransformBroadcaster tf_broadcaster_;
 
         // Subscriber //
