@@ -52,7 +52,7 @@ CloberSerial::CloberSerial()
     feedback_pub_ = nh.advertise<clober_msgs::Feedback>("/feedback", 1);
     cmd_vel_sub_ = nh.subscribe<geometry_msgs::Twist>("/cmd_vel", 1, bind(&CloberSerial::cmd_vel_callback, this, _1));
 
-    readThread_ = std::make_shared<thread>(bind(&CloberSerial::read_serial, this, 20));
+    // readThread_ = std::make_shared<thread>(bind(&CloberSerial::read_serial, this, 20));
     publishThread_ = std::make_shared<thread>(bind(&CloberSerial::publish_loop, this, control_frequency_));
 }
 
@@ -81,8 +81,6 @@ void CloberSerial::cmd_vel_callback(const geometry_msgs::Twist::ConstPtr &msg)
     motor_cmd_.angularVel = msg->angular.z;
     cmd_vel_timeout_switch_ = false;
 
-    // cout << "cmd_vel callback" << endl;
-
     on_motor_move(motor_cmd_);
 }
 
@@ -98,6 +96,7 @@ void CloberSerial::read_serial(int ms)
 void CloberSerial::parse()
 {
     string msg = serial_->readline(max_line_length, eol);
+    // cout <<msg<<endl;
 
     if (msg.size() > 2)
     {
@@ -120,7 +119,7 @@ void CloberSerial::parse()
                     config_.controller_state.emergency_stop = false;
                 }
 
-                faultFlags(boost::lexical_cast<uint16_t>(feedbacks[4]));
+                // faultFlags(boost::lexical_cast<uint16_t>(feedbacks[4]));
 
                 if (feedbacks.size() > 8)
                 {
@@ -395,15 +394,15 @@ void CloberSerial::publishOdom()
     odom.twist.covariance[28] = 1e6;
     odom.twist.covariance[35] = 1e3;
 
-    // geometry_msgs::TransformStamped odom_tf;
-    // odom_tf.header.stamp = stamp_now;
-    // odom_tf.header.frame_id = odom_frame_parent_;
-    // odom_tf.child_frame_id = odom_frame_child_;
-    // odom_tf.transform.translation.x = posX_;
-    // odom_tf.transform.translation.y = posY_;
-    // odom_tf.transform.translation.z = 0;
-    // odom_tf.transform.rotation = odom.pose.pose.orientation;
-    // tf_broadcaster_.sendTransform(odom_tf);
+    geometry_msgs::TransformStamped odom_tf;
+    odom_tf.header.stamp = stamp_now;
+    odom_tf.header.frame_id = odom_frame_parent_;
+    odom_tf.child_frame_id = odom_frame_child_;
+    odom_tf.transform.translation.x = posX_;
+    odom_tf.transform.translation.y = posY_;
+    odom_tf.transform.translation.z = 0;
+    odom_tf.transform.rotation = odom.pose.pose.orientation;
+    tf_broadcaster_.sendTransform(odom_tf);
 
     odom_pub_.publish(odom);
 
@@ -439,26 +438,39 @@ void CloberSerial::on_motor_move(MotorCommand cmd)
     wheel_rpm.first = utils_.toRPM(wheel_speed.first) * 1000 / config_.MAX_RPM;
     wheel_rpm.second = utils_.toRPM(wheel_speed.second) * 1000 / config_.MAX_RPM;
 
-    sendRPM(make_pair(0, 1), make_pair(wheel_rpm.first, wheel_rpm.second));
+    cout <<"wheel first : "<< wheel_rpm.first <<", second : " << wheel_rpm.second << endl;
 
     if (abs(wheel_rpm.first) < 0.0001 && abs(wheel_rpm.second) < 0.0001)
     {
         sendStop(make_pair(0,1));
+    }else{
+        sendRPM(make_pair(0, 1), make_pair(wheel_rpm.first, wheel_rpm.second));
     }
 }
 
 void CloberSerial::sendRPM(pair<int, int> channel, pair<float, float> rpm)
 {
-    stringstream msg;
-    msg << "!G " << channel.first + 1 << " " << rpm.first << "\r"
-        << "!G " << channel.second + 1 << " " << rpm.second << "\r";
+    // stringstream msg;
+    // msg << "!G " << channel.first + 1 << " " << rpm.first << "\r"
+    //     << "!G " << channel.second + 1 << " " << rpm.second << "\r";
+
+    // serial_->write(msg.str());
     // cout << "send rpm : " << msg.str() << endl;
 
-    serial_->write(msg.str());
+    stringstream l_msg;
+    l_msg << "!G " << channel.first + 1 << " " << (int)rpm.first << "\r";
+    cout << "send left rpm : " << l_msg.str() << endl;
+    serial_->write(l_msg.str());
+    
+    stringstream r_msg;
+    r_msg << "!G " << channel.second + 1 << " " <<  (int)rpm.second << "\r";
+    cout << "send right rpm : " << r_msg.str() << endl;
+    serial_->write(r_msg.str());
 }
 
 void CloberSerial::sendStop(pair<int,int> channel){
     stringstream msg;
     msg << "!MS " << channel.first + 1 << "\r" << "!MS " << channel.second + 1 << "\r";
     serial_->write(msg.str());
+    cout << "stop : " << msg.str() << endl;
 }

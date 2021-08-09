@@ -10,18 +10,18 @@ clober_serial_node:
 
   # odometry
   odom_frame_parent : "odom"
-  odom_frame_child : "base_footprint"
+  odom_frame_child : "base_link"
   
   # mode 0 (use v,w) / mode 1 (use wheel speed) / mode 2 (use wheel encoder)
   mode : 0 
 
   # robot configuration
-  wheel_separation: 0.45
+  wheel_separation: 0.3
   wheel_radius : 0.085
   wheel_max_speed_mps : 1.0
   wheel_max_rpm : 200
 
-  encoder_ppr : 4096
+  encoder_ppr : 5600
 
   
 
