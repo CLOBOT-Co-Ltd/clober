@@ -1,5 +1,20 @@
 repositories:
     clober:
         type: git
-        url: https://github.com/clobot-git/clober.git
+        url: https://github.com/CLOBOT-Co-Ltd/clober.git
+        version: noetic-devel
+
+    clober_msgs:
+        type: git
+        url: https://github.com/CLOBOT-Co-Ltd/clober_msgs.git
+        version: noetic-devel
+
+    sick_scan:
+        type: git
+        url: https://github.com/CLOBOT-Co-Ltd/sick_scan.git
+        version: master
+
+    robot_localization:
+        type: git
+        url: https://github.com/CLOBOT-Co-Ltd/robot_localization.git
         version: noetic-devel
