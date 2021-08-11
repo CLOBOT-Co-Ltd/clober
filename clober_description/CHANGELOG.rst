@@ -2,6 +2,9 @@
 Changelog for package clober_description
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+1.0.3 (2021-08-11)
+------------------
+
 1.0.2 (2021-08-11)
 ------------------
 * add suntech map & nav configuration
