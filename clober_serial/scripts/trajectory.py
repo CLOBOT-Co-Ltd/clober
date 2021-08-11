@@ -8,26 +8,45 @@ from geometry_msgs.msg import Point
 from tf.transformations import euler_from_quaternion, quaternion_from_euler
 import math
 
+class OdomType:
+    def __init__(self):
+        self.markerId = 0
+        self.cnt = 0
+        self.marker_pub = None
 
 class OdomViz:
     def __init__(self):
-        
-        self.markerId = 0
-        self.odomCnt = 0
 
-        self.markerPub = rospy.Publisher("/marker/odom", Marker,queue_size=10)
+        self.odomData = OdomType()
+        self.odomData.marker_pub = rospy.Publisher("/marker/odom", Marker,queue_size=10)
+
+        self.odomFiltered = OdomType()
+        self.odomFiltered.marker_pub = rospy.Publisher("/marker/odom/filtered", Marker,queue_size=10)
+
         rospy.Subscriber("/odom", Odometry, self.odomCB)
+        rospy.Subscriber("/odom/ekf/enc_imu", Odometry, self.odomFilteredCB)
 
 
     def odomCB(self, msg):
-        if self.odomCnt > 100 :
+        if self.odomData.cnt > 100 :
             odom_x = msg.pose.pose.position.x
             odom_y = msg.pose.pose.position.y
             odom_yaw = self.getYaw(msg.pose.pose.orientation)
             self.draw(odom_x,odom_y,odom_yaw)
-            self.odomCnt = 0
+            self.odomData.cnt = 0
         else:
-            self.odomCnt += 1
+            self.odomData.cnt += 1
+
+
+    def odomFilteredCB(self, msg):
+        if self.odomFiltered.cnt > 0 :
+            odom_x = msg.pose.pose.position.x
+            odom_y = msg.pose.pose.position.y
+            odom_yaw = self.getYaw(msg.pose.pose.orientation)
+            self.draw2(odom_x,odom_y,odom_yaw)
+            self.odomFiltered.cnt = 0
+        else:
+            self.odomFiltered.cnt += 1
 
 
     def getYaw(self,q):
@@ -39,7 +58,7 @@ class OdomViz:
     def draw(self,x,y,yaw):
         m = Marker()
         m.header.frame_id = "base_link"
-        m.id = self.markerId
+        m.id = self.odomData.markerId
         m.type = m.ARROW
         start = Point()
         start.x = x
@@ -54,10 +73,30 @@ class OdomViz:
         m.scale.x = 0.05
         m.scale.y = 0.05
         m.scale.z = 0.1
-        self.markerPub.publish(m)
+        self.odomData.marker_pub.publish(m)
+        self.odomData.markerId +=1
 
-        self.markerId +=1
 
+    def draw2(self,x,y,yaw):
+        m = Marker()
+        m.header.frame_id = "base_link"
+        m.id = self.odomFiltered.markerId
+        m.type = m.ARROW
+        start = Point()
+        start.x = x
+        start.y = y
+        m.points.append(start)
+        end = Point()
+        end.x = x + (0.1*math.cos(yaw))
+        end.y = y + (0.1*math.sin(yaw))
+        m.points.append(end)
+        m.color.a = 1.0
+        m.color.r = 1.0
+        m.scale.x = 0.05
+        m.scale.y = 0.05
+        m.scale.z = 0.1
+        self.odomFiltered.marker_pub.publish(m)
+        self.odomFiltered.markerId +=1
 
 def main():
     try:

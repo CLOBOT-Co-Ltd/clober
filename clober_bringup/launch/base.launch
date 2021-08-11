@@ -3,7 +3,7 @@
 
     <arg name="port" default="/dev/ttyClober"/>
     <arg name="mode" default="0"/>
-    <arg name="ekf_localization_node_mode" default="false"/>
+    <arg name="ekf_localization_node_mode" default="true"/>
     <arg name="robot_pose_ekf_mode" default="false"/>
 
     <rosparam file="$(find clober_serial)/config/clober.yaml" command="load"/>
@@ -20,10 +20,10 @@
     <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>
 
     <!-- Myahrs+ Driver -->
-    <!-- <node pkg="myahrs_driver" type="myahrs_driver" name="myahrs_driver">
+    <node pkg="myahrs_driver" type="myahrs_driver" name="myahrs_driver">
         <param name="port" value="/dev/ttyACM0" />
         <param name="baud_rate" value="115200" />
-    </node> -->
+    </node>
     
     <!-- Clober 2D Lidar -->
     <!-- <include file="$(find clober_bringup)/launch/include/sick_tim_5xx.launch"/> -->
@@ -31,6 +31,7 @@
     <!-- ekf_localization_node -->
     <group if="$(arg ekf_localization_node_mode)">
         <node pkg="robot_localization" type="ekf_localization_node" name="ekf_odom_node" output="screen" >
+            <param name="publish_tf" value="false"/>
             <param name="frequency" value="30"/>
             <param name="sensor_timeout" value="0.1"/>
             <param name="two_d_mode" value="true"/>
@@ -39,7 +40,7 @@
             <param name="odom_frame" value="odom"/>
             <param name="base_link_frame" value="base_footprint"/>
             <param name="world_frame" value="odom"/>
-            <param name="transform_time_offset" value="0.0"/>
+            <param name="transform_time_offset" value="0.1"/>
             <param name="odom0" value="odom"/>
             <param name="odom0_differential" value="false" />
             <param name="odom0_relative" value="false" />

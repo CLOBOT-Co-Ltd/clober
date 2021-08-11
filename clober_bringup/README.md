@@ -13,6 +13,7 @@ http://wiki.ros.org/noetic/Installation
 ```
 sudo apt-get install ros-noetic-teleop-twist-keyboard
 sudo apt-get install libgeographic-dev
+sudo apt-get install ros-noetic-geographic-msgs
 ```
 
 ### 1.4 Install Clober Packages

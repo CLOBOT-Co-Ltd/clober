@@ -273,7 +273,7 @@ void CloberSerial::updatePose()
     posY_ += y;
     heading_ += theta;
 
-    cout << "update pose x : " << posX_ << ", y : " << posY_ << ", heading : " << heading_ << endl << endl;
+    // cout << "update pose x : " << posX_ << ", y : " << posY_ << ", heading : " << heading_ << endl << endl;
 }
 
 void CloberSerial::updatePose(double dL, double dR)
