@@ -109,15 +109,15 @@ void CloberSerial::parse()
                 vector<string> feedbacks;
                 boost::split(feedbacks, msg, boost::algorithm::is_any_of(":"));
 
-                // The status of the controller
-                config_.controller_state.battery_voltage = (boost::lexical_cast<double>(feedbacks[1]) / 10.0) + 0.4;
-                config_.controller_state.temperature = boost::lexical_cast<double>(feedbacks[2]);
+                // // The status of the controller
+                // config_.controller_state.battery_voltage = (boost::lexical_cast<double>(feedbacks[1]) / 10.0) + 0.4;
+                // config_.controller_state.temperature = boost::lexical_cast<double>(feedbacks[2]);
 
-                if (boost::lexical_cast<int>(feedbacks[3]) == 0){
-                    config_.controller_state.emergency_stop = true;
-                } else {
-                    config_.controller_state.emergency_stop = false;
-                }
+                // if (boost::lexical_cast<int>(feedbacks[3]) == 0){
+                //     config_.controller_state.emergency_stop = true;
+                // } else {
+                //     config_.controller_state.emergency_stop = false;
+                // }
 
                 // faultFlags(boost::lexical_cast<uint16_t>(feedbacks[4]));
 
@@ -142,8 +142,8 @@ void CloberSerial::parse()
                     float dr = config_.right_motor.position_meter_curr - config_.right_motor.position_meter_prev;
 
                     // rad/s -> m/s
-                    float l_speed = config_.left_motor.speed * config_.WheelRadius;
-                    float r_speed = config_.right_motor.speed * config_.WheelRadius;
+                    double l_speed = config_.left_motor.speed * config_.WheelRadius;
+                    double r_speed = config_.right_motor.speed * config_.WheelRadius;
 
                     toVW(l_speed, r_speed);
 
@@ -273,10 +273,10 @@ void CloberSerial::updatePose()
     posY_ += y;
     heading_ += theta;
 
-    // cout << "update pose x : " << posX_ << ", y : " << posY_ << ", heading : " << heading_ << endl << endl;
+    cout << "update pose x : " << posX_ << ", y : " << posY_ << ", heading : " << heading_ << endl << endl;
 }
 
-void CloberSerial::updatePose(float dL, float dR)
+void CloberSerial::updatePose(double dL, double dR)
 {
     ros::Time now = ros::Time::now();
 
@@ -290,12 +290,13 @@ void CloberSerial::updatePose(float dL, float dR)
     double dT = now.toSec() - timestamp_.toSec();
     timestamp_ = now;
 
-    float x = posX_;
-    float y = posY_;
+    double x = posX_;
+    double y = posY_;
     float theta = heading_;
 
     float R = 0.0;
-    if ((dR - dL) < 0.0001)
+    // if ((dR - dL) < 0.0001)
+    if ((dR - dL) == 0.0000 )
     {
         R = 0.0;
     }
@@ -304,23 +305,26 @@ void CloberSerial::updatePose(float dL, float dR)
         R = (config_.WIDTH / 2.0) * ((dL + dR) / (dR - dL));
     }
 
-    float Wdt;
+    double Wdt;
     
     if ( odom_mode_ == 1 ){
-        float W = (dR - dL) / config_.WIDTH;            // dR, dL 인자를 속도값으로 넘겼을 때, dT를 곱해서 계산
+        double W = (dR - dL) / config_.WIDTH;            // dR, dL 인자를 속도값으로 넘겼을 때, dT를 곱해서 계산
         Wdt = W*dT;
     }else if ( odom_mode_ == 2){
         Wdt = (dR - dL) / config_.WIDTH;                // dR, dL 인자를 거리값으로 넘겼을 때,
     }
 
-    float ICCx = x - (R * sin(theta));
-    float ICCy = y + (R * cos(theta));
+    double ICCx = x - (R * sin(theta));
+    double ICCy = y + (R * cos(theta));
+
+    cout <<"ICCx : "<<ICCx <<" , ICCy : "<<ICCy <<endl;
+
 
     posX_ = (cos(Wdt) * (x - ICCx)) - (sin(Wdt) * (y - ICCy)) + ICCx;
     posY_ = (sin(Wdt) * (x - ICCx)) + (cos(Wdt) * (y - ICCy)) + ICCy;
     heading_ = theta + Wdt;
 
-    // cout << "update pose x : " << posX_ << ", y : " << posY_ << ", heading : " << heading_ << endl << endl;
+    cout << "update pose x : " << posX_ << ", y : " << posY_ << ", heading : " << heading_ << endl << endl;
 }
 
 void CloberSerial::publish_loop(int hz)
