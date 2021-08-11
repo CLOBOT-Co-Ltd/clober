@@ -3,7 +3,7 @@ Changelog for package clober_simulation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 1.0.2 (2021-08-11)
------------
+------------------
 * add suntech map & nav configuration
 * edit logo.world file using clober prefix
 * Merge branch 'noetic-devel' of https://github.com/CLOBOT-Co-Ltd/clober into noetic-devel

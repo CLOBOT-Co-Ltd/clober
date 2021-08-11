@@ -3,7 +3,7 @@ Changelog for package clober_bringup
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 1.0.2 (2021-08-11)
------------
+------------------
 * add suntech map & nav configuration
 * clober serial test
 * add ekf & myAHRS nodes

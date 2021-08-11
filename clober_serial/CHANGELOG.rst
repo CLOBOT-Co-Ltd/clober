@@ -3,7 +3,7 @@ Changelog for package clober_serial
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 1.0.2 (2021-08-11)
------------
+------------------
 * add suntech map & nav configuration
 * clober serial test
 * add feedback topic
