@@ -52,7 +52,7 @@ CloberSerial::CloberSerial()
     feedback_pub_ = nh.advertise<clober_msgs::Feedback>("/feedback", 1);
     cmd_vel_sub_ = nh.subscribe<geometry_msgs::Twist>("/cmd_vel", 1, bind(&CloberSerial::cmd_vel_callback, this, _1));
 
-    // readThread_ = std::make_shared<thread>(bind(&CloberSerial::read_serial, this, 20));
+    readThread_ = std::make_shared<thread>(bind(&CloberSerial::read_serial, this, 20));
     publishThread_ = std::make_shared<thread>(bind(&CloberSerial::publish_loop, this, control_frequency_));
 }
 
