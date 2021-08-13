@@ -329,7 +329,8 @@ void CloberSerial::updatePose(double dL, double dR)
 
 void CloberSerial::publish_loop(int hz)
 {
-    int ms = 1000 * (1/hz);
+    int ms = 1000 * (float)1/hz;
+    cout << "publish loop hz : "<<hz <<", ms : "<<ms<<endl;
     while (ros::ok())
     {
         publishOdom();
@@ -442,7 +443,7 @@ void CloberSerial::on_motor_move(MotorCommand cmd)
     wheel_rpm.first = utils_.toRPM(wheel_speed.first) * 1000 / config_.MAX_RPM;
     wheel_rpm.second = utils_.toRPM(wheel_speed.second) * 1000 / config_.MAX_RPM;
 
-    cout <<"wheel first : "<< wheel_rpm.first <<", second : " << wheel_rpm.second << endl;
+    // cout <<"wheel first : "<< wheel_rpm.first <<", second : " << wheel_rpm.second << endl;
 
     if (abs(wheel_rpm.first) < 0.0001 && abs(wheel_rpm.second) < 0.0001)
     {
@@ -454,22 +455,22 @@ void CloberSerial::on_motor_move(MotorCommand cmd)
 
 void CloberSerial::sendRPM(pair<int, int> channel, pair<float, float> rpm)
 {
-    // stringstream msg;
-    // msg << "!G " << channel.first + 1 << " " << rpm.first << "\r"
-    //     << "!G " << channel.second + 1 << " " << rpm.second << "\r";
+    stringstream msg;
+    msg << "!G " << channel.first + 1 << " " << rpm.first << "\r"
+        << "!G " << channel.second + 1 << " " << rpm.second << "\r";
 
-    // serial_->write(msg.str());
+    serial_->write(msg.str());
     // cout << "send rpm : " << msg.str() << endl;
 
-    stringstream l_msg;
-    l_msg << "!G " << channel.first + 1 << " " << (int)rpm.first << "\r";
-    cout << "send left rpm : " << l_msg.str() << endl;
-    serial_->write(l_msg.str());
+    // stringstream l_msg;
+    // l_msg << "!G " << channel.first + 1 << " " << (int)rpm.first << "\r";
+    // cout << "send left rpm : " << l_msg.str() << endl;
+    // serial_->write(l_msg.str());
     
-    stringstream r_msg;
-    r_msg << "!G " << channel.second + 1 << " " <<  (int)rpm.second << "\r";
-    cout << "send right rpm : " << r_msg.str() << endl;
-    serial_->write(r_msg.str());
+    // stringstream r_msg;
+    // r_msg << "!G " << channel.second + 1 << " " <<  (int)rpm.second << "\r";
+    // cout << "send right rpm : " << r_msg.str() << endl;
+    // serial_->write(r_msg.str());
 }
 
 void CloberSerial::sendStop(pair<int,int> channel){
