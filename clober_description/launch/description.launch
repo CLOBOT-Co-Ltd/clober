@@ -4,6 +4,6 @@
   <param name="robot_description" command="$(find xacro)xacro '$(find clober_description)/urdf/clober.urdf.xacro'"/>
   
   <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>
-  <node pkg="rviz" type="rviz" name="rviz" args="-d $(find clober_description)/rviz/clober.rviz"/>
+  <!-- <node pkg="rviz" type="rviz" name="rviz" args="-d $(find clober_description)/rviz/clober.rviz"/> -->
 
 </launch>
