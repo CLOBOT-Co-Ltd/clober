@@ -26,11 +26,12 @@
     </node> -->
     
     <!-- Clober 2D Lidar -->
-    <!-- <include file="$(find clober_bringup)/launch/include/sick_tim_5xx.launch"/> -->
+    <include file="$(find clober_bringup)/launch/include/sick_tim_5xx.launch"/>
 
     <!-- ekf_localization_node -->
     <group if="$(arg ekf_localization_node_mode)">
         <node pkg="robot_localization" type="ekf_localization_node" name="ekf_odom_node" output="screen" >
+            <param name="publish_tf" value="false"/>
             <param name="frequency" value="30"/>
             <param name="sensor_timeout" value="0.1"/>
             <param name="two_d_mode" value="true"/>
@@ -39,7 +40,7 @@
             <param name="odom_frame" value="odom"/>
             <param name="base_link_frame" value="base_footprint"/>
             <param name="world_frame" value="odom"/>
-            <param name="transform_time_offset" value="0.0"/>
+            <param name="transform_time_offset" value="0.1"/>
             <param name="odom0" value="odom"/>
             <param name="odom0_differential" value="false" />
             <param name="odom0_relative" value="false" />

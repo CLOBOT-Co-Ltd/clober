@@ -1,7 +1,7 @@
 footprint: [[-0.202, -0.202], [-0.202, 0.202], [0.202, 0.202], [0.202, -0.202]] 
 
-update_frequency: 10.0
-publish_frequency: 10.0
+update_frequency: 2
+publish_frequency: 2
 
 obstacle_layer:
   observation_sources: scan

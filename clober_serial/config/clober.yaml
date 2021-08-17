@@ -17,11 +17,11 @@ clober_serial_node:
 
   # robot configuration
   wheel_separation: 0.3
-  wheel_radius : 0.085
+  wheel_radius : 0.08
   wheel_max_speed_mps : 1.0
   wheel_max_rpm : 200
 
-  encoder_ppr : 5600
+  encoder_ppr : 4096
 
   
 
