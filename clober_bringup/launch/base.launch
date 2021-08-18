@@ -9,7 +9,7 @@
     <rosparam file="$(find clober_serial)/config/clober.yaml" command="load"/>
 
     <!-- Clober Motor Driver -->
-    <node pkg="clober_serial" type="clober_serial_node" name="clober_serial_node" output="screen">
+    <node pkg="clober_serial" type="clober_serial_node" name="clober_serial_node" output="log">
         <param name="port" value="$(arg port)"/>
         <param name="mode" value="$(arg mode)"/>
     </node>

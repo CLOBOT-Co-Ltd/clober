@@ -54,7 +54,7 @@ class OdomViz:
         (roll, pitch, yaw) = euler_from_quaternion(q_list)
         return yaw
 
-        
+
     def draw(self,x,y,yaw):
         m = Marker()
         m.header.frame_id = "base_link"
