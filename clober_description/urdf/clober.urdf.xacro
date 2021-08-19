@@ -9,15 +9,15 @@
 
     <xacro:property name="PI" value="3.1415926535897931"/>
 
-    <link name="base_footprint"/>
+    <link name="$(arg prefix)base_footprint"/>
 
-    <joint name="base_joint" type="fixed">
-        <parent link="base_footprint"/>
-        <child link="base_link"/>
+    <joint name="$(arg prefix)base_joint" type="fixed">
+        <parent link="$(arg prefix)base_footprint"/>
+        <child link="$(arg prefix)base_link"/>
         <origin xyz="0.0 0.0 0.020" rpy="0 0 0"/>
     </joint>
 
-    <link name="base_link">
+    <link name="$(arg prefix)base_link">
         <visual>
             <origin xyz="0 0 0" rpy="0 0 ${PI/2}"/>
             <geometry>
@@ -45,14 +45,14 @@
         </inertial>
     </link>
 
-    <joint name="wheel_left_joint" type="continuous">
-        <parent link="base_link"/>
-        <child link="wheel_left_link"/>
+    <joint name="$(arg prefix)wheel_left_joint" type="continuous">
+        <parent link="$(arg prefix)base_link"/>
+        <child link="$(arg prefix)wheel_left_link"/>
         <origin xyz="0.0018 0.1558 0.02" rpy="0 0 0"/>
         <axis xyz="0 1 0" rpy="0 0 0"/>
     </joint>
 
-    <link name="wheel_left_link">
+    <link name="$(arg prefix)wheel_left_link">
         <visual>
             <origin xyz="0 0 0" rpy="0 0 -${PI/2}"/>
             <geometry>
@@ -80,14 +80,14 @@
         </inertial>
     </link>
 
-    <joint name="wheel_right_joint" type="continuous">
-        <parent link="base_link"/>
-        <child link="wheel_right_link"/>
+    <joint name="$(arg prefix)wheel_right_joint" type="continuous">
+        <parent link="$(arg prefix)base_link"/>
+        <child link="$(arg prefix)wheel_right_link"/>
         <origin xyz="0.0018 -0.1558 0.02" rpy="0 0 0"/>
         <axis xyz="0 1 0" rpy="0 0 0"/>
     </joint>
 
-    <link name="wheel_right_link">
+    <link name="$(arg prefix)wheel_right_link">
         <visual>
             <origin xyz="0 0 0" rpy="0 0 ${PI/2}"/>
             <geometry>
@@ -115,14 +115,14 @@
         </inertial>
     </link>
 
-    <joint name="caster_joint1" type="continuous">
-        <parent link="base_link"/>
-        <child link="caster_link1"/>
+    <joint name="$(arg prefix)caster_joint1" type="continuous">
+        <parent link="$(arg prefix)base_link"/>
+        <child link="$(arg prefix)caster_link1"/>
         <origin xyz="0.11 0.13 -0.04" rpy="${PI/2} 0 0"/>
         <axis xyz="0 0 1" rpy="0 0 0"/>
     </joint>
 
-    <link name="caster_link1">
+    <link name="$(arg prefix)caster_link1">
         <collision>
             <origin xyz="0 0 0" rpy="0 0 0"/>
             <geometry>
@@ -137,14 +137,14 @@
         </inertial>
     </link>
 
-    <joint name="caster_joint2" type="continuous">
-        <parent link="base_link"/>
-        <child link="caster_link2"/>
+    <joint name="$(arg prefix)caster_joint2" type="continuous">
+        <parent link="$(arg prefix)base_link"/>
+        <child link="$(arg prefix)caster_link2"/>
         <origin xyz="-0.11 0.13 -0.04" rpy="${PI/2} 0 0"/>
         <axis xyz="0 0 1" rpy="0 0 0"/>
     </joint>
 
-    <link name="caster_link2">
+    <link name="$(arg prefix)caster_link2">
         <collision>
             <origin xyz="0 0 0" rpy="0 0 0"/>
             <geometry>
@@ -159,14 +159,14 @@
         </inertial>
     </link>
 
-    <joint name="caster_joint3" type="continuous">
-        <parent link="base_link"/>
-        <child link="caster_link3"/>
+    <joint name="$(arg prefix)caster_joint3" type="continuous">
+        <parent link="$(arg prefix)base_link"/>
+        <child link="$(arg prefix)caster_link3"/>
         <origin xyz="0.11 -0.13 -0.04" rpy="${PI/2} 0 0"/>
         <axis xyz="0 0 1" rpy="0 0 0"/>
     </joint>
 
-    <link name="caster_link3">
+    <link name="$(arg prefix)caster_link3">
         <collision>
             <origin xyz="0 0 0" rpy="0 0 0"/>
             <geometry>
@@ -181,14 +181,14 @@
         </inertial>
     </link>
 
-    <joint name="caster_joint4" type="continuous">
-        <parent link="base_link"/>
-        <child link="caster_link4"/>
+    <joint name="$(arg prefix)caster_joint4" type="continuous">
+        <parent link="$(arg prefix)base_link"/>
+        <child link="$(arg prefix)caster_link4"/>
         <origin xyz="-0.11 -0.13 -0.04" rpy="${PI/2} 0 0"/>
         <axis xyz="0 0 1" rpy="0 0 0"/>
     </joint>
 
-    <link name="caster_link4">
+    <link name="$(arg prefix)caster_link4">
         <collision>
             <origin xyz="0 0 0" rpy="0 0 0"/>
             <geometry>
@@ -203,38 +203,38 @@
         </inertial>
     </link>
 
-    <joint name="imu_joint" type="fixed">
-        <parent link="base_link"/>
-        <child link="imu_link"/>
+    <joint name="$(arg prefix)imu_joint" type="fixed">
+        <parent link="$(arg prefix)base_link"/>
+        <child link="$(arg prefix)imu_link"/>
         <origin xyz="0.15 0 0.225" rpy="0 0 0"/>
         <!-- <origin xyz="0.0605 0 0.0923" rpy="0 0 0"/> -->
     </joint>
 
-    <link name="imu_link"/>
+    <link name="$(arg prefix)imu_link"/>
 
-    <joint name="left_ultrasonic_joint" type="fixed">
-        <parent link="base_link"/>
-        <child link="left_ultrasonic"/>
+    <joint name="$(arg prefix)left_ultrasonic_joint" type="fixed">
+        <parent link="$(arg prefix)base_link"/>
+        <child link="$(arg prefix)left_ultrasonic"/>
         <origin xyz="0.18164 0.09679 0.08396" rpy="0 0 0"/>
     </joint>
 
-    <link name="left_ultrasonic"/>
+    <link name="$(arg prefix)left_ultrasonic"/>
 
-    <joint name="right_ultrasonic_joint" type="fixed">
-        <parent link="base_link"/>
-        <child link="right_ultrasonic"/>
+    <joint name="$(arg prefix)right_ultrasonic_joint" type="fixed">
+        <parent link="$(arg prefix)base_link"/>
+        <child link="$(arg prefix)right_ultrasonic"/>
         <origin xyz="0.18164 -0.09679 0.08396" rpy="0 0 0"/>
     </joint>
 
-    <link name="right_ultrasonic"/>
+    <link name="$(arg prefix)right_ultrasonic"/>
 
-    <joint name="base_scan_joint" type="fixed">
-        <parent link="base_link"/>
-        <child link="base_scan"/>
+    <joint name="$(arg prefix)base_scan_joint" type="fixed">
+        <parent link="$(arg prefix)base_link"/>
+        <child link="$(arg prefix)base_scan"/>
         <origin xyz="0.159 0 0.16" rpy="${PI} 0 0"/>
     </joint>
     <!-- <origin xyz="0.21 0 0.16" rpy="${PI} 0 0"/> -->
-    <link name="base_scan">
+    <link name="$(arg prefix)base_scan">
       <visual>
           <origin xyz="0 0 0"    rpy="0 0 0"/>
           <geometry>
@@ -245,8 +245,8 @@
     <!-- <xacro:sensor_tim571 parent="base_link"> <origin xyz="0.159 0 0.2265"
     rpy="${PI} 0 0"/> </xacro:sensor_tim571> -->
 
-    <xacro:sensor_d435 parent="base_link" name="camera">
+    <!-- <xacro:sensor_d435 parent="$(arg prefix)base_link" name="camera">
         <origin xyz="0.17573 0 0.06791" rpy="0 -${PI/12} 0"/>
-    </xacro:sensor_d435>
+    </xacro:sensor_d435> -->
 
 </robot>
