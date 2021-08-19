@@ -47,6 +47,7 @@ CloberSerial::CloberSerial()
     }
 
     cout << "Connected to serial : " << port_ << " with baudrate " << baudrate_ << endl;
+    restartScript();
 
     odom_pub_ = nh.advertise<nav_msgs::Odometry>("/odom", 1);
     feedback_pub_ = nh.advertise<clober_msgs::Feedback>("/feedback", 1);
@@ -81,7 +82,10 @@ void CloberSerial::cmd_vel_callback(const geometry_msgs::Twist::ConstPtr &msg)
     motor_cmd_.angularVel = msg->angular.z;
     cmd_vel_timeout_switch_ = false;
 
+    // rpmValue_+=16;
+    sendHeardBeat();
     on_motor_move(motor_cmd_);
+
 }
 
 void CloberSerial::read_serial(int ms)
@@ -108,6 +112,8 @@ void CloberSerial::parse()
 
                 vector<string> feedbacks;
                 boost::split(feedbacks, msg, boost::algorithm::is_any_of(":"));
+
+                // cout <<msg<<endl;
 
                 // // The status of the controller
                 // config_.controller_state.battery_voltage = (boost::lexical_cast<double>(feedbacks[1]) / 10.0) + 0.4;
@@ -419,8 +425,8 @@ void CloberSerial::publishOdom()
     //     cmd_vel_timeout_switch_ = true;
     // }else{
     //     if( timeout_counter > cmd_vel_timeout_*odom_freq_){
-    //         motor_cmd_->linear.x = 0;
-    //         motor_cmd_->angular.z = 0;
+    //         motor_cmd_.linearVel = 0;
+    //         motor_cmd_.angularVel = 0;
     //         timeout_counter = 0;
     //     }else{
     //         timeout_counter++;
@@ -430,9 +436,23 @@ void CloberSerial::publishOdom()
     // on_motor_move(motor_cmd_);
 }
 
+
+void CloberSerial::sendHeardBeat(){
+    stringstream msg;
+    msg << "!B 3 1" << "\r";
+    serial_->write(msg.str());
+}
+
+
+void CloberSerial::restartScript(){
+    stringstream msg;
+    msg << "!R 2" << "\r";
+    serial_->write(msg.str());
+}
+
+
 void CloberSerial::on_motor_move(MotorCommand cmd)
 {
-
     pair<float, float> wheel_speed;
 
     wheel_speed = toWheelSpeed(cmd.linearVel, cmd.angularVel);
@@ -460,20 +480,11 @@ void CloberSerial::sendRPM(pair<int, int> channel, pair<float, float> rpm)
         << "!G " << channel.second + 1 << " " << rpm.second << "\r";
 
     serial_->write(msg.str());
-    // cout << "send rpm : " << msg.str() << endl;
-
-    // stringstream l_msg;
-    // l_msg << "!G " << channel.first + 1 << " " << (int)rpm.first << "\r";
-    // cout << "send left rpm : " << l_msg.str() << endl;
-    // serial_->write(l_msg.str());
-    
-    // stringstream r_msg;
-    // r_msg << "!G " << channel.second + 1 << " " <<  (int)rpm.second << "\r";
-    // cout << "send right rpm : " << r_msg.str() << endl;
-    // serial_->write(r_msg.str());
+    cout << "send rpm : " << msg.str() << endl;
 }
 
-void CloberSerial::sendStop(pair<int,int> channel){
+void CloberSerial::sendStop(pair<int,int> channel)
+{
     stringstream msg;
     msg << "!MS " << channel.first + 1 << "\r" << "!MS " << channel.second + 1 << "\r";
     serial_->write(msg.str());

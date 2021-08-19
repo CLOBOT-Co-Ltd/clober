@@ -21,7 +21,7 @@ clober_serial_node:
   wheel_max_speed_mps : 1.0
   wheel_max_rpm : 200
 
-  encoder_ppr : 4096
+  encoder_ppr : 5600
 
   
 
