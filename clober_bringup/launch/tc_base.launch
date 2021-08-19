@@ -1,0 +1,99 @@
+<?xml version="1.0"?>
+<launch>
+
+    <arg name="port" default="/dev/ttyClober"/>
+    <arg name="mode" default="0"/>
+    <arg name="ekf_localization_node_mode" default="false"/>
+    <arg name="robot_pose_ekf_mode" default="false"/>
+    <arg name="clober"  default="clober_0"/>
+
+    <group ns = "$(arg clober)">
+
+    <rosparam file="$(find clober_serial)/config/clober.yaml" command="load"/>
+    <!-- Clober Motor Driver -->
+    <node pkg="clober_serial" type="clober_serial_node" name="clober_serial_node" output="log">
+        <param name="port" value="$(arg port)"/>
+        <param name="mode" value="$(arg mode)"/>
+        <param name="odom_frame_parent" value="$(arg clober)/odom"/>
+        <param name="odom_frame_child" value="$(arg clober)/base_footprint"/>
+    </node>
+
+    <!-- Clober Descriptoin -->
+        <param name="robot_description" command="$(find xacro)xacro --inorder '$(find clober_description)/urdf/clober.urdf.xacro' prefix:=$(arg clober)/" />
+
+        <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher" output="screen">
+        <param name="publish_frequency" type="double" value="50.0" />
+        <param name="tf_prefix" value="$(arg clober)" />
+        </node>
+
+    <!-- Myahrs+ Driver -->
+    <!-- <node pkg="myahrs_driver" type="myahrs_driver" name="myahrs_driver">
+        <param name="port" value="/dev/ttyACM0" />
+        <param name="baud_rate" value="115200" />
+    </node> -->
+    
+    <!-- Clober 2D Lidar -->
+    <include file="$(find clober_bringup)/launch/include/sick_tim_5xx.launch">
+        <arg name="frame_id" default="$(arg clober)/base_scan"/>
+    </include>
+
+    </group>
+
+    <!-- ekf_localization_node -->
+    <group if="$(arg ekf_localization_node_mode)">
+        <node pkg="robot_localization" type="ekf_localization_node" name="ekf_odom_node" output="screen" >
+            <param name="publish_tf" value="false"/>
+            <param name="frequency" value="30"/>
+            <param name="sensor_timeout" value="0.1"/>
+            <param name="two_d_mode" value="true"/>
+            <remap from="odometry/filtered" to="odom/ekf/enc_imu"/>
+            <param name="map_frame" value="map"/>
+            <param name="odom_frame" value="odom"/>
+            <param name="base_link_frame" value="base_footprint"/>
+            <param name="world_frame" value="odom"/>
+            <param name="transform_time_offset" value="0.1"/>
+            <param name="odom0" value="odom"/>
+            <param name="odom0_differential" value="false" />
+            <param name="odom0_relative" value="false" />
+            <param name="odom0_queue_size" value="10" />
+            <rosparam param="odom0_config">[true,  true, false,
+                                            false, false, false,
+                                            true, false, false,
+                                            false, false, true,
+                                            false, false, false]</rosparam>
+            <param name="imu0" value="/imu/data"/>
+            <param name="imu0_differential" value="false" />
+            <param name="imu0_relative" value="false" />
+            <param name="imu0_queue_size" value="10" />
+            <param name="imu0_remove_gravitational_acceleration" value="true" />
+            <rosparam param="imu0_config">[false,  false, false,
+                                            false, false, false,
+                                            false, false, false,
+                                            false , false, true,
+                                            true, false, false]</rosparam>
+            <param name="print_diagnostics" value="true" />
+            <param name="debug" value="false" />
+            <param name="debug_out_file" value="debug_odom_ekf.txt" />
+        </node>
+    </group>
+
+    <!-- robot_pose_ekf -->
+    <group if="$(arg robot_pose_ekf_mode)">
+        <node pkg="robot_pose_ekf" type="robot_pose_ekf" name="robot_pose_ekf">
+            <param name="output_frame" value="odom"/>
+            <param name="base_footprint_frame" value="base_footprint"/>
+            <param name="freq" value="30.0"/>
+            <param name="sensor_timeout" value="1.0"/>
+            <param name="odom_used" value="true"/>
+            <param name="imu_used" value="true"/>
+            <param name="vo_used" value="false"/>
+            <param name="gps_used" value="false"/>
+            <param name="debug" value="false"/>
+            <param name="self_diagnose" value="false"/>
+            <remap from="/imu_data" to="/imu/data" />
+        </node>
+    </group>
+
+</launch>
+
+
