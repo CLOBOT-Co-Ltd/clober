@@ -98,6 +98,10 @@ class CloberSerial{
         void sendRPM(pair<int,int> channel, pair<float,float> rpm);
         void sendStop(pair<int,int> channel);
 
+        void sendHeardBeat();
+        void restartScript();
+
+
     private:    
         ros::Time timestamp_;
 
