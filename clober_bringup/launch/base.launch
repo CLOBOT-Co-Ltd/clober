@@ -5,6 +5,7 @@
     <arg name="mode" default="0"/>
     <arg name="ekf_localization_node_mode" default="false"/>
     <arg name="robot_pose_ekf_mode" default="false"/>
+    <arg name="clober"  default=""/>
 
     <rosparam file="$(find clober_serial)/config/clober.yaml" command="load"/>
 
@@ -15,9 +16,12 @@
     </node>
 
     <!-- Clober Descriptoin -->
-    <include file="$(find clober_description)/launch/description.launch"/>
-    <!-- <param name="robot_description" command="$(find xacro)xacro '$(find clober_description)/urdf/clober.urdf.xacro'"/>
-    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/> -->
+        <param name="robot_description" command="$(find xacro)xacro --inorder '$(find clober_description)/urdf/clober.urdf.xacro' prefix:=$(arg clober)/" />
+
+        <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher" output="screen">
+        <param name="publish_frequency" type="double" value="50.0" />
+        <param name="tf_prefix" value="$(arg clober)" />
+        </node>
 
     <!-- Myahrs+ Driver -->
     <!-- <node pkg="myahrs_driver" type="myahrs_driver" name="myahrs_driver">
