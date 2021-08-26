@@ -206,8 +206,7 @@
     <joint name="$(arg prefix)imu_joint" type="fixed">
         <parent link="$(arg prefix)base_link"/>
         <child link="$(arg prefix)imu_link"/>
-        <origin xyz="0.15 0 0.225" rpy="0 0 0"/>
-        <!-- <origin xyz="0.0605 0 0.0923" rpy="0 0 0"/> -->
+        <origin xyz="0.0605 0 0.0923" rpy="0 0 0"/>
     </joint>
 
     <link name="$(arg prefix)imu_link"/>
@@ -245,8 +244,8 @@
     <!-- <xacro:sensor_tim571 parent="base_link"> <origin xyz="0.159 0 0.2265"
     rpy="${PI} 0 0"/> </xacro:sensor_tim571> -->
 
-    <!-- <xacro:sensor_d435 parent="$(arg prefix)base_link" name="camera">
+    <xacro:sensor_d435 parent="$(arg prefix)base_link" name="$(arg prefix)camera">
         <origin xyz="0.17573 0 0.06791" rpy="0 -${PI/12} 0"/>
-    </xacro:sensor_d435> -->
+    </xacro:sensor_d435>
 
 </robot>
