@@ -2,6 +2,14 @@
 Changelog for package clober_navigation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+1.0.4 (2021-09-03)
+------------------
+* add nav param
+* test nav
+* edit serial odom period
+* odom mode 0 check
+* Contributors: dev
+
 1.0.3 (2021-08-11)
 ------------------
 
