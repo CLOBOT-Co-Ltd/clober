@@ -26,9 +26,9 @@
         </visual>
 
         <collision>
-            <origin xyz="0 0 0.05" rpy="0 0 ${PI/2}"/>
+            <origin xyz="0 0 0.02" rpy="0 0 ${PI/2}"/>
             <geometry>
-                <box size="0.41 0.41 0.1"/>
+                <mesh filename="package://clober_description/meshes/clober.dae"/>
             </geometry>
         </collision>
 

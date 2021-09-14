@@ -1,10 +1,23 @@
 <launch>
   <arg name="model" default="clober"/>
   <arg name="clober_0"  default="clober_0"/>
+  <arg name="clober_1"  default="clober_1"/>
+  <arg name="clober_2"  default="clober_2"/>
+
   <arg name="clober_0_x_pos" default="-0.20640"/>
   <arg name="clober_0_y_pos" default="-3.134880"/>
   <arg name="clober_0_z_pos" default="0.0"/>
   <arg name="clober_0_yaw"   default=" 0.0"/>
+
+  <arg name="clober_1_x_pos" default="10.43"/>
+  <arg name="clober_1_y_pos" default="1.56"/>
+  <arg name="clober_1_z_pos" default="0.0"/>
+  <arg name="clober_1_yaw"   default="0.0"/>
+
+  <arg name="clober_2_x_pos" default="7.35548"/>
+  <arg name="clober_2_y_pos" default="11.05311"/>
+  <arg name="clober_2_z_pos" default="0.0"/>
+  <arg name="clober_2_yaw"   default="0.0"/>
 
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
     <arg name="world_name" value="$(find clober_simulation)/worlds/suntech.world"/>
@@ -23,6 +36,26 @@
     </node>
     
     <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-urdf -model $(arg clober_0) -x $(arg clober_0_x_pos) -y $(arg clober_0_y_pos) -z $(arg clober_0_z_pos) -Y $(arg clober_0_yaw) -param robot_description" />
+  </group>
+
+  <group ns = "$(arg clober_1)">
+    <param name="robot_description" command="$(find xacro)/xacro --inorder $(find clober_description)/urdf/clober.urdf.xacro prefix:=$(arg clober_1)/" />
+
+    <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher" output="screen">
+      <param name="publish_frequency" type="double" value="50.0" />
+    </node>
+    
+    <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-urdf -model $(arg clober_1) -x $(arg clober_1_x_pos) -y $(arg clober_1_y_pos) -z $(arg clober_1_z_pos) -Y $(arg clober_1_yaw) -param robot_description" />
+  </group>
+
+  <group ns = "$(arg clober_2)">
+    <param name="robot_description" command="$(find xacro)/xacro --inorder $(find clober_description)/urdf/clober.urdf.xacro prefix:=$(arg clober_2)/" />
+
+    <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher" output="screen">
+      <param name="publish_frequency" type="double" value="50.0" />
+    </node>
+    
+    <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-urdf -model $(arg clober_2) -x $(arg clober_2_x_pos) -y $(arg clober_2_y_pos) -z $(arg clober_2_z_pos) -Y $(arg clober_2_yaw) -param robot_description" />
   </group>
 
 
