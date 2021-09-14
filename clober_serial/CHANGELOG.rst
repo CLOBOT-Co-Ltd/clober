@@ -2,6 +2,21 @@
 Changelog for package clober_serial
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+1.0.4 (2021-09-03)
+------------------
+* update urdf files
+* Merge branch 'noetic-devel' of https://github.com/CLOBOT-Co-Ltd/clober into noetic-devel
+* Merge branch 'noetic-devel' of https://github.com/CLOBOT-Co-Ltd/clober into noetic-devel
+* add for new clober
+* add tc version
+* add nav param
+* edit serial odom period
+* add temporary test file
+* add odom viz test file
+* odom mode 0 check
+* odom check
+* Contributors: ClobotLucy, clober, clobot-git, dev
+
 1.0.3 (2021-08-11)
 ------------------
 * add license in package.xml

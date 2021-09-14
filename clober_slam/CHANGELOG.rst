@@ -2,6 +2,11 @@
 Changelog for package clober_slam
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+1.0.4 (2021-09-03)
+------------------
+* odom mode 0 check
+* Contributors: dev
+
 1.0.3 (2021-08-11)
 ------------------
 
