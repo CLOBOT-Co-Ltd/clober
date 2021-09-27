@@ -1,7 +1,7 @@
 test_local_costmap:
   footprint: [[-0.202, -0.202], [-0.202, 0.202], [0.202, 0.202], [0.202, -0.202]] 
   global_frame: map                 #The global frame for the costmap to operate in.
-  robot_base_frame: base_link       #The name of the frame for the base link of the robot.
+  robot_base_frame: base_footprint       #The name of the frame for the base link of the robot.
 
   transform_tolerance: 1.0          #Specifies the delay in transform (tf) data that is tolerable in seconds. 
   update_frequency: 10.0            #The frequency in Hz for the map to be updated.

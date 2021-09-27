@@ -8,7 +8,6 @@
     <arg name="clober"  default=""/>
 
     <group ns = "$(arg clober)">
-
     <rosparam file="$(find clober_serial)/config/clober.yaml" command="load"/>
 
     <!-- Clober Motor Driver -->
