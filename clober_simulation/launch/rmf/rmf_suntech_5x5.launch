@@ -9,8 +9,8 @@
   <arg name="clober_0_z_pos" default="0.0"/>
   <arg name="clober_0_yaw"   default=" 0.0"/>
 
-  <arg name="clober_1_x_pos" default="2.88247"/>
-  <arg name="clober_1_y_pos" default="0.44454"/>
+  <arg name="clober_1_x_pos" default="5.8564"/>
+  <arg name="clober_1_y_pos" default="0.41104"/>
   <arg name="clober_1_z_pos" default="0.0"/>
   <arg name="clober_1_yaw"   default="0.0"/>
 
