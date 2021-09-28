@@ -9,6 +9,8 @@
 
     <xacro:property name="PI" value="3.1415926535897931"/>
 
+    <xacro:arg name="prefix" default="clober_0/"/>
+
     <link name="$(arg prefix)base_footprint"/>
 
     <joint name="$(arg prefix)base_joint" type="fixed">
