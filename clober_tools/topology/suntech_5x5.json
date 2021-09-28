@@ -1,0 +1,767 @@
+{
+    "Map": "suntech_5x5",
+    "Node": [
+        {
+            "ID": "n1",
+            "Weight": 0,
+            "Position": {
+                "x": 1.878711223602295,
+                "y": 0.3808671832084656,
+                "z": 0.0
+            },
+            "Type": "T",
+            "Orientation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            }
+        },
+        {
+            "ID": "n2",
+            "Weight": 0,
+            "Position": {
+                "x": 2.8826358318328857,
+                "y": 0.444850355386734,
+                "z": 0.0
+            },
+            "Type": "T",
+            "Orientation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            }
+        },
+        {
+            "ID": "n3",
+            "Weight": 0,
+            "Position": {
+                "x": 3.8617589473724365,
+                "y": 0.4311977028846741,
+                "z": 0.0
+            },
+            "Type": "T",
+            "Orientation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            }
+        },
+        {
+            "ID": "n4",
+            "Weight": 0,
+            "Position": {
+                "x": 4.902839183807373,
+                "y": 0.39932990074157715,
+                "z": 0.0
+            },
+            "Type": "T",
+            "Orientation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            }
+        },
+        {
+            "ID": "n5",
+            "Weight": 0,
+            "Position": {
+                "x": 5.856928825378418,
+                "y": 0.4111434817314148,
+                "z": 0.0
+            },
+            "Type": "T",
+            "Orientation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            }
+        },
+        {
+            "ID": "n6",
+            "Weight": 0,
+            "Position": {
+                "x": 1.8980703353881836,
+                "y": -0.7095500826835632,
+                "z": 0.0
+            },
+            "Type": "T",
+            "Orientation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            }
+        },
+        {
+            "ID": "n7",
+            "Weight": 0,
+            "Position": {
+                "x": 2.910090446472168,
+                "y": -0.6580493450164795,
+                "z": 0.0
+            },
+            "Type": "T",
+            "Orientation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            }
+        },
+        {
+            "ID": "n8",
+            "Weight": 0,
+            "Position": {
+                "x": 3.864903211593628,
+                "y": -0.7046816945075989,
+                "z": 0.0
+            },
+            "Type": "T",
+            "Orientation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            }
+        },
+        {
+            "ID": "n9",
+            "Weight": 0,
+            "Position": {
+                "x": 4.85841703414917,
+                "y": -0.7313502430915833,
+                "z": 0.0
+            },
+            "Type": "T",
+            "Orientation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            }
+        },
+        {
+            "ID": "n10",
+            "Weight": 0,
+            "Position": {
+                "x": 5.870677947998047,
+                "y": -0.6993314623832703,
+                "z": 0.0
+            },
+            "Type": "T",
+            "Orientation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            }
+        },
+        {
+            "ID": "n11",
+            "Weight": 0,
+            "Position": {
+                "x": 1.9298441410064697,
+                "y": -1.7028918266296387,
+                "z": 0.0
+            },
+            "Type": "T",
+            "Orientation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            }
+        },
+        {
+            "ID": "n12",
+            "Weight": 0,
+            "Position": {
+                "x": 2.92311692237854,
+                "y": -1.7100778818130493,
+                "z": 0.0
+            },
+            "Type": "T",
+            "Orientation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            }
+        },
+        {
+            "ID": "n13",
+            "Weight": 0,
+            "Position": {
+                "x": 3.91461181640625,
+                "y": -1.7271934747695923,
+                "z": 0.0
+            },
+            "Type": "T",
+            "Orientation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            }
+        },
+        {
+            "ID": "n14",
+            "Weight": 0,
+            "Position": {
+                "x": 4.902152061462402,
+                "y": -1.6951960325241089,
+                "z": 0.0
+            },
+            "Type": "T",
+            "Orientation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            }
+        },
+        {
+            "ID": "n15",
+            "Weight": 0,
+            "Position": {
+                "x": 5.8901801109313965,
+                "y": -1.702731966972351,
+                "z": 0.0
+            },
+            "Type": "T",
+            "Orientation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            }
+        },
+        {
+            "ID": "n16",
+            "Weight": 0,
+            "Position": {
+                "x": 1.9115253686904907,
+                "y": -2.720710039138794,
+                "z": 0.0
+            },
+            "Type": "T",
+            "Orientation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            }
+        },
+        {
+            "ID": "n17",
+            "Weight": 0,
+            "Position": {
+                "x": 2.8995542526245117,
+                "y": -2.728245973587036,
+                "z": 0.0
+            },
+            "Type": "T",
+            "Orientation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            }
+        },
+        {
+            "ID": "n18",
+            "Weight": 0,
+            "Position": {
+                "x": 3.887582540512085,
+                "y": -2.73578143119812,
+                "z": 0.0
+            },
+            "Type": "T",
+            "Orientation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            }
+        },
+        {
+            "ID": "n19",
+            "Weight": 0,
+            "Position": {
+                "x": 4.875367641448975,
+                "y": -2.723550796508789,
+                "z": 0.0
+            },
+            "Type": "T",
+            "Orientation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            }
+        },
+        {
+            "ID": "n20",
+            "Weight": 0,
+            "Position": {
+                "x": 5.882906436920166,
+                "y": -2.7110753059387207,
+                "z": 0.0
+            },
+            "Type": "T",
+            "Orientation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            }
+        },
+        {
+            "ID": "n21",
+            "Weight": 0,
+            "Position": {
+                "x": 1.9242525100708008,
+                "y": -3.7485764026641846,
+                "z": 0.0
+            },
+            "Type": "T",
+            "Orientation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            }
+        },
+        {
+            "ID": "n22",
+            "Weight": 0,
+            "Position": {
+                "x": 2.9517924785614014,
+                "y": -3.7556228637695312,
+                "z": 0.0
+            },
+            "Type": "T",
+            "Orientation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            }
+        },
+        {
+            "ID": "n23",
+            "Weight": 0,
+            "Position": {
+                "x": 3.900554656982422,
+                "y": -3.7834153175354004,
+                "z": 0.0
+            },
+            "Type": "T",
+            "Orientation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            }
+        },
+        {
+            "ID": "n24",
+            "Weight": 0,
+            "Position": {
+                "x": 4.90809440612793,
+                "y": -3.770939826965332,
+                "z": 0.0
+            },
+            "Type": "T",
+            "Orientation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            }
+        },
+        {
+            "ID": "n25",
+            "Weight": 0,
+            "Position": {
+                "x": 5.935635089874268,
+                "y": -3.7779860496520996,
+                "z": 0.0
+            },
+            "Type": "T",
+            "Orientation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            }
+        }
+    ],
+    "Link": [
+    		{
+			"Args": null,
+			"Connected": [
+				"n1",
+				"n2"
+			],
+			"ID": "link1",
+			"Link_type": "bidirectional"
+		},
+		{
+			"Args": null,
+			"Connected": [
+				"n2",
+				"n3"
+			],
+			"ID": "link2",
+			"Link_type": "bidirectional"
+		},
+		{
+			"Args": null,
+			"Connected": [
+				"n3",
+				"n4"
+			],
+			"ID": "link3",
+			"Link_type": "bidirectional"
+		},
+		{
+			"Args": null,
+			"Connected": [
+				"n4",
+				"n5"
+			],
+			"ID": "link4",
+			"Link_type": "bidirectional"
+		},
+		{
+			"Args": null,
+			"Connected": [
+				"n6",
+				"n7"
+			],
+			"ID": "link5",
+			"Link_type": "bidirectional"
+		},
+		{
+			"Args": null,
+			"Connected": [
+				"n7",
+				"n8"
+			],
+			"ID": "link6",
+			"Link_type": "bidirectional"
+		},
+		{
+			"Args": null,
+			"Connected": [
+				"n8",
+				"n9"
+			],
+			"ID": "link7",
+			"Link_type": "bidirectional"
+		},
+		{
+			"Args": null,
+			"Connected": [
+				"n9",
+				"n10"
+			],
+			"ID": "link8",
+			"Link_type": "bidirectional"
+		},
+		{
+			"Args": null,
+			"Connected": [
+				"n11",
+				"n12"
+			],
+			"ID": "link9",
+			"Link_type": "bidirectional"
+		},
+		{
+			"Args": null,
+			"Connected": [
+				"n12",
+				"n13"
+			],
+			"ID": "link10",
+			"Link_type": "bidirectional"
+		},
+		{
+			"Args": null,
+			"Connected": [
+				"n13",
+				"n14"
+			],
+			"ID": "link11",
+			"Link_type": "bidirectional"
+		},
+		{
+			"Args": null,
+			"Connected": [
+				"n14",
+				"n15"
+			],
+			"ID": "link12",
+			"Link_type": "bidirectional"
+		},
+		{
+			"Args": null,
+			"Connected": [
+				"n16",
+				"n17"
+			],
+			"ID": "link13",
+			"Link_type": "bidirectional"
+		},
+		{
+			"Args": null,
+			"Connected": [
+				"n17",
+				"n18"
+			],
+			"ID": "link14",
+			"Link_type": "bidirectional"
+		},
+		{
+			"Args": null,
+			"Connected": [
+				"n18",
+				"n19"
+			],
+			"ID": "link15",
+			"Link_type": "bidirectional"
+		},
+		{
+			"Args": null,
+			"Connected": [
+				"n19",
+				"n20"
+			],
+			"ID": "link16",
+			"Link_type": "bidirectional"
+		},
+		{
+			"Args": null,
+			"Connected": [
+				"n21",
+				"n22"
+			],
+			"ID": "link17",
+			"Link_type": "bidirectional"
+		},
+		{
+			"Args": null,
+			"Connected": [
+				"n22",
+				"n23"
+			],
+			"ID": "link18",
+			"Link_type": "bidirectional"
+		},
+		{
+			"Args": null,
+			"Connected": [
+				"n23",
+				"n24"
+			],
+			"ID": "link19",
+			"Link_type": "bidirectional"
+		},
+		{
+			"Args": null,
+			"Connected": [
+				"n24",
+				"n25"
+			],
+			"ID": "link20",
+			"Link_type": "bidirectional"
+		},
+		{
+			"Args": null,
+			"Connected": [
+				"n1",
+				"n6"
+			],
+			"ID": "link21",
+			"Link_type": "bidirectional"
+		},
+		{
+			"Args": null,
+			"Connected": [
+				"n2",
+				"n7"
+			],
+			"ID": "link22",
+			"Link_type": "bidirectional"
+		},
+		{
+			"Args": null,
+			"Connected": [
+				"n3",
+				"n8"
+			],
+			"ID": "link23",
+			"Link_type": "bidirectional"
+		},
+		{
+			"Args": null,
+			"Connected": [
+				"n4",
+				"n9"
+			],
+			"ID": "link24",
+			"Link_type": "bidirectional"
+		},
+		{
+			"Args": null,
+			"Connected": [
+				"n5",
+				"n10"
+			],
+			"ID": "link25",
+			"Link_type": "bidirectional"
+		},
+		{
+			"Args": null,
+			"Connected": [
+				"n6",
+				"n11"
+			],
+			"ID": "link26",
+			"Link_type": "bidirectional"
+		},
+		{
+			"Args": null,
+			"Connected": [
+				"n7",
+				"n12"
+			],
+			"ID": "link27",
+			"Link_type": "bidirectional"
+		},
+		{
+			"Args": null,
+			"Connected": [
+				"n8",
+				"n13"
+			],
+			"ID": "link28",
+			"Link_type": "bidirectional"
+		},
+		{
+			"Args": null,
+			"Connected": [
+				"n9",
+				"n14"
+			],
+			"ID": "link29",
+			"Link_type": "bidirectional"
+		},
+		{
+			"Args": null,
+			"Connected": [
+				"n10",
+				"n15"
+			],
+			"ID": "link30",
+			"Link_type": "bidirectional"
+		},
+		{
+			"Args": null,
+			"Connected": [
+				"n11",
+				"n16"
+			],
+			"ID": "link31",
+			"Link_type": "bidirectional"
+		},
+		{
+			"Args": null,
+			"Connected": [
+				"n12",
+				"n17"
+			],
+			"ID": "link32",
+			"Link_type": "bidirectional"
+		},
+		{
+			"Args": null,
+			"Connected": [
+				"n13",
+				"n18"
+			],
+			"ID": "link33",
+			"Link_type": "bidirectional"
+		},
+		{
+			"Args": null,
+			"Connected": [
+				"n14",
+				"n19"
+			],
+			"ID": "link34",
+			"Link_type": "bidirectional"
+		},
+		{
+			"Args": null,
+			"Connected": [
+				"n15",
+				"n20"
+			],
+			"ID": "link35",
+			"Link_type": "bidirectional"
+		},
+		{
+			"Args": null,
+			"Connected": [
+				"n16",
+				"n21"
+			],
+			"ID": "link36",
+			"Link_type": "bidirectional"
+		},
+		{
+			"Args": null,
+			"Connected": [
+				"n17",
+				"n22"
+			],
+			"ID": "link37",
+			"Link_type": "bidirectional"
+		},
+		{
+			"Args": null,
+			"Connected": [
+				"n18",
+				"n23"
+			],
+			"ID": "link38",
+			"Link_type": "bidirectional"
+		},
+		{
+			"Args": null,
+			"Connected": [
+				"n19",
+				"n24"
+			],
+			"ID": "link39",
+			"Link_type": "bidirectional"
+		},
+		{
+			"Args": null,
+			"Connected": [
+				"n20",
+				"n25"
+			],
+			"ID": "link40",
+			"Link_type": "bidirectional"
+		}
+    ]
+}
