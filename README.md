@@ -30,11 +30,11 @@ For multi-robot applications, we adapt open-source fleet management system RMF(R
 ---
 ## ROS Packages for Clober
 [![Licence](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-|ROS1|Noetic + Ubuntu Focal|\||ROS2|Foxy + Ubuntu Focal|Galactic|
-|:---:|:---:|:---:|:---:|:---:|:---:|
-|Branch|[`neotic-branch`](https://github.com/clobot-git/clober/tree/noetic-devel)|\||Branch|[`foxy-devel`](https://github.com/clobot-git/clober/tree/foxy-devel)| TBD |
-|Travis-CI|[![Build Status](https://travis-ci.com/clobot-git/clober.svg?branch=noetic-devel)](https://travis-ci.com/clobot-git/clober)|\||Travis-CI|[![Build Status](https://travis-ci.com/clobot-git/clober.svg?branch=foxy-devel)](https://travis-ci.com/clobot-git/clober)| TBD |
-| | |\||Linter|[![Lint](https://github.com/clobot-git/clober/workflows/Lint/badge.svg?branch=foxy-devel)](https://github.com/clobot-git/clober/actions)| TBD |
+|ROS1|Noetic + Ubuntu Focal|ROS2|Foxy + Ubuntu Focal|Galactic|
+|:---:|:---:|:---:|:---:|:---:|
+|Branch|[`neotic-branch`](https://github.com/clobot-git/clober/tree/noetic-devel)||Branch|[`foxy-devel`](https://github.com/clobot-git/clober/tree/foxy-devel)| TBD |
+|Travis-CI|[![Build Status](https://travis-ci.com/clobot-git/clober.svg?branch=noetic-devel)](https://travis-ci.com/clobot-git/clober)|Travis-CI|[![Build Status](https://travis-ci.com/clobot-git/clober.svg?branch=foxy-devel)](https://travis-ci.com/clobot-git/clober)| TBD |
+| | |Linter|[![Lint](https://github.com/clobot-git/clober/workflows/Lint/badge.svg?branch=foxy-devel)](https://github.com/clobot-git/clober/actions)| TBD |
 
 ## Clobot gitbook for Clober Manual
 - [Manual for Clober](https://app.gitbook.com/@clobot-git/s/clober-manual/)
