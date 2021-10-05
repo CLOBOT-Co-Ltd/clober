@@ -16,7 +16,7 @@ We provide gazebo-based simulation for rapid prototyping of robotic algorithm de
 |<img align="center" src="./images/clober_right.png" width="300">|<img align="center" src="./images/clober_description.png" width="300">|
 
 ### SLAM and Navigation
-Basic SLAM and Navigation algorithms can be driven using ROS-based acml and move-base packages.
+Basic SLAM and Navigation algorithms are implemented using ROS-based acml and move-base packages.
 
 <img align="center" src="./images/clober_navigation.gif" width="700">
 
@@ -32,7 +32,7 @@ For multi-robot applications, we adapt open-source fleet management system RMF(R
 [![Licence](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 |ROS1|Noetic + Ubuntu Focal|ROS2|Foxy + Ubuntu Focal|Galactic|
 |:---:|:---:|:---:|:---:|:---:|
-|Branch|[`neotic-branch`](https://github.com/clobot-git/clober/tree/noetic-devel)||Branch|[`foxy-devel`](https://github.com/clobot-git/clober/tree/foxy-devel)| TBD |
+|Branch|[`neotic-branch`](https://github.com/clobot-git/clober/tree/noetic-devel)|Branch|[`foxy-devel`](https://github.com/clobot-git/clober/tree/foxy-devel)| TBD |
 |Travis-CI|[![Build Status](https://travis-ci.com/clobot-git/clober.svg?branch=noetic-devel)](https://travis-ci.com/clobot-git/clober)|Travis-CI|[![Build Status](https://travis-ci.com/clobot-git/clober.svg?branch=foxy-devel)](https://travis-ci.com/clobot-git/clober)| TBD |
 | | |Linter|[![Lint](https://github.com/clobot-git/clober/workflows/Lint/badge.svg?branch=foxy-devel)](https://github.com/clobot-git/clober/actions)| TBD |
 
