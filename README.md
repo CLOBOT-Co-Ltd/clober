@@ -1,7 +1,7 @@
 # Clober!
 <img align="center" src="./images/clober_introduce_.png" width="700">
 
-**Clober is ROS supported platform robot from** [**Clobot**](https://www.clobot.co.kr/).
+**Clober is a next-generation robot research platform from** [**Clobot**](https://www.clobot.co.kr/) that is specifically targeting research systems that require multi-robot hardware possible to attach and detach accessories. Here we provide basic robot packages as opensource resources for you to utilize over your course of research. The goal of Clober is to reduce production costs while increasing functionality and quality in order to introduce a platform to control multiple robots into research centers
 
 For researchers, robotics developers, students, and other users, the code for all feature of clober is provided opensource. Use clover and this code to bring your algorithms into the real world and apply robots to your applications, and also contribute to ROS community.
 
