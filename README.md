@@ -44,25 +44,16 @@ Please see our other repository [clober_free_fleet](https://github.com/CLOBOT-Co
 <!--- 
 TODO : Add package description
 --->
-|Package|Description|
-|:---:|:---:|
-|clober| Meta package |
-|clober_bringup| launch files to bring up the sensor drivers and hardware interface for real clober |
-|clober_description| URDF description of clober |
-|clober_navigation| navigation based on move_base package |
-|clober_serial| hardware interface package using serial communication |
-|clober_simulation| simulation specific launch and configuration files for clober |
-|clober_slam| configuration and launch file for SLAM which create a map of the environment and localize clober's position on the map. |
-|clober_teleop| configuration and launch file for teleoperation |
-
-
-- http://wiki.ros.org/clober 
-- http://wiki.ros.org/clober_bringup 
-- http://wiki.ros.org/clober_description
-- http://wiki.ros.org/clober_teleop
-- http://wiki.ros.org/clober_slam
-- http://wiki.ros.org/clober_navigation
-- http://wiki.ros.org/clober_simulation
+|Package|Description|Wiki
+|:---:|:---:|:---:|
+|clober| Meta package | http://wiki.ros.org/clober 
+|clober_bringup| launch files to bring up the sensor drivers and hardware interface for real clober | http://wiki.ros.org/clober_bringup 
+|clober_description| URDF description of clober | http://wiki.ros.org/clober_description
+|clober_navigation| navigation based on move_base package | http://wiki.ros.org/clober_navigation
+|clober_serial| hardware interface package using serial communication | -
+|clober_simulation| simulation specific launch and configuration files for clober | http://wiki.ros.org/clober_simulation
+|clober_slam| configuration and launch file for SLAM which create a map of the environment and localize clober's position on the map. | http://wiki.ros.org/clober_slam
+|clober_teleop| configuration and launch file for teleoperation | http://wiki.ros.org/clober_teleop
 
 ## Clobot developed Opensource packages
 - [ FreeFleet ](http://wiki.ros.org/RMF/FreeFleet)
