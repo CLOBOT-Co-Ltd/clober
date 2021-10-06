@@ -24,6 +24,7 @@ Basic SLAM and Navigation algorithms are implemented using ROS-based acml and mo
 
 For multi-robot applications, we adapt open-source fleet management system RMF(Robotics Middleware Framework) to clober. So, you can deal with schedule and traffic control, task management of multi clober or other robots.
 
+Please see our other repository [clober_free_fleet](https://github.com/CLOBOT-Co-Ltd/clober_free_fleet/tree/dev).
 <img align="center" src="./images/multi_clober.gif" width="700">
 
 
@@ -39,7 +40,22 @@ For multi-robot applications, we adapt open-source fleet management system RMF(R
 ## Clobot gitbook for Clober Manual
 - [Manual for Clober](https://app.gitbook.com/@clobot-git/s/clober-manual/)
 
-## Wiki for Clober Packages
+## **Wiki** for Clober Packages
+<!--- 
+TODO : Add package description
+--->
+|Package|Description|
+|:---:|:---:|
+|clober| Meta package |
+|clober_bringup| launch files to bring up the sensor drivers and hardware interface for real clober |
+|clober_description| URDF description of clober |
+|clober_navigation| navigation based on move_base package |
+|clober_serial| hardware interface package using serial communication |
+|clober_simulation| simulation specific launch and configuration files for clober |
+|clober_slam| configuration and launch file for SLAM which create a map of the environment and localize clober's position on the map. |
+|clober_teleop| configuration and launch file for teleoperation |
+
+
 - http://wiki.ros.org/clober 
 - http://wiki.ros.org/clober_bringup 
 - http://wiki.ros.org/clober_description
