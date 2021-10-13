@@ -1,0 +1,7 @@
+CLOBOTPlannerROS:
+  max_vel_x: 0.7                      #robot max traslational velocity
+  follow_curve_threshlod: 0.2         #if value > follow_curve_threshold, then robot do alignment
+  alignment_threshold: 0.05           #robot target angle alignment threshold [rad]
+  alignment_vel: 0.5
+  goal_threshold: 0.1                 #robot target position distance threshold [m] 
+  following_point: 20                 #The path index for robot following

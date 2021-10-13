@@ -1,0 +1,16 @@
+global_costmap:
+  global_frame: map
+  robot_base_frame: base_link
+  
+  static_map: true
+  rolling_window: false
+  
+  plugins:
+    - name: static_map
+      type: "costmap_2d::StaticLayer"
+    - name: inflation_layer
+      type: "costmap_2d::InflationLayer"
+
+  inflation_layer:
+     inflation_radius: 0.5
+     cost_scaling_factor: 10.0

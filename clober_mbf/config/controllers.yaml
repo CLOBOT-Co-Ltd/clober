@@ -1,0 +1,85 @@
+controllers:
+# You can add more controllers you need to use.
+#- name: ''
+#  type: ''
+ - name: 'CLOBOTPlannerROS'
+   type: 'clobot_local_planner/CLOBOTPlannerROS'
+ - name: 'tra'
+   type: 'base_local_planner/TrajectoryPlannerROS'
+ - name: 'dwa'
+   type: 'dwa_local_planner/DWAPlannerROS'
+
+# Set configuration of CLOBOTPlannerROS aka. 'CLOBOTPlannerROS'
+CLOBOTPlannerROS:
+  max_vel_x: 0.7                      #robot max traslational velocity
+  follow_curve_threshlod: 0.2         #if value > follow_curve_threshold, then robot do alignment
+  alignment_threshold: 0.05           #robot target angle alignment threshold [rad]
+  alignment_vel: 0.5
+  goal_threshold: 0.1                 #robot target position distance threshold [m] 
+  following_point: 20                 #The path index for robot following
+
+
+# Set configuration of TrajectoryPlannerROS aka. 'tra'
+tra:
+  max_vel_x: 0.8
+  min_vel_x: 0.01
+  max_vel_theta: 0.5
+  min_in_place_vel_theta: 0.3
+
+  acc_lim_theta: 1.0
+  acc_lim_x: 1.0
+  acc_lim_y: 0.0
+
+  holonomic_robot: false
+
+  meter_scoring : true
+
+  controller_frequency: 10.0
+
+# Set configuration of DWAPlannerROS aka. 'dwa'
+dwa:
+# Robot Configuration Parameters
+  max_vel_x: 0.26
+  min_vel_x: -0.26
+
+  max_vel_y: 0.0
+  min_vel_y: 0.0
+
+# The velocity when robot is moving in a straight line
+  max_vel_trans:  0.26
+  min_vel_trans:  0.13
+
+  max_vel_theta: 1.82
+  min_vel_theta: 0.9
+
+  acc_lim_x: 2.5
+  acc_lim_y: 0.0
+  acc_lim_theta: 3.2 
+
+# Goal Tolerance Parametes
+  xy_goal_tolerance: 0.05
+  yaw_goal_tolerance: 0.17
+  latch_xy_goal_tolerance: false
+
+# Forward Simulation Parameters
+  sim_time: 2.0
+  vx_samples: 20
+  vy_samples: 0
+  vth_samples: 40
+  controller_frequency: 10.0
+
+# Trajectory Scoring Parameters
+  path_distance_bias: 32.0
+  goal_distance_bias: 20.0
+  occdist_scale: 0.02
+  forward_point_distance: 0.325
+  stop_time_buffer: 0.2
+  scaling_speed: 0.25
+  max_scaling_factor: 0.2
+
+# Oscillation Prevention Parameters
+  oscillation_reset_dist: 0.05
+
+# Debugging
+  publish_traj_pc : true
+  publish_cost_grid_pc: true

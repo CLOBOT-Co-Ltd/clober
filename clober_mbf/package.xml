@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>clober_mbf</name>
+  <version>1.0.4</version>
+  <description>
+    This package includes launch files for navigation using move_base_flex
+  </description>
+  <maintainer email="ros@clobot.co.kr">clobot-git</maintainer>
+  <license>Apache License 2.0</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <build_depend>roslint</build_depend>
+
+  <depend>amcl</depend>
+  <depend>move_base</depend>
+  <depend>move_base_flex</depend>
+  <depend>costmap_2d</depend>
+  <depend>costmap_converter</depend>
+  <depend>base_local_planner</depend>
+  <depend>teb_local_planner</depend>
+  <depend>map_server</depend>
+
+</package>
