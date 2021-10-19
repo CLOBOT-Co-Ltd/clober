@@ -1,0 +1,21 @@
+<launch>
+  <arg name="model" default="clober"/>
+  <arg name="world" default="empty"/>
+  <arg name="x_pos" default=" 0.0"/>
+  <arg name="y_pos" default=" 0.0"/>
+  <arg name="z_pos" default=" 0.0"/>
+
+  <include file="$(find clober_simulation)/launch/include/world/world.launch">
+    <arg name="world" value="$(arg world)"/>
+  </include>
+
+  <group ns='adsf'>
+  <include file="$(find clober_simulation)/launch/include/robot/robot.launch">
+    <arg name="model" value="$(arg model)"/>
+    <arg name="x_pos" value="$(arg x_pos)"/>
+    <arg name="y_pos" value="$(arg y_pos)"/>
+    <arg name="z_pos" value="$(arg z_pos)"/>
+  </include>
+  </group>
+
+</launch>
