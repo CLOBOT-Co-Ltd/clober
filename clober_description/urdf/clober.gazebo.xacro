@@ -2,6 +2,7 @@
 <robot name="clober_sim" xmlns:xacro="http://ros.org/wiki/xacro">
   <xacro:arg name="laser_visual" default="true"/>
   <xacro:arg name="imu_visual"   default="false"/>
+  <xacro:arg name="prefix" default="clober"/>
 
   <gazebo reference="$(arg prefix)base_link">
     <material>Gazebo/White</material>
