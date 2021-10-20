@@ -9,13 +9,13 @@
     <arg name="world" value="$(arg world)"/>
   </include>
 
-  <group ns='adsf'>
-  <include file="$(find clober_simulation)/launch/include/robot/robot.launch">
-    <arg name="model" value="$(arg model)"/>
-    <arg name="x_pos" value="$(arg x_pos)"/>
-    <arg name="y_pos" value="$(arg y_pos)"/>
-    <arg name="z_pos" value="$(arg z_pos)"/>
-  </include>
+  <group ns='clober'>
+    <include file="$(find clober_simulation)/launch/include/robot/robot.launch">
+      <arg name="model" value="$(arg model)"/>
+      <arg name="x_pos" value="$(arg x_pos)"/>
+      <arg name="y_pos" value="$(arg y_pos)"/>
+      <arg name="z_pos" value="$(arg z_pos)"/>
+    </include>
   </group>
 
 </launch>
