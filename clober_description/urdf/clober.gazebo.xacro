@@ -2,7 +2,7 @@
 <robot name="clober_sim" xmlns:xacro="http://ros.org/wiki/xacro">
   <xacro:arg name="laser_visual" default="true"/>
   <xacro:arg name="imu_visual"   default="false"/>
-  <xacro:arg name="prefix" default="clober"/>
+  <xacro:arg name="prefix" default=""/>
 
   <gazebo reference="$(arg prefix)base_link">
     <material>Gazebo/White</material>
@@ -86,10 +86,10 @@
     <plugin name="clober_controller" filename="libgazebo_ros_diff_drive.so">
       <commandTopic>cmd_vel</commandTopic>
       <odometryTopic>odom</odometryTopic>
-      <odometryFrame>$(arg prefix)odom</odometryFrame>
+      <odometryFrame>odom</odometryFrame>
       <odometrySource>world</odometrySource>
       <publishOdomTF>true</publishOdomTF>
-      <robotBaseFrame>$(arg prefix)base_footprint</robotBaseFrame>
+      <robotBaseFrame>base_footprint</robotBaseFrame>
       <publishWheelTF>false</publishWheelTF>
       <publishTf>true</publishTf>
       <publishWheelJointState>true</publishWheelJointState>
@@ -162,7 +162,7 @@
       </ray>
       <plugin name="gazebo_ros_lds_lfcd_controller" filename="libgazebo_ros_laser.so">
         <topicName>scan</topicName>
-        <frameName>$(arg prefix)base_scan</frameName>
+        <frameName>base_scan</frameName>
       </plugin>
     </sensor>
   </gazebo>
