@@ -9,7 +9,7 @@
     <arg name="world" value="$(arg world)"/>
   </include>
 
-  <group ns='clober'>
+  <group ns='$(arg model)'>
     <include file="$(find clober_simulation)/launch/include/robot/robot.launch">
       <arg name="model" value="$(arg model)"/>
       <arg name="x_pos" value="$(arg x_pos)"/>
