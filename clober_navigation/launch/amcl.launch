@@ -1,8 +1,5 @@
 <?xml version="1.0"?>
 <launch>
-
-  <arg name="scan_topic" default="scan"/>
-  <arg name="map_topic" default="map"/>
   <arg name="global_frame" default="map"/>
   <arg name="odom_frame" default="odom"/>
   <arg name="base_frame" default="base_link"/>
@@ -12,8 +9,6 @@
   <arg name="initial_pose_a" default=" 0.0"/>
 
   <node pkg="amcl" type="amcl" name="amcl" output="screen">
-    <remap from="scan" to="$(arg scan_topic)"/>
-    <remap from="map" to="$(arg map_topic)"/>
     <param name="odom_frame_id" value="$(arg odom_frame)"/>
     <param name="base_frame_id" value="$(arg base_frame)"/>
     <param name="global_frame_id" value="$(arg global_frame)"/>
