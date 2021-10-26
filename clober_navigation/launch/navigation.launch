@@ -3,10 +3,10 @@
   <!-- Arguments -->
   <arg name="map_file" default="$(find clober_navigation)/maps/map.yaml"/>
   <arg name="model" default=""/>
-  <arg name="initial_pose_x" value=" 0.0"/>
-  <arg name="initial_pose_y" value=" 0.0"/>
-  <arg name="initial_pose_z" value=" 0.0"/>  
-  <arg name="initial_pose_a" value=" 0.0"/>
+  <arg name="initial_pose_x" default=" 0.0"/>
+  <arg name="initial_pose_y" default=" 0.0"/>
+  <arg name="initial_pose_z" default=" 0.0"/>  
+  <arg name="initial_pose_a" default=" 0.0"/>
   <arg name="open_rviz" default="true"/>
 
   <!-- Map server -->
@@ -16,16 +16,17 @@
   <include file="$(find clober_navigation)/launch/amcl.launch">
     <arg name="odom_frame" value="$(arg model)/odom"/>
     <arg name="base_frame" value="$(arg model)/base_link"/>
-    <arg name="initial_pose_x" value=" 0.0"/>
-    <arg name="initial_pose_y" value=" 0.0"/>
-    <arg name="initial_pose_z" value=" 0.0"/>  
-    <arg name="initial_pose_a" value=" 0.0"/>
+    <arg name="initial_pose_x" value="$(arg initial_pose_x)"/>
+    <arg name="initial_pose_y" value="$(arg initial_pose_y)"/>
+    <arg name="initial_pose_z" value="$(arg initial_pose_z)"/>  
+    <arg name="initial_pose_a" value="$(arg initial_pose_a)"/>
   </include>
 
   <!-- move_base -->
   <include file="$(find clober_navigation)/launch/move_base.launch">
     <arg name="base_frame" default="$(arg model)/base_link"/>
-    <arg name="scan_frame" default="$(arg model)/scan"/>
+    <arg name="scan_frame" default="$(arg model)/base_scan"/>
+    <arg name="scan_topic" default="/$(arg model)/scan"/>
   </include>
 
   <!-- rviz -->

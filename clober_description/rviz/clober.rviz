@@ -5,12 +5,10 @@ Panels:
     Property Tree Widget:
       Expanded:
         - /Status1
-        - /LaserScan1
         - /Map3
-        - /MarkerArray1
-        - /Pose2
+        - /Path1
       Splitter Ratio: 0.5
-    Tree Height: 281
+    Tree Height: 1085
   - Class: rviz/Selection
     Name: Selection
   - Class: rviz/Tool Properties
@@ -65,98 +63,98 @@ Visualization Manager:
         Expand Link Details: false
         Expand Tree: false
         Link Tree Style: Links in Alphabetic Order
-        base_footprint:
+        clober/base_footprint:
           Alpha: 1
           Show Axes: false
           Show Trail: false
-        base_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        base_scan:
+        clober/base_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        camera_bottom_screw_frame:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        camera_color_frame:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        camera_color_optical_frame:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        camera_depth_frame:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        camera_depth_optical_frame:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        camera_infra1_frame:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        camera_infra1_optical_frame:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        camera_infra2_frame:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        camera_infra2_optical_frame:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        camera_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        caster_link1:
+        clober/base_scan:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        caster_link2:
+        clober/camera_bottom_screw_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        clober/camera_color_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        clober/camera_color_optical_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        clober/camera_depth_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        clober/camera_depth_optical_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        clober/camera_infra1_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        clober/camera_infra1_optical_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        clober/camera_infra2_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        clober/camera_infra2_optical_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        clober/camera_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        clober/caster_link1:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        caster_link3:
+        clober/caster_link2:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        caster_link4:
+        clober/caster_link3:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        imu_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        left_ultrasonic:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        right_ultrasonic:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        wheel_left_link:
+        clober/caster_link4:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        wheel_right_link:
+        clober/imu_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        clober/left_ultrasonic:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        clober/right_ultrasonic:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        clober/wheel_left_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        clober/wheel_right_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
@@ -171,75 +169,98 @@ Visualization Manager:
       Enabled: true
       Frame Timeout: 15
       Frames:
-        All Enabled: true
-        base_footprint:
+        All Enabled: false
+        clober/base_footprint:
           Value: true
-        base_link:
-          Value: true
-        base_scan:
-          Value: true
-        camera_bottom_screw_frame:
-          Value: true
-        camera_color_frame:
-          Value: true
-        camera_color_optical_frame:
-          Value: true
-        camera_depth_frame:
-          Value: true
-        camera_depth_optical_frame:
-          Value: true
-        camera_infra1_frame:
-          Value: true
-        camera_infra1_optical_frame:
-          Value: true
-        camera_infra2_frame:
-          Value: true
-        camera_infra2_optical_frame:
-          Value: true
-        camera_link:
-          Value: true
-        imu_link:
-          Value: true
-        left_ultrasonic:
-          Value: true
+        clober/base_link:
+          Value: false
+        clober/base_scan:
+          Value: false
+        clober/camera_bottom_screw_frame:
+          Value: false
+        clober/camera_color_frame:
+          Value: false
+        clober/camera_color_optical_frame:
+          Value: false
+        clober/camera_depth_frame:
+          Value: false
+        clober/camera_depth_optical_frame:
+          Value: false
+        clober/camera_infra1_frame:
+          Value: false
+        clober/camera_infra1_optical_frame:
+          Value: false
+        clober/camera_infra2_frame:
+          Value: false
+        clober/camera_infra2_optical_frame:
+          Value: false
+        clober/camera_link:
+          Value: false
+        clober/caster_link1:
+          Value: false
+        clober/caster_link2:
+          Value: false
+        clober/caster_link3:
+          Value: false
+        clober/caster_link4:
+          Value: false
+        clober/imu_link:
+          Value: false
+        clober/left_ultrasonic:
+          Value: false
+        clober/odom:
+          Value: false
+        clober/right_ultrasonic:
+          Value: false
+        clober/wheel_left_link:
+          Value: false
+        clober/wheel_right_link:
+          Value: false
         map:
-          Value: true
-        odom:
-          Value: true
-        right_ultrasonic:
-          Value: true
-      Marker Alpha: 1
-      Marker Scale: 1
+          Value: false
+      Marker Scale: 3
       Name: TF
       Show Arrows: true
       Show Axes: true
       Show Names: true
       Tree:
         map:
-          odom:
-            base_footprint:
-              base_link:
-                base_scan:
+          clober/odom:
+            clober/base_footprint:
+              clober/base_link:
+                clober/base_scan:
                   {}
-                camera_bottom_screw_frame:
-                  camera_link:
-                    camera_color_frame:
-                      camera_color_optical_frame:
+                clober/camera_bottom_screw_frame:
+                  clober/camera_link:
+                    clober/camera_color_frame:
+                      clober/camera_color_optical_frame:
                         {}
-                    camera_depth_frame:
-                      camera_depth_optical_frame:
+                    clober/camera_depth_frame:
+                      clober/camera_depth_optical_frame:
                         {}
-                    camera_infra1_frame:
-                      camera_infra1_optical_frame:
+                    clober/camera_infra1_frame:
+                      clober/camera_infra1_optical_frame:
                         {}
-                    camera_infra2_frame:
-                      camera_infra2_optical_frame:
+                    clober/camera_infra2_frame:
+                      clober/camera_infra2_optical_frame:
                         {}
-                imu_link:
+                clober/caster_link1:
                   {}
-                left_ultrasonic:
+                clober/caster_link2:
                   {}
-                right_ultrasonic:
+                clober/caster_link3:
+                  {}
+                clober/caster_link4:
+                  {}
+                clober/imu_link:
+                  {}
+                clober/left_ultrasonic:
+                  {}
+                clober/right_ultrasonic:
+                  {}
+                clober/wheel_left_link:
+                  {}
+                clober/wheel_right_link:
                   {}
       Update Interval: 0
       Value: true
@@ -258,7 +279,9 @@ Visualization Manager:
       Enabled: true
       Invert Rainbow: false
       Max Color: 204; 0; 0
+      Max Intensity: 4096
       Min Color: 204; 0; 0
+      Min Intensity: 0
       Name: LaserScan
       Position Transformer: XYZ
       Queue Size: 10
@@ -266,7 +289,7 @@ Visualization Manager:
       Size (Pixels): 3
       Size (m): 0.05000000074505806
       Style: Flat Squares
-      Topic: /scan
+      Topic: /clober/scan
       Unreliable: false
       Use Fixed Frame: true
       Use rainbow: false
@@ -286,7 +309,9 @@ Visualization Manager:
       Enabled: false
       Invert Rainbow: false
       Max Color: 255; 255; 255
+      Max Intensity: 4096
       Min Color: 0; 0; 0
+      Min Intensity: 0
       Name: PointCloud2
       Position Transformer: XYZ
       Queue Size: 10
@@ -325,7 +350,17 @@ Visualization Manager:
       Draw Behind: false
       Enabled: true
       Name: Map
-      Topic: /map
+      Topic: /clober/map
+      Unreliable: false
+      Use Timestamp: false
+      Value: true
+    - Alpha: 0.699999988079071
+      Class: rviz/Map
+      Color Scheme: costmap
+      Draw Behind: true
+      Enabled: true
+      Name: Map
+      Topic: /clober/move_base/global_costmap/costmap
       Unreliable: false
       Use Timestamp: false
       Value: true
@@ -335,17 +370,7 @@ Visualization Manager:
       Draw Behind: false
       Enabled: true
       Name: Map
-      Topic: /cmb_node/global_costmap/costmap
-      Unreliable: false
-      Use Timestamp: false
-      Value: true
-    - Alpha: 0.699999988079071
-      Class: rviz/Map
-      Color Scheme: costmap
-      Draw Behind: false
-      Enabled: true
-      Name: Map
-      Topic: /cmb_node/local_costmap/costmap
+      Topic: /clober/move_base/local_costmap/costmap
       Unreliable: false
       Use Timestamp: false
       Value: true
@@ -358,7 +383,6 @@ Visualization Manager:
       Head Length: 0.30000001192092896
       Head Radius: 0.10000000149011612
       Name: Pose
-      Queue Size: 10
       Shaft Length: 1
       Shaft Radius: 0.05000000074505806
       Shape: Arrow
@@ -382,11 +406,10 @@ Visualization Manager:
         Z: 0
       Pose Color: 255; 85; 255
       Pose Style: None
-      Queue Size: 10
       Radius: 0.029999999329447746
       Shaft Diameter: 0.10000000149011612
       Shaft Length: 0.10000000149011612
-      Topic: /move_base/NavfnROS/plan
+      Topic: /clober/move_base/DWAPlannerROS/local_plan
       Unreliable: false
       Value: true
     - Alpha: 1
@@ -399,7 +422,6 @@ Visualization Manager:
       Head Length: 0.07000000029802322
       Head Radius: 0.029999999329447746
       Name: PoseArray
-      Queue Size: 10
       Shaft Length: 0.23000000417232513
       Shaft Radius: 0.009999999776482582
       Shape: Arrow (Flat)
@@ -411,7 +433,7 @@ Visualization Manager:
       Marker Topic: /localpath
       Name: MarkerArray
       Namespaces:
-        "": true
+        {}
       Queue Size: 100
       Value: true
     - Class: rviz/Marker
@@ -419,7 +441,7 @@ Visualization Manager:
       Marker Topic: /point
       Name: Marker
       Namespaces:
-        "": true
+        {}
       Queue Size: 100
       Value: true
     - Alpha: 1
@@ -431,11 +453,10 @@ Visualization Manager:
       Head Length: 0.30000001192092896
       Head Radius: 0.10000000149011612
       Name: Pose
-      Queue Size: 10
       Shaft Length: 1
       Shaft Radius: 0.05000000074505806
       Shape: Arrow
-      Topic: /goal
+      Topic: /move_base_simple/goal
       Unreliable: false
       Value: true
   Enabled: true
@@ -458,7 +479,7 @@ Visualization Manager:
       X std deviation: 0.5
       Y std deviation: 0.5
     - Class: rviz/SetGoal
-      Topic: /move_base_simple/goal
+      Topic: /clober/move_base_simple/goal
     - Class: rviz/PublishPoint
       Single click: true
       Topic: /clicked_point
@@ -466,33 +487,33 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 20.14080238342285
+      Distance: 11.172698974609375
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
-      Field of View: 0.7853981852531433
       Focal Point:
-        X: -0.8170136213302612
-        Y: -1.0418039560317993
-        Z: -0.8805896043777466
+        X: -0.3918481767177582
+        Y: -0.8692800402641296
+        Z: -0.8801628351211548
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 1.4747964143753052
+      Pitch: 0.6647966504096985
       Target Frame: <Fixed Frame>
-      Yaw: 2.757230043411255
+      Value: Orbit (rviz)
+      Yaw: 3.1022326946258545
     Saved: ~
 Window Geometry:
   Displays:
     collapsed: false
-  Height: 510
+  Height: 1308
   Hide Left Dock: false
   Hide Right Dock: true
-  QMainWindow State: 000000ff00000000fd000000040000000000000156000001a4fc0200000008fb0000001200530065006c0065006300740069006f006e00000001e10000009b0000005c00fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007302000001ed000001b500000185000000a3fb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afb000000100044006900730070006c006100790073010000003d000001a4000000c900fffffffb0000002000730065006c0065006300740069006f006e00200062007500660066006500720200000138000000aa0000023a00000294fb00000014005700690064006500530074006500720065006f02000000e6000000d2000003ee0000030bfb0000000c004b0069006e0065006300740200000186000001060000030c00000261000000010000010f00000363fc0200000003fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000041000000780000000000000000fb0000000a00560069006500770073000000003d00000363000000a400fffffffb0000001200530065006c0065006300740069006f006e010000025a000000b200000000000000000000000200000490000000a9fc0100000001fb0000000a00560069006500770073030000004e00000080000002e10000019700000003000002eb0000003efc0100000002fb0000000800540069006d00650000000000000002eb000004f300fffffffb0000000800540069006d006501000000000000045000000000000000000000016e000001a400000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
+  QMainWindow State: 000000ff00000000fd000000040000000000000156000004c6fc0200000008fb0000001200530065006c0065006300740069006f006e00000001e10000009b0000005c00fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007302000001ed000001b500000185000000a3fb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afb000000100044006900730070006c006100790073010000003b000004c6000000c700fffffffb0000002000730065006c0065006300740069006f006e00200062007500660066006500720200000138000000aa0000023a00000294fb00000014005700690064006500530074006500720065006f02000000e6000000d2000003ee0000030bfb0000000c004b0069006e0065006300740200000186000001060000030c00000261000000010000010f00000363fc0200000003fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000041000000780000000000000000fb0000000a00560069006500770073000000003d00000363000000a000fffffffb0000001200530065006c0065006300740069006f006e010000025a000000b200000000000000000000000200000490000000a9fc0100000001fb0000000a00560069006500770073030000004e00000080000002e10000019700000003000002eb0000003efc0100000002fb0000000800540069006d00650000000000000002eb0000042700fffffffb0000000800540069006d00650100000000000004500000000000000000000008a4000004c600000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
   Selection:
     collapsed: false
   Time:
@@ -501,6 +522,6 @@ Window Geometry:
     collapsed: false
   Views:
     collapsed: true
-  Width: 714
-  X: 286
-  Y: 53
+  Width: 2560
+  X: 0
+  Y: 27

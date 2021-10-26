@@ -3,6 +3,7 @@
   <arg name="global_frame" default="map"/>
   <arg name="base_frame" default="base_link"/>
   <arg name="scan_frame" default="scan"/>
+  <arg name="scan_topic" default="scan"/>
 
   <node pkg="move_base" type="move_base" name="move_base" respawn="false" >
     <rosparam file="$(find clober_navigation)/config/move_base.yaml" command="load"/>
@@ -21,5 +22,6 @@
     <param name="local_costmap/robot_base_frame"    value="$(arg base_frame)"/>
     <param name="local_costmap/scan/sensor_frame"   value="$(arg scan_frame)"/>
     <param name="local_costmap/obstacle_layer/scan/sensor_frame"   value="$(arg scan_frame)"/>
+    <param name="local_costmap/obstacle_layer/scan/topic"   value="$(arg scan_topic)"/>
   </node>
 </launch>
