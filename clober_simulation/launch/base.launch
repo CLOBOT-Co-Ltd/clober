@@ -7,6 +7,7 @@
 
   <include file="$(find clober_simulation)/launch/include/world/world.launch">
     <arg name="world" value="$(arg world)"/>
+    <arg name="gui" value="true"/>
   </include>
 
   <group ns='$(arg model)'>
