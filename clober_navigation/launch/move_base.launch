@@ -1,5 +1,9 @@
 <?xml version="1.0"?>
 <launch>
+  <arg name="global_frame" default="map"/>
+  <arg name="base_frame" default="base_link"/>
+  <arg name="scan_frame" default="scan"/>
+
   <node pkg="move_base" type="move_base" name="move_base" respawn="false" >
     <rosparam file="$(find clober_navigation)/config/move_base.yaml" command="load"/>
     <rosparam file="$(find clober_navigation)/config/dwa_local_planner.yaml" command="load"/>
@@ -7,6 +11,15 @@
     <rosparam file="$(find clober_navigation)/config/costmap_common.yaml" command="load" ns="local_costmap"/>
     <rosparam file="$(find clober_navigation)/config/local_costmap.yaml" command="load"/>
     <rosparam file="$(find clober_navigation)/config/global_costmap.yaml" command="load"/>
-  </node>
 
+    <param name="global_costmap/global_frame"       value="$(arg global_frame)"/>
+    <param name="global_costmap/robot_base_frame"   value="$(arg base_frame)"/>
+    <param name="global_costmap/scan/sensor_frame"  value="$(arg scan_frame)"/>
+    <param name="global_costmap/obstacle_layer/scan/sensor_frame"   value="$(arg scan_frame)"/>
+
+    <param name="local_costmap/global_frame"        value="$(arg global_frame)"/>
+    <param name="local_costmap/robot_base_frame"    value="$(arg base_frame)"/>
+    <param name="local_costmap/scan/sensor_frame"   value="$(arg scan_frame)"/>
+    <param name="local_costmap/obstacle_layer/scan/sensor_frame"   value="$(arg scan_frame)"/>
+  </node>
 </launch>
