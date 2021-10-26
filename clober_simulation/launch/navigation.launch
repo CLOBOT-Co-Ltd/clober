@@ -5,11 +5,11 @@
   <arg name="y_pos" default=" 0.0"/>
   <arg name="z_pos" default=" 0.0"/>
   <arg name="a_pos" default= "0.0"/>
-  <arg name="rviz" default="true"/>
+  <arg name="rviz" default="false"/>
 
   <include file="$(find clober_simulation)/launch/include/world/world.launch">
     <arg name="world" value="$(arg world)"/>
-    <arg name="gui" value="true"/>
+    <arg name="gui" value="false"/>
   </include>
 
   <group ns='$(arg model)'>
@@ -23,11 +23,11 @@
     <include file="$(find clober_navigation)/launch/navigation.launch">
       <arg name="map_file" value="$(find clober_simulation)/map/$(arg world)/map.yaml"/>
       <arg name="model" value="$(arg model)"/>
-      <arg name="initial_pose_x" value=" (arg x_pos)"/>
-      <arg name="initial_pose_y" value=" (arg y_pos)"/>
-      <arg name="initial_pose_z" value=" (arg z_pos)"/>  
-      <arg name="initial_pose_a" value=" (arg a_pos)"/>
-      <arg name="open_rviz" value="false"/>
+      <arg name="initial_pose_x" value="$(arg x_pos)"/>
+      <arg name="initial_pose_y" value="$(arg y_pos)"/>
+      <arg name="initial_pose_z" value="$(arg z_pos)"/>  
+      <arg name="initial_pose_a" value="$(arg a_pos)"/>
+      <arg name="open_rviz" value="$(arg rviz)"/>
     </include>
   </group>
 </launch>
