@@ -1,0 +1,48 @@
+<launch>
+  <arg name="model" default="clober"/>
+  <arg name="world" default="empty"/>
+  <arg name="rviz" default="true"/>
+
+  <include file="$(find clober_simulation)/launch/include/world/world.launch">
+    <arg name="world" value="$(arg world)"/>
+    <arg name="gui" value="true"/>
+  </include>
+
+  <group ns='$(arg model)_0'>
+    <include file="$(find clober_simulation)/launch/include/robot/robot.launch">
+      <arg name="model" value="$(arg model)_0"/>
+      <arg name="x_pos" value="0.0"/>
+      <arg name="y_pos" value="0.0"/>
+      <arg name="z_pos" value="0.0"/>
+    </include>
+
+    <include file="$(find clober_navigation)/launch/navigation.launch">
+      <arg name="map_file" value="$(find clober_simulation)/map/$(arg world)/map.yaml"/>
+      <arg name="model" value="$(arg model)_0"/>
+      <arg name="initial_pose_x" value="0.0"/>
+      <arg name="initial_pose_y" value="0.0"/>
+      <arg name="initial_pose_z" value="0.0"/>  
+      <arg name="initial_pose_a" value="0.0"/>
+      <arg name="open_rviz" value="$(arg rviz)"/>
+    </include>
+  </group>
+
+  <group ns='$(arg model)_1'>
+    <include file="$(find clober_simulation)/launch/include/robot/robot.launch">
+      <arg name="model" value="$(arg model)_1"/>
+      <arg name="x_pos" value="2.0"/>
+      <arg name="y_pos" value="0.0"/>
+      <arg name="z_pos" value="0.0"/>
+    </include>
+
+    <include file="$(find clober_navigation)/launch/navigation.launch">
+      <arg name="map_file" value="$(find clober_simulation)/map/$(arg world)/map.yaml"/>
+      <arg name="model" value="$(arg model)_1"/>
+      <arg name="initial_pose_x" value=" 2.0"/>
+      <arg name="initial_pose_y" value=" 0.0"/>
+      <arg name="initial_pose_z" value=" 0.0"/>  
+      <arg name="initial_pose_a" value=" 0.0"/>
+      <arg name="open_rviz" value="false"/>
+    </include>
+  </group>
+</launch>
