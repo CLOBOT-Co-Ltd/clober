@@ -4,11 +4,12 @@
   <arg name="x_pos" default=" 0.0"/>
   <arg name="y_pos" default=" 0.0"/>
   <arg name="z_pos" default=" 0.0"/>
-  <arg name="rviz" default="true"/>
+  <arg name="open_rviz" default="true"/>
+  <arg name="open_gazebo" default="true"/>
 
   <include file="$(find clober_simulation)/launch/include/world/world.launch">
     <arg name="world" value="$(arg world)"/>
-    <arg name="gui" value="true"/>
+    <arg name="open_gazebo" value="$(arg open_gazebo)"/>
   </include>
 
   <group ns='$(arg model)'>
@@ -28,6 +29,8 @@
     </include>
   </group>
 
-  <include file="$(find clober_description)/launch/rviz.launch"/>
+  <group if="$(arg open_rviz)">
+    <include file="$(find clober_description)/launch/rviz.launch"/>
+  </group>
 
 </launch>
