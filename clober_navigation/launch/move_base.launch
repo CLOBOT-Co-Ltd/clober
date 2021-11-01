@@ -8,6 +8,7 @@
   <node pkg="move_base" type="move_base" name="move_base" respawn="false" >
     <rosparam file="$(find clober_navigation)/config/move_base.yaml" command="load"/>
     <rosparam file="$(find clober_navigation)/config/dwa_local_planner.yaml" command="load"/>
+      <rosparam file="$(find clober_navigation)/config/global_planner.yaml" command="load"/>
     <rosparam file="$(find clober_navigation)/config/costmap_common.yaml" command="load" ns="global_costmap"/>
     <rosparam file="$(find clober_navigation)/config/costmap_common.yaml" command="load" ns="local_costmap"/>
     <rosparam file="$(find clober_navigation)/config/local_costmap.yaml" command="load"/>
