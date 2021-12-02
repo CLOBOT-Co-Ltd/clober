@@ -101,28 +101,22 @@ For SLAM in Gazebo simulator, you can select or create various virtual environem
 
   [*For fine tuning of the SLAM package please review the SLAM package README.md*](https://github.com/clobot-git/clober/tree/noetic-devel/clober_slam)
 
-### 4.1 Launch Simulation World
-Out of the worlds prepared, we recommend using the Clobot Logo World.
-  ```bash
-  roslaunch clober_simulation logo_world.launch
-  ``` 
-
-### 4.2 Launch SLAM Node
+### 4.1 Launch Simulation World && Launch SLAM Node
 On a new terminal run a SLAM node. Gmapping SLAM is used by default.
   ```bash
-  roslaunch clober_slam clober_slam.launch slam_methods:=gmapping
+  roslaunch clober_simulation slam.launch world:=logo model:=clober
   ```
 
-### 4.3 Run Teleoperation Node
+### 4.2 Run Teleoperation Node
 On a new terminal run a teleoperation node to explore and map the Gazebo world.
   ```bash
-  rosrun teleop_twist_keyboard teleop_twist_keyboard.py
+  rosrun teleop_twist_keyboard teleop_twist_keyboard.py cmd_vel:=/clober/cmd_vel
   ```
 
   <img align="center" src="https://github.com/clobot-git/clober/blob/noetic-devel/gifs/clober_slam.gif">
 
 
-### 4.4 Save Map
+### 4.3 Save Map
 After successful SLAM and map creation, open a new terminal to save the map.
   ```bash
   rosrun map_server map_saver -f ~/map
