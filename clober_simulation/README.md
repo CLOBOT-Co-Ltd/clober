@@ -49,21 +49,21 @@ Several Simulation environments are prepared, made accessible by each launch fil
 <img align="center" src="https://github.com/clobot-git/clober/blob/noetic-devel/images/empty_world.png">
 
   ```bash
-  roslaunch clober_simulation base.launch world:=empty
+  roslaunch clober_simulation base.launch
   ```
 
 ### 2.2 Clobot Logo World
 <img align="center" src="https://github.com/clobot-git/clober/blob/noetic-devel/images/logo_world.png">
 
   ```bash
-  roslaunch clober_simulation logo_world.launch
+  roslaunch clober_simulation base.launch world:=logo model:=clober
   ```
 
 ### 2.3 Warehouse World
 <img align="center" src="https://github.com/clobot-git/clober/blob/noetic-devel/images/warehouse_world.png">
 
   ```bash
-  roslaunch clober_simulation warehouse_env_world.launch
+  roslaunch clober_simulation base.launch world:=warehouse_env model:=cb
   ```
 
 ### 2.4 Grid World
@@ -71,22 +71,22 @@ Several Simulation environments are prepared, made accessible by each launch fil
 
 3x3 grid world
   ```bash
-  roslaunch clober_simulation 3x3_world.launch
+  roslaunch clober_simulation base.launch world:=3x3 model:=clober
   ```
 
 4x4 grid world
   ```bash
-  roslaunch clober_simulation 4x4_world.launch
+  roslaunch clober_simulation base.launch world:=4x4 model:=clober
   ```
 
 5x5 grid world
   ```bash
-  roslaunch clober_simulation 5x5_world.launch
+  roslaunch clober_simulation base.launch world:=5x5 model:=clober
   ```
 
 10x10 grid world
   ```bash
-  roslaunch clober_simulation 10x10_world.launch
+  roslaunch clober_simulation base.launch world:=10x10 model:=clober
   ```
 
 
