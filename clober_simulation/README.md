@@ -49,7 +49,7 @@ Several Simulation environments are prepared, made accessible by each launch fil
 <img align="center" src="https://github.com/clobot-git/clober/blob/noetic-devel/images/empty_world.png">
 
   ```bash
-  roslaunch clober_simulation empty_world.launch
+  roslaunch clober_simulation base.launch world:=empty
   ```
 
 ### 2.2 Clobot Logo World
