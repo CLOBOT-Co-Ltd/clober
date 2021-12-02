@@ -49,21 +49,21 @@ Several Simulation environments are prepared, made accessible by each launch fil
 <img align="center" src="https://github.com/clobot-git/clober/blob/noetic-devel/images/empty_world.png">
 
   ```bash
-  roslaunch clober_simulation base.launch world:=empty
+  roslaunch clober_simulation base.launch
   ```
 
 ### 2.2 Clobot Logo World
 <img align="center" src="https://github.com/clobot-git/clober/blob/noetic-devel/images/logo_world.png">
 
   ```bash
-  roslaunch clober_simulation logo_world.launch
+  roslaunch clober_simulation base.launch world:=logo model:=clober
   ```
 
 ### 2.3 Warehouse World
 <img align="center" src="https://github.com/clobot-git/clober/blob/noetic-devel/images/warehouse_world.png">
 
   ```bash
-  roslaunch clober_simulation warehouse_env_world.launch
+  roslaunch clober_simulation base.launch world:=warehouse_env model:=cb
   ```
 
 ### 2.4 Grid World
@@ -71,22 +71,22 @@ Several Simulation environments are prepared, made accessible by each launch fil
 
 3x3 grid world
   ```bash
-  roslaunch clober_simulation 3x3_world.launch
+  roslaunch clober_simulation base.launch world:=3x3 model:=clober
   ```
 
 4x4 grid world
   ```bash
-  roslaunch clober_simulation 4x4_world.launch
+  roslaunch clober_simulation base.launch world:=4x4 model:=clober
   ```
 
 5x5 grid world
   ```bash
-  roslaunch clober_simulation 5x5_world.launch
+  roslaunch clober_simulation base.launch world:=5x5 model:=clober
   ```
 
 10x10 grid world
   ```bash
-  roslaunch clober_simulation 10x10_world.launch
+  roslaunch clober_simulation base.launch world:=10x10 model:=clober
   ```
 
 
@@ -101,28 +101,22 @@ For SLAM in Gazebo simulator, you can select or create various virtual environem
 
   [*For fine tuning of the SLAM package please review the SLAM package README.md*](https://github.com/clobot-git/clober/tree/noetic-devel/clober_slam)
 
-### 4.1 Launch Simulation World
-Out of the worlds prepared, we recommend using the Clobot Logo World.
-  ```bash
-  roslaunch clober_simulation logo_world.launch
-  ``` 
-
-### 4.2 Launch SLAM Node
+### 4.1 Launch Simulation World && Launch SLAM Node
 On a new terminal run a SLAM node. Gmapping SLAM is used by default.
   ```bash
-  roslaunch clober_slam clober_slam.launch slam_methods:=gmapping
+  roslaunch clober_simulation slam.launch world:=logo model:=clober
   ```
 
-### 4.3 Run Teleoperation Node
+### 4.2 Run Teleoperation Node
 On a new terminal run a teleoperation node to explore and map the Gazebo world.
   ```bash
-  rosrun teleop_twist_keyboard teleop_twist_keyboard.py
+  rosrun teleop_twist_keyboard teleop_twist_keyboard.py cmd_vel:=/clober/cmd_vel
   ```
 
   <img align="center" src="https://github.com/clobot-git/clober/blob/noetic-devel/gifs/clober_slam.gif">
 
 
-### 4.4 Save Map
+### 4.3 Save Map
 After successful SLAM and map creation, open a new terminal to save the map.
   ```bash
   rosrun map_server map_saver -f ~/map
