@@ -1,13 +1,14 @@
 <?xml version="1.0"?>
 <launch>
   <!-- Arguments -->
-  <arg name="map_file" default="$(find clober_navigation)/maps/map.yaml"/>
   <arg name="model" default=""/>
   <arg name="initial_pose_x" default=" 0.0"/>
   <arg name="initial_pose_y" default=" 0.0"/>
   <arg name="initial_pose_z" default=" 0.0"/>  
   <arg name="initial_pose_a" default=" 0.0"/>
   <arg name="open_rviz" default="true"/>
+  <arg name="world" default="logo"/>
+  <arg name="map_file" default="$(find clober_navigation)/map/$(arg world)/map.yaml"/>
 
   <!-- Map server -->
   <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)"/>
