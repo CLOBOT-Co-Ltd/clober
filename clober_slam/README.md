@@ -11,32 +11,34 @@ The SLAM (Simultaneous Localization and Mapping) is a technique to draw a map by
   ```
 - This can be substituted by running a simulation node
   ```bash
-  roslaunch clober_simulation logo_world.launch
+   roslaunch clober_simulation base.launch world:=logo model:=clober
   ```
 
 ### 1.2 Launch SLAM Node
 On a new terminal run a SLAM node. Gmapping SLAM is used by default.
   ```bash
-  roslaunch clober_slam clober_slam.launch slam_methods:=gmapping
+  roslaunch clober_slam clober_slam.launch slam_methods:=gmapping set_base_frame:=clober/base_link set_odom_frame:=clober/odom __ns:=clober
+
+  roslaunch clober_description rviz.launch 
   ```
 
 ### 1.3 Run Teleoperation Node
 On a new terminal run a teleoperation node to explore and map the world.
   ```bash
-  rosrun teleop_twist_keyboard teleop_twist_keyboard.py
+  rosrun teleop_twist_keyboard teleop_twist_keyboard.py cmd_vel:=clober/cmd_vel
   ```
-
-  <img align="center" src="https://github.com/clobot-git/clober/blob/noetic-devel/images/clober_slam.gif">
+                          
+  <img align="center" src="https://github.com/CLOBOT-Co-Ltd/clober/blob/noetic-devel/images/clober_slam.gif">
 
 
 ### 1.4 Save Map
 After successful SLAM and map creation, open a new terminal to save the map.
   ```bash
-  rosrun map_server map_saver -f ~/map
+  rosrun map_server map_saver map:=/clober/map -f ~/map
   ```
   If you've saved your map successfully it should look like the following. The map uses two-dimensional Occupancy Grid Map (OGM), which is commonly used in ROS and Navigation.
 
-  <img align="center" src="https://github.com/clobot-git/clober/blob/noetic-devel/images/map.png" width=400>
+  <img align="center" src="https://github.com/CLOBOT-Co-Ltd/clober/blob/noetic-devel/images/map.png" width=400>
   White area is collision free area while black area is occupied and inaccessible, and gray area represents the unknown area. 
 
 
