@@ -119,7 +119,7 @@ On a new terminal run a teleoperation node to explore and map the Gazebo world.
 ### 4.3 Save Map
 After successful SLAM and map creation, open a new terminal to save the map.
   ```bash
-  rosrun map_server map_saver map:=/clober/clober_slam_gmapping -f ~/map
+  rosrun map_server map_saver map:=/clober/map -f ~/map
   ```
   If you've saved your map successfully it should look like the following.
 
