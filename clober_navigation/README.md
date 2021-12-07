@@ -5,7 +5,7 @@ Navigation is to move a robot from one location to a specified destination of th
 
 [*SLAM of the environment allow you to acquire a map*](https://github.com/clobot-git/clober/tree/noetic-devel/clober_slam)
 
-## 1. Run Navigation Nodes
+## 1.  Run Navigation Nodes
 ### 1.1 Bringup Robot
 1. Run a `Bringup` for the Clober.
   ```bash
@@ -13,18 +13,18 @@ Navigation is to move a robot from one location to a specified destination of th
   ```
 - This can be substituted by running a simulation node
   ```bash
-  roslaunch clober_simulation logo_world.launch
+  roslaunch clober_simulation base.launch world:=logo model:=clober
   ```
 
 ### 1.2 Launch Navigation
 ```bash
-roslaunch clober_navigation navigation.launch
+roslaunch clober_navigation navigation.launch model:=clober world:=logo __ns:=clober
 ```
 
 ## 2. Estimate Initial Pose
 Initial Pose Estimation can be performed before Navigation to intialize AMCL parameters which are critical to Navigation quality. 
   1. Click `2D Pose Estimate` Button on the RVIZ menu
-    <img align="center" src="https://github.com/clobot-git/clober/blob/noetic-devel/images/2d_pose_estimate.png">
+    <img align="center" src="https://github.com/CLOBOT-Co-Ltd/clober/blob/noetic-devel/images/2d_pose_estimate.png">
 
   2. Click on the map where clober is located and drag the green arrow toward the dirction the robot is facing.
 
@@ -32,20 +32,20 @@ Initial Pose Estimation can be performed before Navigation to intialize AMCL par
 
   4. Launch keyboard teleoperation to further increase precision.
     ```bash
-    rosrun teleop_twist_keyboard teleop_twist_keyboard.py
+    rosrun teleop_twist_keyboard teleop_twist_keyboard.py cmd_vel:=/clober/cmd_vel
     ```
 
   5. Move the robot back and forth in order to narrow down the estimated location.
-    <img align="center" src="https://github.com/clobot-git/clober/blob/noetic-devel/images/clober_amcl.gif">
+    <img align="center" src="https://github.com/CLOBOT-Co-Ltd/clober/blob/noetic-devel/images/clober_amcl.gif">
 
   6. Terminate the keyboard teleoperation(`Ctrl`+`C`) for the next navigation step. 
 
 ## 3. Publish 2D Navigation Goal
 - On the RVIZ menu click `2D Nav Goal`
-  <img align="center" src="https://github.com/clobot-git/clober/blob/noetic-devel/images/2d_nav_goal.png">
+  <img align="center" src="https://github.com/CLOBOT-Co-Ltd/clober/blob/noetic-devel/images/2d_nav_goal.png">
 
 - Click on the destination and drag the green arrow toward the dirction of the robot on the map.
-  <img align="center" src="https://github.com/clobot-git/clober/blob/noetic-devel/images/clober_navigation.gif">
+  <img align="center" src="https://github.com/CLOBOT-Co-Ltd/clober/blob/noetic-devel/images/clober_navigation.gif">>
 
 
 ---
