@@ -71,10 +71,10 @@ set(DEPENDENCIES
   "clober_msgs"
 )
 
-target_link_libraries(${EXECUTABLE_NAME} libserial ${ament_LIBRARIES} ${Boost_LIBRARIES})
 ament_target_dependencies(${EXECUTABLE_NAME} ${DEPENDENCIES})
+target_link_libraries(${EXECUTABLE_NAME} libserial ${Boost_LIBRARIES} ${ament_LIBRARIES})
 
-install (TARGETS ${EXECUTABLE_NAME}
+install(TARGETS ${EXECUTABLE_NAME}
   DESTINATION lib/${PROJECT_NAME}
 )
 
