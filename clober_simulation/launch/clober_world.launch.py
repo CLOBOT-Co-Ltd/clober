@@ -26,13 +26,16 @@ from launch.substitutions import EnvironmentVariable
 
 def generate_launch_description():
 
-    use_sim_time = LaunchConfiguration('use_sim_time', default='false')
+    use_sim_time = LaunchConfiguration('use_sim_time', default='true')
     world_file_name = 'clober.model'
     world = os.path.join(get_package_share_directory('clober_simulation'), 'worlds', world_file_name)
 
     launch_file_dir = os.path.join(get_package_share_directory('clober_description'), 'launch')
     pkg_gazebo_ros = get_package_share_directory('gazebo_ros')
     gazebo_model_path = os.path.join(get_package_share_directory('clober_simulation'), 'models')
+
+    os.environ["GAZEBO_MODEL_PATH"] = gazebo_model_path
+
 
     return LaunchDescription([
 
