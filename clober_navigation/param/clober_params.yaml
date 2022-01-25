@@ -1,6 +1,10 @@
 amcl:
   ros__parameters:
     use_sim_time: True
+    set_initial_pose: true
+    initial_pose.x: 3.0
+    initial_pose.y: -3.0
+    initial_pose.yaw: 0.0
     alpha1: 0.2
     alpha2: 0.2
     alpha3: 0.2
@@ -115,9 +119,9 @@ controller_server:
     FollowPath:
       plugin: "dwb_core::DWBLocalPlanner"
       debug_trajectory_details: true
-      min_vel_x: -0.05
+      min_vel_x: 0.0
       min_vel_y: 0.0
-      max_vel_x: 0.2
+      max_vel_x: 1.0
       max_vel_y: 0.0
       max_vel_theta: 1.0
       min_speed_xy: 0.0
@@ -125,10 +129,10 @@ controller_server:
       min_speed_theta: 0.0
       acc_lim_x: 1.5
       acc_lim_y: 1.5
-      acc_lim_theta: 3.0
+      acc_lim_theta: 1.0
       decel_lim_x: -1.5
       decel_lim_y: -1.5
-      decel_lim_theta: -3.0
+      decel_lim_theta: -1.0
       vx_samples: 20
       vy_samples: 20
       vtheta_samples: 20
