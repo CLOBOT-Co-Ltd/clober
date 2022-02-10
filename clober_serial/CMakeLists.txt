@@ -47,7 +47,7 @@ set(serial_srcs
 )
 
 add_library(libserial ${serial_srcs})
-target_link_libraries(libserial rt pthread ${catkin_LIBRARIES})
+target_link_libraries(libserial rt ${catkin_LIBRARIES})
 
 
 set(EXECUTABLE_NAME "clober_serial_node")
